@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/screens/about_screen.dart';
 import 'package:portfolio/screens/contact_screen.dart';
-import 'package:portfolio/screens/projects_screen.dart';
+import 'package:portfolio/screens/projects_screen/projects_screen.dart';
 
 import 'widgets/pageview_indicator.dart';
 
