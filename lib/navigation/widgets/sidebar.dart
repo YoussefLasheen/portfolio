@@ -12,15 +12,12 @@ class Sidebar extends StatefulWidget {
 
 class _SidebarState extends State<Sidebar> {
   int currentPageValue = 0;
-  Color sideBarColor = Colors.transparent;
   @override
   Widget build(BuildContext context) {
-    return AnimatedContainer(
-      duration: Duration(milliseconds: 300),
-      curve: Curves.easeInOutCirc,
+    return Container(
       height: double.infinity,
       width: MediaQuery.of(context).size.width * 0.085,
-      color: sideBarColor,
+      color: Colors.transparent,
       child: RotatedBox(
         quarterTurns: -1,
         child: PageViewIndicator(
