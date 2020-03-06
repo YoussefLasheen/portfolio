@@ -9,29 +9,15 @@ class BottomSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: MediaQuery.of(context).size.height * (4 / 3),
-      child: Stack(
-        children: <Widget>[
-          Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: Image.asset('assets/images/rect1208-0-8.png'),
+      child: Padding(
+        padding: const EdgeInsets.only(top: 150),
+        child: Container(
+          width: double.infinity,
+          height: double.infinity,
+          decoration: BoxDecoration(
+            color: Color(0xFFc34372),
           ),
-          /*
-          Padding(
-            padding: const EdgeInsets.only(top: 150),
-            child: Container(
-              width: double.infinity,
-              height: double.infinity,
-              decoration: BoxDecoration(
-                  color: Color(0xFFc34372),
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(500),
-                      topRight: Radius.circular(500))),
-            ),
-          ),
-          */
-          Center(
+          child: Center(
             child: FractionallySizedBox(
               widthFactor: 2 / 3,
               child: Column(
@@ -41,9 +27,7 @@ class BottomSection extends StatelessWidget {
                   ),
                   Expanded(
                     flex: 6,
-                    child: Image.asset(
-                        'assets/images/P2-BottonSection-Background.png'),
-                  ),
+                    child: Placeholder(),),
                   Spacer(),
                   Expanded(
                     flex: 6,
@@ -77,20 +61,16 @@ class BottomSection extends StatelessWidget {
                                     flex: 3,
                                     child: SizedBox.expand(
                                       child: TextField(
-                                        style: TextStyle(
-                                            color: Colors.black87),
+                                        style: TextStyle(color: Colors.black87),
                                         decoration: new InputDecoration(
-                                            border:
-                                                new OutlineInputBorder(
+                                            border: new OutlineInputBorder(
                                               borderSide: BorderSide.none,
                                               borderRadius:
                                                   const BorderRadius.only(
                                                 topLeft:
-                                                    const Radius.circular(
-                                                        50.0),
+                                                    const Radius.circular(50.0),
                                                 bottomLeft:
-                                                    const Radius.circular(
-                                                        50.0),
+                                                    const Radius.circular(50.0),
                                               ),
                                             ),
                                             filled: true,
@@ -108,18 +88,14 @@ class BottomSection extends StatelessWidget {
                                         color: Colors.cyan,
                                         child: Text(
                                           "GO",
-                                          style: TextStyle(
-                                              color: Colors.white),
+                                          style: TextStyle(color: Colors.white),
                                         ),
                                         shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              const BorderRadius.only(
+                                          borderRadius: const BorderRadius.only(
                                             bottomRight:
-                                                const Radius.circular(
-                                                    50.0),
+                                                const Radius.circular(50.0),
                                             topRight:
-                                                const Radius.circular(
-                                                    50.0),
+                                                const Radius.circular(50.0),
                                           ),
                                         ),
                                       ),
@@ -138,7 +114,7 @@ class BottomSection extends StatelessWidget {
               ),
             ),
           ),
-        ],
+        ),
       ),
     );
   }
