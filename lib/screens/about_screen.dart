@@ -45,7 +45,7 @@ class AboutScreen extends StatelessWidget {
                       child: SizedBox.expand(
                         child: FlatButton(
                           onPressed: () {},
-                          child: Text('Download CV'),
+                          child: FittedBox(child: Text('Download CV')),
                           color: Color(0xFF323941),
                           shape: RoundedRectangleBorder(
                             borderRadius: new BorderRadius.circular(50.0),
