@@ -11,6 +11,7 @@ class ProjectsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+      physics: BouncingScrollPhysics(),
       itemCount: projects.length + 2,
       itemBuilder: (BuildContext context, int index) {
         if (index == 0) {
