@@ -23,29 +23,12 @@ class ProjectsScreen extends StatelessWidget {
         return SizedBox(
           height: MediaQuery.of(context).size.height * (1 / 3) +
               (projects.length * 100),
-          child: Column(
-            children: <Widget>[
-              if (index.isEven) ...[
-                Expanded(
-                  child: Padding(
-                    padding: EdgeInsets.only(bottom: 100),
-                    child: ProjectCard(
-                      project: projects[index],
-                      isInversed: true,
-                    ),
-                  ),
-                )
-              ] else
-                Expanded(
-                  child: Padding(
-                    padding: EdgeInsets.only(bottom: 100),
-                    child: ProjectCard(
-                      project: projects[index],
-                      isInversed: false,
-                    ),
-                  ),
-                )
-            ],
+          child: Padding(
+            padding: EdgeInsets.only(bottom: 100),
+            child: ProjectCard(
+              project: projects[index],
+              isInversed: index.isEven,
+            ),
           ),
         );
       },
