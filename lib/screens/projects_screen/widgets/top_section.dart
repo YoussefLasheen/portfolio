@@ -7,11 +7,13 @@ class TopSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
     return SizedBox(
-      height: MediaQuery.of(context).size.height / 2,
+      height: isLandscape?MediaQuery.of(context).size.height / 2:MediaQuery.of(context).size.height / 4,
       child: Column(
         children: <Widget>[
-          Spacer(flex: 2),
+          Spacer(),
           Expanded(
             flex: 2,
             child: Row(
@@ -22,7 +24,7 @@ class TopSection extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Expanded(
-                        flex: 4,
+                        flex: 2,
                         child: FittedBox(
                           child: Text(
                             '#Recent Work',
@@ -31,14 +33,14 @@ class TopSection extends StatelessWidget {
                         ),
                       ),
                       Spacer(),
-                      Expanded(
-                        flex: 6,
-                        child: FittedBox(
-                          child: Text(
-                            'Some of my projects. From complete\nprojects with showcases to Flutter packages',
-                            style: TextStyle(color: Colors.white70),
+                      Flexible(
+                        flex: 3,
+                          child: FittedBox(
+                            child: Text(
+                              'Some of my projects. From complete\nprojects with showcases to Flutter packages',
+                              style: TextStyle(color: Colors.white70),
+                            ),
                           ),
-                        ),
                       ),
                     ],
                   ),
@@ -53,7 +55,7 @@ class TopSection extends StatelessWidget {
               ],
             ),
           ),
-          Spacer(flex: 2)
+          Spacer(flex: 2,)
         ],
       ),
     );
