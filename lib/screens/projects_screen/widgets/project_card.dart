@@ -8,66 +8,106 @@ class ProjectCard extends StatelessWidget {
   const ProjectCard({Key key, this.project, this.isInversed}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: <Widget>[
-        Align(
-          alignment: isInversed ? Alignment.centerLeft : Alignment.centerRight,
-          child: SizedBox(
-            width: MediaQuery.of(context).size.width * (9 / 16),
-            child:
-                Placeholder(color: isInversed ? Colors.white : Colors.blueGrey),
+    double screenWidth = MediaQuery.of(context).size.width;
+    bool isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
+    return Align(
+      alignment: isLandscape
+          ? isInversed ? Alignment.centerLeft : Alignment.centerRight
+          : Alignment.center,
+      child: SizedBox(
+        width: isLandscape ? screenWidth * 0.7 : screenWidth * 0.9,
+        child: AspectRatio(
+          aspectRatio: 1.6,
+          child: Stack(
+            children: <Widget>[
+              Padding(
+                  padding: EdgeInsets.only(
+                      //top: isLandscape ? 0 : 10,
+                      right:
+                          isLandscape ? isInversed ? screenWidth * 0.1 : 0 : 0,
+                      left:
+                          isLandscape ? !isInversed ? screenWidth * 0.1 : 0 : 0,
+                      //bottom: isLandscape ? 0 : 10
+                      ),
+                  child: Placeholder(
+                      color: isInversed ? Colors.white : Colors.blueGrey)),
+              Positioned.fill(
+                left: !isInversed ? 0 : null,
+                right: isInversed ? 0 : null,
+                child: SizedBox(
+                  width: screenWidth / 4,
+                  child: Column(
+                    children: <Widget>[
+                      isLandscape
+                          ? Spacer(
+                              flex: 2,
+                            )
+                          : Container(),
+                      Expanded(
+                        flex: 2,
+                        child: FittedBox(
+                            child: Text(
+                          "#" + project.title,
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xFFc34372)),
+                        )),
+                      ),
+                      Expanded(
+                        child: FittedBox(
+                            child: Text(
+                          "— " + project.subTitle,
+                        )),
+                      ),
+                      Spacer(
+                        flex: isLandscape ? 5 : 8,
+                      ),
+                      Expanded(
+                          flex: 2,
+                          child: Align(
+                            alignment: isInversed
+                                ? Alignment.centerRight
+                                : Alignment.centerLeft,
+                            child: FractionallySizedBox(
+                              widthFactor: 3 / 4,
+                              child: Row(
+                                children: <Widget>[
+                                  Expanded(
+                                      flex: 8,
+                                      child:
+                                          FittedBox(child: Text('View work'))),
+                                  Spacer(),
+                                  Expanded(
+                                    flex: isLandscape ? 2 : 4,
+                                    child: FloatingActionButton(
+                                      backgroundColor: Color(0xFFc34372),
+                                      onPressed: () {},
+                                      child: FittedBox(
+                                        child: Icon(
+                                          Icons.play_arrow,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          )),
+                      isLandscape
+                          ? Spacer(
+                              flex: 8,
+                            )
+                          : Container(),
+                    ],
+                  ),
+                ),
+              )
+            ],
           ),
         ),
-        Positioned(
-            width: MediaQuery.of(context).size.width / 4,
-            height: MediaQuery.of(context).size.height * (2 / 3),
-            left: !isInversed?MediaQuery.of(context).size.width / 5:null,
-            right: isInversed?MediaQuery.of(context).size.width / 5:null,
-            child: Column(
-              children: <Widget>[
-                Spacer(
-                  flex: 2,
-                ),
-                Expanded(
-                  flex: 2,
-                  child: FittedBox(
-                      child: Text(
-                    "# " + project.title,
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, color: Color(0xFFc34372)),
-                  )),
-                ),
-                Expanded(
-                  child: FittedBox(
-                      child: Text("— " + project.subTitle,)),
-                ),
-                Spacer(
-                  flex: 5,
-                ),
-                Expanded(
-                    flex: 2,
-                    child: Align(
-                      alignment: isInversed?Alignment.centerRight:Alignment.centerLeft,
-                      child: FractionallySizedBox(
-                        widthFactor: 3/4,
-                        child: Row(
-                          children: <Widget>[
-                            Expanded(child: FittedBox(child: Text('View work'))),
-                            FloatingActionButton(
-                              backgroundColor: Color(0xFFc34372),
-                              onPressed: (){},
-                              child: Icon(Icons.play_arrow, color: Colors.white,),
-                            ),
-                          ],
-                        ),
-                      ),
-                    )),
-                Spacer(
-                  flex: 8,
-                )
-              ],
-            ))
-      ],
+      ),
     );
   }
 }

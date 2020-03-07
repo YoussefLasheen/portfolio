@@ -20,15 +20,11 @@ class ProjectsScreen extends StatelessWidget {
           return BottomSection();
         }
         index = index - 1;
-        return SizedBox(
-          height: MediaQuery.of(context).size.height * (1 / 3) +
-              (projects.length * 100),
-          child: Padding(
-            padding: EdgeInsets.only(bottom: 100),
-            child: ProjectCard(
-              project: projects[index],
-              isInversed: index.isEven,
-            ),
+        return Padding(
+          padding: EdgeInsets.only(bottom: 100),
+          child: ProjectCard(
+            project: projects[index],
+            isInversed: index.isEven,
           ),
         );
       },
