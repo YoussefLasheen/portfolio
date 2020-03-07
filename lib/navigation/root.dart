@@ -8,8 +8,11 @@ class Root extends StatelessWidget {
   final PageController controller = PageController(initialPage: 0);
   @override
   Widget build(BuildContext context) {
+    bool isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
     return Material(
-      child: Row(
+      child: Flex(
+        direction: isLandscape? Axis.horizontal:Axis.vertical,
         children: <Widget>[
           Sidebar(
             control: controller,
@@ -18,7 +21,7 @@ class Root extends StatelessWidget {
             child: PageView(
               controller: controller,
               physics: NeverScrollableScrollPhysics(),
-              scrollDirection: Axis.vertical,
+              scrollDirection: isLandscape? Axis.vertical:Axis.horizontal,
               children: <Widget>[
                 AboutScreen(),
                 ProjectsScreen(),

@@ -4,30 +4,47 @@ class PageViewIndicator extends StatelessWidget {
   final int activePage;
   final void Function(int) callback;
 
-  const PageViewIndicator({Key key, this.activePage, this.callback}) : super(key: key);
+  const PageViewIndicator({Key key, this.activePage, this.callback})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
-    List<String> list = ['ABOUT', 'PROJECTS', 'CONTACT'];
+    bool isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
+    List<String> list = isLandscape
+        ? ['ABOUT', 'PROJECTS', 'CONTACT']
+        : ['CONTACT', 'PROJECTS', 'ABOUT'];
+    List<int> keysList = isLandscape ? [0, 1, 2] : [2, 1, 0];
     return Center(
-      child: SizedBox(
-        height: MediaQuery.of(context).size.width * 0.028,
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Spacer(
-              flex: 4,
+      child: Column(
+        children: <Widget>[
+          Spacer(),
+          Expanded(
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Spacer(
+                  flex: 4,
+                ),
+                GestureDetector(
+                    onTap: () => callback(keysList[2]),
+                    child: circleBar(activePage == keysList[2], list[2])),
+                Spacer(),
+                GestureDetector(
+                    onTap: () => callback(keysList[1]),
+                    child: circleBar(activePage == keysList[1], list[1])),
+                Spacer(),
+                GestureDetector(
+                    onTap: () => callback(keysList[0]),
+                    child: circleBar(activePage == keysList[0], list[0])),
+                Spacer(
+                  flex: 4,
+                ),
+              ],
             ),
-            GestureDetector(onTap:()=>callback(2),child: circleBar(activePage == 2, list[2])),
-            Spacer(),
-            GestureDetector(onTap:()=>callback(1),child: circleBar(activePage == 1, list[1])),
-            Spacer(),
-            GestureDetector(onTap:()=>callback(0),child: circleBar(activePage == 0, list[0])),
-            Spacer(
-              flex: 4,
-            ),
-          ],
-        ),
+          ),
+          Spacer()
+        ],
       ),
     );
   }
@@ -44,7 +61,9 @@ Widget circleBar(bool isActive, String content) {
           style: TextStyle(color: isActive ? Colors.white : Colors.white70),
         ),
       ),
-      Spacer(flex: 2,),
+      Spacer(
+        flex: 2,
+      ),
       Expanded(
         child: AnimatedContainer(
           duration: Duration(milliseconds: 150),

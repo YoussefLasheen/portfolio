@@ -14,12 +14,16 @@ class _SidebarState extends State<Sidebar> {
   int currentPageValue = 0;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: double.infinity,
-      width: MediaQuery.of(context).size.width * 0.085,
-      color: Colors.transparent,
-      child: RotatedBox(
-        quarterTurns: -1,
+    bool isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
+    return RotatedBox(
+      quarterTurns: isLandscape ? -1 : 0,
+      child: Container(
+        height: isLandscape
+            ? MediaQuery.of(context).size.width * 0.085
+            : MediaQuery.of(context).size.height * 0.1,
+        width: double.infinity,
+        color: Colors.transparent,
         child: PageViewIndicator(
           activePage: currentPageValue,
           callback: (int index) {
