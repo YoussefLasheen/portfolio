@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
@@ -25,6 +26,26 @@
       });
     }
   </script>
+   <script src="https://www.gstatic.com/firebasejs/7.10.0/firebase-app.js"></script>
+   <script src="https://www.gstatic.com/firebasejs/7.10.0/firebase-firestore.js"></script>
+   <!-- Other firebase SDKs/config here -->
+   <script>
+     // TODO: Replace the following with your app's Firebase project configuration.
+     // See: https://support.google.com/firebase/answer/7015592
+     var firebaseConfig = {
+       apiKey: "AIzaSyBXG5hfEfLnSlS4xB02Hc4sq4QoJLdtF3k",
+       authDomain: "yousseflasheen-portfolio.firebaseapp.com",
+       databaseURL: "https://yousseflasheen-portfolio.firebaseio.com",
+       projectId: "yousseflasheen-portfolio",
+       storageBucket: "yousseflasheen-portfolio.appspot.com",
+       messagingSenderId: "23616548175",
+       appId: "1:23616548175:web:8645a9195f6294f50be93a",
+       measurementId: "G-QZM1EDTRDD"
+     };
+     // Initialize Firebase
+     firebase.initializeApp(firebaseConfig);
+   </script>
+   <!-- END OF FIREBASE INIT CODE -->
   <script src="main.dart.js" type="application/javascript"></script>
 </body>
 </html>

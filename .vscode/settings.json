@@ -3,5 +3,5 @@
 		"C:\\Coding\\Flutter Channels\\flutter - BETA\\flutter", // Can be a specific SDK folder
 		"C:\\Coding\\Flutter Channels\\flutter - MASTER\\flutter" // Or can be a folder that contains multiple SDKs
 	],
-	"dart.flutterSdkPath": "C:\\Coding\\Flutter Channels\\flutter - BETA\\flutter",
+	"dart.flutterSdkPath": "C:\\Coding\\Flutter Channels\\flutter - MASTER\\flutter",
 }
