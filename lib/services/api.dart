@@ -18,4 +18,8 @@ class Api {
   Future<DocumentSnapshot> getDocumentById(String id) {
     return ref.document(id).get();
   }
+
+  Future<DocumentReference> addDocument(Map data) {
+    return ref.add(data);
+  }
 }
