@@ -22,9 +22,11 @@ class Footer extends StatelessWidget {
             ),
             Expanded(
               flex: 2,
-              child: Text(
-                '2020 © Youssef Lasheen',
-                style: TextStyle(color: Colors.black),
+              child: FittedBox(
+                child: Text(
+                  '2020 © Youssef Lasheen',
+                  style: TextStyle(color: Colors.black),
+                ),
               ),
             ),
             Spacer(
@@ -39,9 +41,11 @@ class Footer extends StatelessWidget {
             ),
             Expanded(
               flex: 2,
-              child: Text(
-                "● ylasheen5@gmail.com",
-                style: TextStyle(color: Colors.black),
+              child: FittedBox(
+                child: Text(
+                  "● ylasheen5@gmail.com",
+                  style: TextStyle(color: Colors.black),
+                ),
               ),
             ),
             Spacer(
