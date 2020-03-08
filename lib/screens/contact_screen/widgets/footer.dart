@@ -5,8 +5,10 @@ class Footer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
     return SizedBox(
-      height: MediaQuery.of(context).size.height / 12,
+      height: isLandscape? MediaQuery.of(context).size.height / 12: MediaQuery.of(context).size.height / 24,
       child: Container(
         color: Colors.white,
         child: Row(

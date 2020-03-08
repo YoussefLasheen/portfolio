@@ -7,92 +7,99 @@ class ContactScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
     return Container(
       color: Color(0xFFc34372),
-      child: Column(
+      child: Flex(
+        direction: isLandscape ? Axis.vertical : Axis.horizontal,
         children: <Widget>[
           Expanded(
-            child: Center(
-              child: SizedBox(
-                width: MediaQuery.of(context).size.width * (9 / 16),
-                child: Column(
-                  children: <Widget>[
-                    Spacer(
-                      flex: 2,
-                    ),
-                    Expanded(
-                      child: FittedBox(child: Text("Get in touch")),
-                    ),
-                    Spacer(),
-                    Expanded(
-                      flex: 2,
-                      child: Row(
-                        children: <Widget>[
-                          Expanded(
-                            flex: 15,
-                            child: TextInput(
-                              hintText: 'Your Name',
-                            ),
-                          ),
-                          Spacer(),
-                          Expanded(
-                            flex: 15,
-                            child: TextInput(
-                              hintText: 'Email Address',
-                            ),
-                          )
-                        ],
+            child: Row(
+              children: <Widget>[
+                Spacer(flex: isLandscape?3:1,),
+                Expanded(
+                  flex: 10,
+                  child: Column(
+                    children: <Widget>[
+                      Spacer(
+                        flex: isLandscape? 2:4,
                       ),
-                    ),
-                    Spacer(),
-                    Expanded(
-                      flex: 2,
-                      child: Row(
-                        children: <Widget>[
-                          Expanded(
-                            flex: 15,
-                            child: TextInput(
-                              hintText: 'Website',
-                            ),
-                          ),
-                          Spacer(),
-                          Expanded(
-                            flex: 15,
-                            child: TextInput(
-                              hintText: 'Budget',
-                            ),
-                          )
-                        ],
+                      Expanded(
+                        child: FittedBox(child: Text("Get in touch")),
                       ),
-                    ),
-                    Spacer(),
-                    Expanded(
-                      flex: 6,
-                      child: TextInput(
-                        hintText: 'Message text',
-                        isMultiLine: true,
-                      ),
-                    ),
-                    Spacer(),
-                    Expanded(
-                      child: FlatButton(
-                        onPressed: () {},
-                        child: Text("Send"),
-                        color: Color(0xFF323941),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: new BorderRadius.circular(5.0),
+                      Spacer(),
+                      Expanded(
+                        flex: 2,
+                        child: Row(
+                          children: <Widget>[
+                            Expanded(
+                              flex: 15,
+                              child: TextInput(
+                                hintText: 'Your Name',
+                              ),
+                            ),
+                            Spacer(),
+                            Expanded(
+                              flex: 15,
+                              child: TextInput(
+                                hintText: 'Email Address',
+                              ),
+                            )
+                          ],
                         ),
                       ),
-                    ),
-                    Spacer(
-                      flex: 2,
-                    )
-                  ],
+                      Spacer(),
+                      Expanded(
+                        flex: 2,
+                        child: Row(
+                          children: <Widget>[
+                            Expanded(
+                              flex: 15,
+                              child: TextInput(
+                                hintText: 'Website',
+                              ),
+                            ),
+                            Spacer(),
+                            Expanded(
+                              flex: 15,
+                              child: TextInput(
+                                hintText: 'Budget',
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                      Spacer(),
+                      Expanded(
+                        flex: 6,
+                        child: TextInput(
+                          hintText: 'Message text',
+                          isMultiLine: true,
+                        ),
+                      ),
+                      Spacer(),
+                      Expanded(
+                        child: FlatButton(
+                          onPressed: () {},
+                          child: Text("Send"),
+                          color: Color(0xFF323941),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(5.0),
+                          ),
+                        ),
+                      ),
+                      Spacer(
+                        flex: isLandscape? 2:6,
+                      )
+                    ],
+                  ),
                 ),
-              ),
+                Spacer(flex: isLandscape?3:1)
+              ],
             ),
           ),
-          Footer()
+          RotatedBox(quarterTurns: isLandscape?0:-1,child: Footer())
         ],
       ),
     );
