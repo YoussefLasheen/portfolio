@@ -30,8 +30,9 @@ class ContactScreen extends StatelessWidget {
                       ),
                       Spacer(),
                       Expanded(
-                        flex: 2,
-                        child: Row(
+                        flex: isLandscape? 2:6,
+                        child: Flex(
+                          direction: isLandscape?Axis.horizontal:Axis.vertical,
                           children: <Widget>[
                             Expanded(
                               flex: 15,
@@ -51,8 +52,9 @@ class ContactScreen extends StatelessWidget {
                       ),
                       Spacer(),
                       Expanded(
-                        flex: 2,
-                        child: Row(
+                        flex: isLandscape? 2:6,
+                        child: Flex(
+                          direction: isLandscape?Axis.horizontal:Axis.vertical,
                           children: <Widget>[
                             Expanded(
                               flex: 15,
@@ -80,12 +82,15 @@ class ContactScreen extends StatelessWidget {
                       ),
                       Spacer(),
                       Expanded(
-                        child: FlatButton(
-                          onPressed: () {},
-                          child: Text("Send"),
-                          color: Color(0xFF323941),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: new BorderRadius.circular(5.0),
+                        flex: 2,
+                        child: SizedBox.expand(
+                          child: FlatButton(
+                            onPressed: () {},
+                            child: Text("Send"),
+                            color: Color(0xFF323941),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: new BorderRadius.circular(5.0),
+                            ),
                           ),
                         ),
                       ),
