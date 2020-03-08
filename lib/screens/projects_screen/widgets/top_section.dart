@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 class TopSection extends StatelessWidget {
@@ -11,51 +12,56 @@ class TopSection extends StatelessWidget {
         MediaQuery.of(context).orientation == Orientation.landscape;
     return SizedBox(
       height: isLandscape?MediaQuery.of(context).size.height / 2:MediaQuery.of(context).size.height / 4,
-      child: Column(
+      child: Row(
         children: <Widget>[
-          Spacer(),
+          isLandscape? Container():Spacer(),
           Expanded(
-            flex: 2,
-            child: Row(
+            flex: isLandscape?10:15,
+            child: Column(
               children: <Widget>[
+                Spacer(),
                 Expanded(
-                  flex: 6,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  flex: 2,
+                  child: Row(
                     children: <Widget>[
                       Expanded(
-                        flex: 2,
-                        child: FittedBox(
-                          child: Text(
-                            '#Recent Work',
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
+                        flex: 6,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Expanded(
+                              flex: 2,
+                              child: AutoSizeText(
+                                '#Recent Work',
+                                style: TextStyle(fontWeight: FontWeight.bold,fontSize: 100),
+                              ),
+                            ),
+                            Spacer(),
+                            Expanded(
+                              flex: 3,
+                                child: AutoSizeText(
+                                  'Some of my projects. From complete projects with showcases to Flutter packages',
+                                  style: TextStyle(color: Colors.white70, fontSize: 60),
+                                ),
+                            ),
+                          ],
                         ),
                       ),
-                      Spacer(),
-                      Flexible(
-                        flex: 3,
-                          child: FittedBox(
-                            child: Text(
-                              'Some of my projects. From complete\nprojects with showcases to Flutter packages',
-                              style: TextStyle(color: Colors.white70),
-                            ),
-                          ),
+                      Spacer(
+                        flex: 1,
                       ),
+                      Expanded(
+                          flex: isLandscape?4:2,
+                          child: Image.asset('assets/images/P2Logo.png')),
+                      //Spacer()
                     ],
                   ),
                 ),
-                Spacer(
-                  flex: 2,
-                ),
-                Expanded(
-                    flex: 2,
-                    child: Image.asset('assets/images/P2Logo.png')),
-                Spacer()
+                Spacer(flex: 2,)
               ],
             ),
           ),
-          Spacer(flex: 2,)
+          isLandscape? Container():Spacer()
         ],
       ),
     );
