@@ -1,7 +1,7 @@
 class Project {
-  const Project({ this.title, this.subTitle, this.imagePath, this.buttonFunction,});
+  const Project({ this.title, this.subTitle, this.imgSrc, this.buttonFunction,});
   final String title;
   final String subTitle;
-  final String imagePath;
+  final String imgSrc;
   final Function buttonFunction;
 }

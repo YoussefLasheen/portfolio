@@ -22,16 +22,32 @@ class ProjectCard extends StatelessWidget {
           child: Stack(
             children: <Widget>[
               Padding(
-                  padding: EdgeInsets.only(
-                      //top: isLandscape ? 0 : 10,
-                      right:
-                          isLandscape ? isInversed ? screenWidth * 0.1 : 0 : 0,
-                      left:
-                          isLandscape ? !isInversed ? screenWidth * 0.1 : 0 : 0,
-                      //bottom: isLandscape ? 0 : 10
+                padding: EdgeInsets.only(
+                  //top: isLandscape ? 0 : 10,
+                  right: isLandscape ? isInversed ? screenWidth * 0.1 : 0 : 0,
+                  left: isLandscape ? !isInversed ? screenWidth * 0.1 : 0 : 0,
+                  //bottom: isLandscape ? 0 : 10
+                ),
+                child: project.imgSrc == null
+                    ? Placeholder(
+                        color: isInversed ? Colors.white : Colors.blueGrey)
+                    : Image.network(
+                        project.imgSrc,
+                        fit: BoxFit.fill,
+                        loadingBuilder: (BuildContext context, Widget child,
+                            ImageChunkEvent loadingProgress) {
+                          if (loadingProgress == null) return child;
+                          return Center(
+                            child: CircularProgressIndicator(
+                              value: loadingProgress.expectedTotalBytes != null
+                                  ? loadingProgress.cumulativeBytesLoaded /
+                                      loadingProgress.expectedTotalBytes
+                                  : null,
+                            ),
+                          );
+                        },
                       ),
-                  child: Placeholder(
-                      color: isInversed ? Colors.white : Colors.blueGrey)),
+              ),
               Positioned.fill(
                 left: !isInversed ? 0 : null,
                 right: isInversed ? 0 : null,
