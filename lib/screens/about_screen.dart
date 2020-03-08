@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:portfolio/services/api.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AboutScreen extends StatelessWidget {
@@ -91,8 +93,8 @@ class AboutScreen extends StatelessWidget {
 }
 
 _launchURL() async {
-  const url =
-      'https://firebasestorage.googleapis.com/v0/b/yousseflasheen-portfolio.appspot.com/o/Resume%20v4%20(1).pdf?alt=media&token=00434306-5ac2-408e-b7be-356692b6e05e';
+  DocumentSnapshot snapshot = await Api('Data').getDocumentById('about_screen');
+  String url = snapshot.data['CVDownloadURL'];
   if (await canLaunch(url)) {
     await launch(url);
   } else {
