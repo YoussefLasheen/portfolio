@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Footer extends StatelessWidget {
   const Footer({Key key}) : super(key: key);
@@ -43,10 +44,20 @@ class Footer extends StatelessWidget {
             ),
             Expanded(
               flex: 2,
-              child: FittedBox(
-                child: Text(
-                  "● ylasheen5@gmail.com",
-                  style: TextStyle(color: Colors.black),
+              child: GestureDetector(
+                onTap: ()async{
+                  String url = 'mailto:ylasheen5@gmail.com';
+                  if (await canLaunch(url)) {
+                    await launch(url);
+                    } else {
+                      throw 'Could not launch $url';
+                      }
+                },
+                child: FittedBox(
+                  child: Text(
+                    "● ylasheen5@gmail.com",
+                    style: TextStyle(color: Colors.black),
+                  ),
                 ),
               ),
             ),
