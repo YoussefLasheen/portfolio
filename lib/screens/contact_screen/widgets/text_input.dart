@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:portfolio/screens/contact_screen/models/message.dart';
 
 class ContactForm extends StatelessWidget {
+  static var _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     bool isLandscape =
         MediaQuery.of(context).orientation == Orientation.landscape;
     Message message = Message();
-    final _formKey = GlobalKey<FormState>();
     return SingleChildScrollView(
       child: SizedBox(
         height: isLandscape
