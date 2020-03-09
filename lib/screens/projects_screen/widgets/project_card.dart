@@ -18,7 +18,7 @@ class ProjectCard extends StatelessWidget {
       child: SizedBox(
         width: isLandscape ? screenWidth * 0.7 : screenWidth * 0.9,
         child: AspectRatio(
-          aspectRatio: 1.6,
+          aspectRatio: 3 / 2,
           child: Stack(
             children: <Widget>[
               Padding(
