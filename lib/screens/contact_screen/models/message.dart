@@ -11,7 +11,8 @@ class Message {
   String messageText;
 
   send(Message msg) {
+    String currentTime = Timestamp.now().millisecondsSinceEpoch.toString();
     Map<String, dynamic> msgMap = {'name':msg.name,'email':msg.email,'website':msg.website,'budget':msg.budget,'messageText':msg.messageText,'time':Timestamp.now()};
-    Api('Messages').addDocument(msgMap);
+    Api('Messages').updateDocument(msgMap , currentTime);
   }
 }
