@@ -30,15 +30,12 @@ class ProjectsScreen extends StatelessWidget {
                 return BottomSection();
               }
               index = index - 1;
-              return Padding(
-                padding: EdgeInsets.only(bottom: 100),
-                child: ProjectCard(
-                  project: Project(
-                      title: projects[index]['title'],
-                      subTitle: projects[index]['subTitle'],
-                      imgSrc: projects[index]['imgSrc']),
-                  isInversed: index.isEven,
-                ),
+              return ProjectCard(
+                project: Project(
+                    title: projects[index]['title'],
+                    subTitle: projects[index]['subTitle'],
+                    imgSrc: projects[index]['imgSrc']),
+                isInversed: index.isEven,
               );
             },
           );
