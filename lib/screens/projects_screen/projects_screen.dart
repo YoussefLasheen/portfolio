@@ -16,10 +16,19 @@ class ProjectsScreen extends StatelessWidget {
     return FutureBuilder<DocumentSnapshot>(
         future: Api('Data').getDocumentById('projects_screen'),
         builder: (context, snapshot) {
+          List projects;
           if (!snapshot.hasData) {
-            return Container();
+            projects = [
+              {
+                'title': 'Loading',
+                'subTitle': 'Loading',
+                'imgSrc': null,
+                'details': {'title': 'Loading', 'body': 'Loading'},
+              }
+            ];
+          } else {
+            projects = snapshot.data['projects'];
           }
-          List projects = snapshot.data['projects'];
           return ListView.builder(
             physics: BouncingScrollPhysics(),
             itemCount: projects.length + 2,

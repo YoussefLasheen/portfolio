@@ -17,10 +17,12 @@ class ProjectDetails extends StatelessWidget {
               title: Text(project.title),
               background: Hero(
                 tag: project.title + 'image',
-                child: Image.network(
-                  project.imgSrc,
-                  fit: BoxFit.cover,
-                ),
+                child: project.imgSrc == null
+                    ? Placeholder()
+                    : Image.network(
+                        project.imgSrc,
+                        fit: BoxFit.cover,
+                      ),
               ),
             ),
           ),
