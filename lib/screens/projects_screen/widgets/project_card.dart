@@ -52,7 +52,7 @@ class ProjectCard extends StatelessWidget {
                 left: !isInversed ? 0 : null,
                 right: isInversed ? 0 : null,
                 child: SizedBox(
-                  width: screenWidth / 4,
+                  width: isLandscape? screenWidth / 4 : screenWidth / 2,
                   child: Column(
                     children: <Widget>[
                       isLandscape
