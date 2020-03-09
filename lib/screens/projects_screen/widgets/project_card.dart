@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/screens/projects_screen/models/project.dart';
 
+import 'project_details_screen/project_details_screen.dart';
+
 class ProjectCard extends StatelessWidget {
   final Project project;
   final bool isInversed;
@@ -34,22 +36,25 @@ class ProjectCard extends StatelessWidget {
                   child: project.imgSrc == null
                       ? Placeholder(
                           color: isInversed ? Colors.white : Colors.blueGrey)
-                      : Image.network(
-                          project.imgSrc,
-                          fit: BoxFit.fill,
-                          loadingBuilder: (BuildContext context, Widget child,
-                              ImageChunkEvent loadingProgress) {
-                            if (loadingProgress == null) return child;
-                            return Center(
-                              child: CircularProgressIndicator(
-                                value: loadingProgress.expectedTotalBytes != null
-                                    ? loadingProgress.cumulativeBytesLoaded /
-                                        loadingProgress.expectedTotalBytes
-                                    : null,
-                              ),
-                            );
-                          },
-                        ),
+                      : Hero(
+                        tag: project.title + 'image',
+                        child: Image.network(
+                            project.imgSrc,
+                            fit: BoxFit.fill,
+                            loadingBuilder: (BuildContext context, Widget child,
+                                ImageChunkEvent loadingProgress) {
+                              if (loadingProgress == null) return child;
+                              return Center(
+                                child: CircularProgressIndicator(
+                                  value: loadingProgress.expectedTotalBytes != null
+                                      ? loadingProgress.cumulativeBytesLoaded /
+                                          loadingProgress.expectedTotalBytes
+                                      : null,
+                                ),
+                              );
+                            },
+                          ),
+                      ),
                 ),
                 Positioned.fill(
                   left: !isInversed ? 0 : null,
@@ -100,8 +105,11 @@ class ProjectCard extends StatelessWidget {
                                     Expanded(
                                       flex: isLandscape ? 2 : 4,
                                       child: FloatingActionButton(
+                                        heroTag: project.title,
                                         backgroundColor: Color(0xFFc34372),
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          Navigator.push(context,MaterialPageRoute(builder: (context) => ProjectDetails(project: project,),));
+                                        },
                                         child: FittedBox(
                                           child: Icon(
                                             Icons.play_arrow,

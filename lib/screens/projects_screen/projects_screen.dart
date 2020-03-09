@@ -34,7 +34,8 @@ class ProjectsScreen extends StatelessWidget {
                 project: Project(
                     title: projects[index]['title'],
                     subTitle: projects[index]['subTitle'],
-                    imgSrc: projects[index]['imgSrc']),
+                    imgSrc: projects[index]['imgSrc'],
+                    details: projects[index]['projectDetails']),
                 isInversed: index.isEven,
               );
             },
