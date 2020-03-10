@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio/screens/contact_screen/widgets/footer_icons.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Footer extends StatelessWidget {
@@ -36,14 +37,14 @@ class Footer extends StatelessWidget {
               flex: 2,
             ),
             Expanded(
-              flex: 2,
-              child: Placeholder(),
+              flex: isLandscape?2:4,
+              child: FooterIcons(),
             ),
             Spacer(
               flex: 2,
             ),
             Expanded(
-              flex: 2,
+              flex: isLandscape?2:4,
               child: GestureDetector(
                 onTap: ()async{
                   String url = 'mailto:ylasheen5@gmail.com';
