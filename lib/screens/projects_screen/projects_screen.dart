@@ -31,13 +31,15 @@ class ProjectsScreen extends StatelessWidget {
           }
           return ListView.builder(
             physics: BouncingScrollPhysics(),
-            itemCount: projects.length + 2,
+            itemCount: projects.length + 1,
             itemBuilder: (BuildContext context, int index) {
               if (index == 0) {
                 return TopSection();
-              } else if (index == projects.length + 1) {
+              }
+              /* else if (index == projects.length + 1) {
                 return BottomSection();
               }
+              */
               index = index - 1;
               return ProjectCard(
                 project: Project(
