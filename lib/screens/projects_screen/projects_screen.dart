@@ -14,7 +14,7 @@ class ProjectsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<DocumentSnapshot>(
-        future: Api('Data').getDocumentById('projects_screen'),
+        future: Future.delayed(const Duration(milliseconds: 500000,), (){return Api('Data').getDocumentById('projects_screen');}),
         builder: (context, snapshot) {
           List projects;
           if (!snapshot.hasData) {
@@ -23,7 +23,7 @@ class ProjectsScreen extends StatelessWidget {
                 'title': 'Loading',
                 'subTitle': 'Loading',
                 'imgSrc': null,
-                'details': {'title': 'Loading', 'body': 'Loading'},
+                'projectDetails': {'title': 'Loading', 'body': 'Loading'},
               }
             ];
           } else {
