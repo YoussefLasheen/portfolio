@@ -9,15 +9,21 @@ class FooterIcons extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: <Widget>[
-        FooterIcon(
-            iconData: FooterIconsFont.facebook_rect,
-            url: 'https://www.facebook.com/YoussefELasheen'),
-        FooterIcon(
-            iconData: FooterIconsFont.twitter_bird,
-            url: 'https://twitter.com/joelasheen'),
-        FooterIcon(
-            iconData: FooterIconsFont.github_circled,
-            url: 'https://github.com/YoussefLasheen'),
+        Expanded(
+          child: FooterIcon(
+              iconData: FooterIconsFont.facebook_rect,
+              url: 'https://www.facebook.com/YoussefELasheen'),
+        ),
+        Expanded(
+          child: FooterIcon(
+              iconData: FooterIconsFont.twitter_bird,
+              url: 'https://twitter.com/joelasheen'),
+        ),
+        Expanded(
+          child: FooterIcon(
+              iconData: FooterIconsFont.github_circled,
+              url: 'https://github.com/YoussefLasheen'),
+        ),
       ],
     );
   }
@@ -31,9 +37,11 @@ class FooterIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      icon: Icon(
-        iconData,
-        color: Colors.black,
+      icon: FittedBox(
+        child: Icon(
+          iconData,
+          color: Colors.black,
+        ),
       ),
       onPressed: () async {
         if (await canLaunch(url)) {
