@@ -41,11 +41,11 @@ class AboutScreen extends StatelessWidget {
                 ),
               ),
               Expanded(
-                flex: 2,
+                flex: isLandscape? 2:1,
                 child: Row(
                   children: <Widget>[
                     Expanded(
-                      flex: 2,
+                      flex: isLandscape? 2:4,
                       child: SizedBox.expand(
                         child: FlatButton(
                           onPressed: () {
@@ -54,7 +54,7 @@ class AboutScreen extends StatelessWidget {
                           child: FittedBox(child: Text('Download CV')),
                           color: Color(0xFF323941),
                           shape: RoundedRectangleBorder(
-                            borderRadius: new BorderRadius.circular(50.0),
+                            borderRadius: new BorderRadius.circular(1500.0),
                           ),
                         ),
                       ),
