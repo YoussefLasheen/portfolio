@@ -36,7 +36,7 @@ class AboutScreen extends StatelessWidget {
               Expanded(
                 flex: 6,
                 child: AutoSizeText(
-                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sed rhoncus neque. Pellentesque venenatis felis at risus rutrum porttitor ac sed turpis. Praesent vel iaculis lacus. Mauris maximus quam congue neque tincidunt aliquam vel in sapien.',
+                  'A freelance Flutter developer based in Egypt.\nI design and build products. I make quality, commented, and reusable code.\nMy services include product analysis through to full product design - from wireframing and prototyping to interface design and Flutter development.',
                   style: TextStyle(color: Colors.grey, fontSize: 50),
                 ),
               ),
