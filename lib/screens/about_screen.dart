@@ -14,18 +14,22 @@ class AboutScreen extends StatelessWidget {
         MediaQuery.of(context).orientation == Orientation.landscape;
     return Row(
       children: <Widget>[
-        isLandscape ? Container() : Spacer(),
+        isLandscape
+            ? Spacer()
+            : Spacer(
+                flex: 4,
+              ),
         Expanded(
-          flex: isLandscape ? 5 : 15,
+          flex: isLandscape ? 20 : 60,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Spacer(
-                flex: 3,
+                flex: 6,
               ),
               Expanded(
-                flex: isLandscape ? 5 : 3,
+                flex: isLandscape ? 10 : 6,
                 child: AutoSizeText(
                   "Hello, I'm\nYoussef Lasheen",
                   textAlign: TextAlign.left,
@@ -33,25 +37,45 @@ class AboutScreen extends StatelessWidget {
                   maxLines: 2,
                 ),
               ),
+              Spacer(
+                flex: 2,
+              ),
               Expanded(
-                flex: 6,
+                flex: 10,
                 child: AutoSizeText(
                   'A freelance Flutter developer based in Egypt.\nI make quality, commented, and reusable code.\nMy services include product analysis through to full product design - from wireframing and prototyping to interface design and Flutter development.',
-                  style: TextStyle(color: Colors.grey, fontSize: 50),
+                  style: TextStyle(
+                    color: Colors.white70,
+                    fontSize: 30,
+                    fontWeight: FontWeight.w100,
+                  ),
                 ),
               ),
               Expanded(
-                flex: isLandscape? 2:1,
+                flex: isLandscape ? 3 : 2,
                 child: Row(
                   children: <Widget>[
                     Expanded(
-                      flex: isLandscape? 2:4,
+                      flex: isLandscape ? 3 : 4,
                       child: SizedBox.expand(
                         child: FlatButton(
                           onPressed: () {
                             _launchURL();
                           },
-                          child: FittedBox(child: Text('Download CV')),
+                          child: Expanded(
+                            child: SizedBox.expand(
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: FittedBox(
+                                  child: Text(
+                                    'DOWNLOAD CV',
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
                           color: Color(0xFF323941),
                           shape: RoundedRectangleBorder(
                             borderRadius: new BorderRadius.circular(1500.0),
@@ -60,25 +84,32 @@ class AboutScreen extends StatelessWidget {
                       ),
                     ),
                     Spacer(
-                      flex: 4,
+                      flex: 8,
                     )
                   ],
                 ),
               ),
               Spacer(
-                flex: 6,
+                flex: 12,
               )
             ],
           ),
         ),
-        Spacer(),
+        Spacer(
+          flex: 4,
+        ),
         isLandscape
             ? Expanded(
-                flex: 3,
+                flex: 10,
                 child: Column(
                   children: <Widget>[
                     Spacer(),
-                    Image.asset('assets/images/P1Logo.png'),
+                    Expanded(
+                        flex: 5,
+                        child: Image.asset(
+                          'assets/images/P1Logo.png',
+                          fit: BoxFit.contain,
+                        )),
                     Spacer(
                       flex: 3,
                     )
@@ -86,7 +117,11 @@ class AboutScreen extends StatelessWidget {
                 ),
               )
             : Container(),
-        isLandscape ? Spacer() : Container(),
+        isLandscape
+            ? Spacer(
+                flex: 4,
+              )
+            : Container(),
       ],
     );
   }
