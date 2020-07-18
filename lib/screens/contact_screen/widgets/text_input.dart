@@ -9,6 +9,7 @@ class ContactForm extends StatelessWidget {
         MediaQuery.of(context).orientation == Orientation.landscape;
     Message message = Message();
     return SingleChildScrollView(
+      physics: BouncingScrollPhysics(),
       child: SizedBox(
         height: isLandscape
             ? MediaQuery.of(context).size.height * 0.9
