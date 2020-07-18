@@ -201,6 +201,6 @@ InputDecoration inputDecoration = InputDecoration(
     filled: true,
     hintStyle: new TextStyle(color: Colors.grey[800]),
     fillColor: Colors.white,
-    errorStyle: TextStyle(backgroundColor: Colors.white));
+    errorStyle: TextStyle(height: 0));
 
 TextStyle inputTextStyle = TextStyle(color: Colors.black);
