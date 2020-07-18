@@ -53,7 +53,7 @@ class ContactForm extends StatelessWidget {
                               },
                             ),
                           ),
-                          Spacer(),
+                          isLandscape?Spacer():Container(),
                           Expanded(
                             flex: 15,
                             child: TextFormField(
@@ -75,7 +75,7 @@ class ContactForm extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Spacer(),
+                    Container(height: 5,),
                     Expanded(
                       flex: isLandscape ? 2 : 6,
                       child: Flex(
@@ -98,7 +98,7 @@ class ContactForm extends StatelessWidget {
                               },
                             ),
                           ),
-                          Spacer(),
+                          isLandscape?Spacer():Container(),
                           Expanded(
                             flex: 15,
                             child: TextFormField(
@@ -118,7 +118,7 @@ class ContactForm extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Spacer(),
+                    Container(height: 5,),
                     Expanded(
                       flex: 6,
                       child: TextFormField(
@@ -136,7 +136,7 @@ class ContactForm extends StatelessWidget {
                         maxLines: 10,
                       ),
                     ),
-                    Spacer(),
+                    isLandscape?Container(height: 5,):Spacer(),
                     Expanded(
                       flex: 2,
                       child: SizedBox.expand(
