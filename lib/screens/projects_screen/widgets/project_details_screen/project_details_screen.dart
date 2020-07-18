@@ -15,6 +15,7 @@ class ProjectDetails extends StatelessWidget {
     String body = project.details['body'].replaceAll('<br/>', '\n');
     return Material(
       child: CustomScrollView(
+        physics: BouncingScrollPhysics(),
         slivers: <Widget>[
           SliverAppBar(
             expandedHeight: screenHeight * 0.25,
@@ -32,16 +33,18 @@ class ProjectDetails extends StatelessWidget {
             ),
           ),
           SliverFillRemaining(
-            hasScrollBody: true,
-            child: Center(
+            hasScrollBody: false,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
               child: FractionallySizedBox(
-                widthFactor: isLandscape ? 3 / 4 : 1,
-                child: Markdown(
+                widthFactor: isLandscape? 3 / 4 : 1,
+                child: MarkdownBody(
                   data: body,
                   onTapLink: (String url) => _launchURL(url),
                   styleSheet: MarkdownStyleSheet(
                     blockSpacing: 20,
                   ),
+                  selectable: true ,
                 ),
               ),
             ),
