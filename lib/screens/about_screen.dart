@@ -62,16 +62,14 @@ class AboutScreen extends StatelessWidget {
                           onPressed: () {
                             _launchURL();
                           },
-                          child: Expanded(
-                            child: SizedBox.expand(
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: FittedBox(
-                                  child: Text(
-                                    'DOWNLOAD CV',
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold),
-                                  ),
+                          child: SizedBox.expand(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: FittedBox(
+                                child: Text(
+                                  'DOWNLOAD CV',
+                                  style:
+                                      TextStyle(fontWeight: FontWeight.bold),
                                 ),
                               ),
                             ),
