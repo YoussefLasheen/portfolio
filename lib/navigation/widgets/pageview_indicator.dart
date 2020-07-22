@@ -28,15 +28,15 @@ class PageViewIndicator extends StatelessWidget {
                 ),
                 GestureDetector(
                     onTap: () => callback(keysList[2]),
-                    child: circleBar(activePage == keysList[2], list[2])),
+                    child: circleBar(activePage == keysList[2], list[2], isLandscape)),
                 Spacer(),
                 GestureDetector(
                     onTap: () => callback(keysList[1]),
-                    child: circleBar(activePage == keysList[1], list[1])),
+                    child: circleBar(activePage == keysList[1], list[1], isLandscape)),
                 Spacer(),
                 GestureDetector(
                     onTap: () => callback(keysList[0]),
-                    child: circleBar(activePage == keysList[0], list[0])),
+                    child: circleBar(activePage == keysList[0], list[0], isLandscape)),
                 Spacer(
                   flex: 4,
                 ),
@@ -50,15 +50,17 @@ class PageViewIndicator extends StatelessWidget {
   }
 }
 
-Widget circleBar(bool isActive, String content) {
+Widget circleBar(bool isActive, String content, bool isLandscape) {
   return Column(
     children: <Widget>[
       Spacer(),
       Expanded(
-        flex: 6,
-        child: Text(
-          content,
-          style: TextStyle(color: isActive ? Colors.white : Colors.white70),
+        flex: isLandscape?3:8,
+        child: FittedBox(
+          child: Text(
+            content,
+            style: TextStyle(color: isActive ? Colors.white : Colors.white70),
+          ),
         ),
       ),
       Spacer(
