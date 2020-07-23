@@ -8,6 +8,8 @@ class Root extends StatelessWidget {
   final PageController controller = PageController(initialPage: 0);
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance
+        .addPostFrameCallback((_) => limitOrientation(context));
     bool isLandscape =
         MediaQuery.of(context).orientation == Orientation.landscape;
     return Material(
@@ -33,4 +35,49 @@ class Root extends StatelessWidget {
       ),
     );
   }
+}
+
+// This function checks if the user's screen height is smaller than required to the app
+// to be shown horizontaly and will launch a full screen dialog to tell the user to flip his device to vertical mode
+limitOrientation(BuildContext context) {
+  MediaQuery.of(context).size.shortestSide < 600 && MediaQuery.of(context).orientation == Orientation.landscape
+      ? !Navigator.of(context).canPop()
+          ? showGeneralDialog(
+              context: context,
+              barrierDismissible: false,
+              barrierLabel: "Dialog",
+              transitionDuration: Duration(milliseconds: 400),
+              pageBuilder: (_, __, ___) {
+                return SizedBox.expand(
+                  child: Material(
+                    color: Color(0xFF303030),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          Spacer(),
+                          Expanded(
+                              flex: 6,
+                              child: Image.asset(
+                                  'assets/images/rotate-to-portrait-icon.png')),
+                          Spacer(),
+                          Expanded(
+                            child: FittedBox(
+                              child: Text(
+                                "Please Rotate your Screen\n for better experience",
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                          ),
+                          Spacer()
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+              },
+            )
+          // ignore: unnecessary_statements
+          : null
+      : Navigator.of(context).maybePop();
 }
