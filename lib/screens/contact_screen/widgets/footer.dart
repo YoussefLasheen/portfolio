@@ -7,66 +7,61 @@ class Footer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isLandscape =
-        MediaQuery.of(context).orientation == Orientation.landscape;
-    return SizedBox(
-      height: isLandscape? MediaQuery.of(context).size.height / 12: MediaQuery.of(context).size.height / 24,
-      child: Container(
-        color: Colors.white,
-        child: Row(
-          children: <Widget>[
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Image.asset('assets/images/FooterLogo.png'),
+    return Container(
+      color: Colors.white,
+      child: Row(
+        children: <Widget>[
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Image.asset('assets/images/FooterLogo.png'),
+            ),
+          ),
+          Spacer(
+            flex: 2,
+          ),
+          Expanded(
+            flex: 2,
+            child: FittedBox(
+              child: Text(
+                '2020 © Youssef Lasheen',
+                style: TextStyle(color: Colors.black),
               ),
             ),
-            Spacer(
-              flex: 2,
-            ),
-            Expanded(
-              flex: 2,
+          ),
+          Spacer(
+            flex: 2,
+          ),
+          Expanded(
+            flex: 2,
+            child: FooterIcons(),
+          ),
+          Spacer(
+            flex: 2,
+          ),
+          Expanded(
+            flex: 2,
+            child: GestureDetector(
+              onTap: ()async{
+                String url = 'mailto:ylasheen5@gmail.com';
+                if (await canLaunch(url)) {
+                  await launch(url);
+                  } else {
+                    throw 'Could not launch $url';
+                    }
+              },
               child: FittedBox(
                 child: Text(
-                  '2020 © Youssef Lasheen',
+                  "● ylasheen5@gmail.com",
                   style: TextStyle(color: Colors.black),
                 ),
               ),
             ),
-            Spacer(
-              flex: 2,
-            ),
-            Expanded(
-              flex: isLandscape?2:4,
-              child: FooterIcons(),
-            ),
-            Spacer(
-              flex: 2,
-            ),
-            Expanded(
-              flex: isLandscape?2:4,
-              child: GestureDetector(
-                onTap: ()async{
-                  String url = 'mailto:ylasheen5@gmail.com';
-                  if (await canLaunch(url)) {
-                    await launch(url);
-                    } else {
-                      throw 'Could not launch $url';
-                      }
-                },
-                child: FittedBox(
-                  child: Text(
-                    "● ylasheen5@gmail.com",
-                    style: TextStyle(color: Colors.black),
-                  ),
-                ),
-              ),
-            ),
-            Spacer(
-              flex: 3,
-            ),
-          ],
-        ),
+          ),
+          Spacer(
+            flex: 3,
+          ),
+        ],
       ),
     );
   }
