@@ -5,7 +5,8 @@ import 'package:portfolio/screens/contact_screen/contact_screen.dart';
 import 'package:portfolio/screens/projects_screen/projects_screen.dart';
 
 class Root extends StatelessWidget {
-  final PageController controller = PageController(initialPage: 0);
+  // Set(viewportFraction: 0.9999). It's a Dirty little trick to preload the next and previous pages
+  final PageController controller = PageController(initialPage: 0, viewportFraction: 0.9999);
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance
