@@ -27,17 +27,17 @@ class PortraitFooter extends StatelessWidget {
                           Expanded(
                             child: ListTile(
                               leading: Icon(Icons.phone),
-                              title: SelectableText("+201008555161"),
+                              title: SelectableText("+201012845227"),
                               subtitle: Text("Phone"),
                             ),
                           ),
                           Expanded(
                             child: ListTile(
                               leading: Icon(Icons.mail),
-                              title: SelectableText("ylasheen5@gmail.com"),
+                              title: SelectableText("youssef@lasheen.dev"),
                               subtitle: Text('Email'),
                               onTap: () async {
-                                String url = 'mailto:ylasheen5@gmail.com';
+                                String url = 'mailto:youssef@lasheen.dev';
                                 if (await canLaunch(url)) {
                                   await launch(url);
                                 } else {
@@ -76,7 +76,8 @@ class PortraitFooter extends StatelessWidget {
                             fit: BoxFit.cover,
                             child: InkWell(
                               onTap: () async {
-                                String url = 'https://www.facebook.com/YoussefELasheen';
+                                String url =
+                                    'https://www.facebook.com/YoussefELasheen';
                                 if (await canLaunch(url)) {
                                   await launch(url);
                                 } else {
@@ -126,7 +127,8 @@ class PortraitFooter extends StatelessWidget {
                             fit: BoxFit.cover,
                             child: InkWell(
                               onTap: () async {
-                                String url = 'https://github.com/YoussefLasheen';
+                                String url =
+                                    'https://github.com/YoussefLasheen';
                                 if (await canLaunch(url)) {
                                   await launch(url);
                                 } else {

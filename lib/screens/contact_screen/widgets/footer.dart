@@ -42,17 +42,17 @@ class Footer extends StatelessWidget {
           Expanded(
             flex: 2,
             child: GestureDetector(
-              onTap: ()async{
-                String url = 'mailto:ylasheen5@gmail.com';
+              onTap: () async {
+                String url = 'mailto:youssef@lasheen.dev';
                 if (await canLaunch(url)) {
                   await launch(url);
-                  } else {
-                    throw 'Could not launch $url';
-                    }
+                } else {
+                  throw 'Could not launch $url';
+                }
               },
               child: FittedBox(
                 child: Text(
-                  "● ylasheen5@gmail.com",
+                  "● youssef@lasheen.dev",
                   style: TextStyle(color: Colors.black),
                 ),
               ),
