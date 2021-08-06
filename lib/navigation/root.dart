@@ -6,7 +6,8 @@ import 'package:portfolio/screens/projects_screen/projects_screen.dart';
 
 class Root extends StatelessWidget {
   // Set(viewportFraction: 0.9999). It's a Dirty little trick to preload the next and previous pages
-  final PageController controller = PageController(initialPage: 0, viewportFraction: 0.9999);
+  final PageController controller =
+      PageController(initialPage: 0, viewportFraction: 0.9999);
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance
@@ -15,7 +16,7 @@ class Root extends StatelessWidget {
         MediaQuery.of(context).orientation == Orientation.landscape;
     return Material(
       child: Flex(
-        direction: isLandscape? Axis.horizontal:Axis.vertical,
+        direction: isLandscape ? Axis.horizontal : Axis.vertical,
         children: <Widget>[
           Sidebar(
             control: controller,
@@ -24,7 +25,7 @@ class Root extends StatelessWidget {
             child: PageView(
               controller: controller,
               physics: NeverScrollableScrollPhysics(),
-              scrollDirection: isLandscape? Axis.vertical:Axis.horizontal,
+              scrollDirection: isLandscape ? Axis.vertical : Axis.horizontal,
               children: <Widget>[
                 AboutScreen(),
                 ProjectsScreen(),
@@ -41,7 +42,8 @@ class Root extends StatelessWidget {
 // This function checks if the user's screen height is smaller than required to the app
 // to be shown horizontaly and will launch a full screen dialog to tell the user to flip his device to vertical mode
 limitOrientation(BuildContext context) {
-  MediaQuery.of(context).size.shortestSide < 600 && MediaQuery.of(context).orientation == Orientation.landscape
+  MediaQuery.of(context).size.shortestSide < 600 &&
+          MediaQuery.of(context).orientation == Orientation.landscape
       ? !Navigator.of(context).canPop()
           ? showGeneralDialog(
               context: context,
