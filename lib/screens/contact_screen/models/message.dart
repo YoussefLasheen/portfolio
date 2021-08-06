@@ -6,13 +6,20 @@ class Message {
 
   String name;
   String email;
-  String website;
+  String subject;
   String budget;
   String messageText;
 
   send(Message msg) {
     String currentTime = Timestamp.now().millisecondsSinceEpoch.toString();
-    Map<String, dynamic> msgMap = {'name':msg.name,'email':msg.email,'website':msg.website,'budget':msg.budget,'messageText':msg.messageText,'time':Timestamp.now()};
-    Api('Messages').updateDocument(msgMap , currentTime);
+    Map<String, dynamic> msgMap = {
+      'name': msg.name,
+      'email': msg.email,
+      'subject': msg.subject,
+      'budget': msg.budget,
+      'messageText': msg.messageText,
+      'time': Timestamp.now()
+    };
+    Api('Messages').updateDocument(msgMap, currentTime);
   }
 }
