@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/screens/contact_screen/widgets/contact_form/contact_form.dart';
+import 'package:portfolio/screens/contact_screen/widgets/contact_links/contact_links.dart';
 
 class ContactScreen extends StatelessWidget {
   const ContactScreen({Key key}) : super(key: key);
@@ -8,12 +9,13 @@ class ContactScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     bool isLandscape =
         MediaQuery.of(context).orientation == Orientation.landscape;
+    double screenHeight = MediaQuery.of(context).size.height;
     return SingleChildScrollView(
-      physics: BouncingScrollPhysics(),
+      physics: isLandscape
+          ? NeverScrollableScrollPhysics()
+          : BouncingScrollPhysics(),
       child: SizedBox(
-        height: isLandscape
-            ? MediaQuery.of(context).size.height
-            : MediaQuery.of(context).size.height * 1.25,
+        height: isLandscape ? screenHeight : screenHeight * 1.25,
         child: Flex(
           direction: isLandscape ? Axis.horizontal : Axis.vertical,
           children: <Widget>[
@@ -27,8 +29,20 @@ class ContactScreen extends StatelessWidget {
             ),
             Expanded(
               child: Container(
-                color: Colors.pink,
+                color: Color(0xFFc34372),
                 constraints: BoxConstraints.expand(),
+                child: Align(
+                  alignment: Alignment.center,
+                  child: SizedBox(
+                    height: screenHeight * 0.5,
+                    child: Padding(
+                      padding: isLandscape
+                          ? EdgeInsets.symmetric(horizontal: 100.0)
+                          : EdgeInsets.symmetric(horizontal: 20),
+                      child: ContactLinks(),
+                    ),
+                  ),
+                ),
               ),
             )
           ],
