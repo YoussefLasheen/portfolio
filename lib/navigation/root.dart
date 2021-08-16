@@ -5,9 +5,7 @@ import 'package:portfolio/screens/contact_screen/contact_screen.dart';
 import 'package:portfolio/screens/projects_screen/projects_screen.dart';
 
 class Root extends StatelessWidget {
-  // Set(viewportFraction: 0.9999). It's a Dirty little trick to preload the next and previous pages
-  final PageController controller =
-      PageController(initialPage: 0, viewportFraction: 0.9999);
+  final _navigatorKey = GlobalKey<NavigatorState>();
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance
@@ -19,18 +17,39 @@ class Root extends StatelessWidget {
         direction: isLandscape ? Axis.horizontal : Axis.vertical,
         children: <Widget>[
           Sidebar(
-            control: controller,
+            _navigatorKey,
           ),
           Expanded(
-            child: PageView(
-              controller: controller,
-              physics: NeverScrollableScrollPhysics(),
-              scrollDirection: isLandscape ? Axis.vertical : Axis.horizontal,
-              children: <Widget>[
-                AboutScreen(),
-                ProjectsScreen(),
-                ContactScreen()
-              ],
+            child: Navigator(
+              key: _navigatorKey,
+              initialRoute: '/',
+              onGenerateRoute: (RouteSettings settings) {
+                Widget builder;
+                // Manage your route names here
+                switch (settings.name) {
+                  case '/':
+                    builder = AboutScreen();
+                    break;
+                  case '/projects':
+                    builder = ProjectsScreen();
+                    break;
+                  case '/contact':
+                    builder = ContactScreen();
+                    break;
+                  default:
+                    throw Exception('Invalid route: ${settings.name}');
+                }
+                // You can also return a PageRouteBuilder and
+                // define custom transitions between pages
+                return PageRouteBuilder(
+                  pageBuilder: (context, animation, anotherAnimation) {
+                    return builder;
+                  },
+                  transitionsBuilder: (c, anim, anim2, child) =>
+                      FadeTransition(opacity: anim, child: child),
+                  settings: settings,
+                );
+              },
             ),
           )
         ],

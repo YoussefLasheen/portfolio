@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'pageview_indicator.dart';
 
 class Sidebar extends StatefulWidget {
-  Sidebar({Key key, this.control}) : super(key: key);
-  final PageController control;
+  Sidebar(this.navigatorKey);
+  final GlobalKey<NavigatorState> navigatorKey;
 
   @override
   _SidebarState createState() => _SidebarState();
@@ -27,14 +27,29 @@ class _SidebarState extends State<Sidebar> {
         child: PageViewIndicator(
           activePage: currentPageValue,
           callback: (int index) {
-            currentPageValue = index;
-            widget.control.animateToPage(index,
-                duration: Duration(milliseconds: 500),
-                curve: Curves.easeInOutCirc);
-            setState(() {});
+            if (currentPageValue != index) {
+              currentPageValue = index;
+              widget.navigatorKey.currentState
+                  .pushReplacementNamed(indexToRoute(index));
+              setState(() {});
+            }
           },
         ),
       ),
     );
+  }
+}
+
+String indexToRoute(int index) {
+  switch (index) {
+    case 0:
+      return '/';
+      break;
+    case 1:
+      return '/projects';
+      break;
+    case 2:
+      return '/contact';
+      break;
   }
 }
