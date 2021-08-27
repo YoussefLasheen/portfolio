@@ -14,7 +14,12 @@ class ProjectsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<DocumentSnapshot>(
-        future: Future.delayed(const Duration(milliseconds: 350,), (){return Api('Data').getDocumentById('projects_screen');}),
+        future: Future.delayed(
+            const Duration(
+              milliseconds: 350,
+            ), () {
+          return Api('Data').getDocumentById('projects_screen');
+        }),
         builder: (context, snapshot) {
           List projects;
           if (!snapshot.hasData) {

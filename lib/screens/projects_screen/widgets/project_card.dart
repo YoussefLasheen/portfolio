@@ -18,7 +18,9 @@ class ProjectCard extends StatelessWidget {
       padding: EdgeInsets.only(bottom: screenHeight * 0.1),
       child: Align(
         alignment: isLandscape
-            ? isInversed ? Alignment.centerLeft : Alignment.centerRight
+            ? isInversed
+                ? Alignment.centerLeft
+                : Alignment.centerRight
             : Alignment.center,
         child: SizedBox(
           width: isLandscape ? screenWidth * 0.7 : screenWidth * 0.9,
@@ -29,16 +31,24 @@ class ProjectCard extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.only(
                     //top: isLandscape ? 0 : 10,
-                    right: isLandscape ? isInversed ? screenWidth * 0.1 : 0 : 0,
-                    left: isLandscape ? !isInversed ? screenWidth * 0.1 : 0 : 0,
+                    right: isLandscape
+                        ? isInversed
+                            ? screenWidth * 0.1
+                            : 0
+                        : 0,
+                    left: isLandscape
+                        ? !isInversed
+                            ? screenWidth * 0.1
+                            : 0
+                        : 0,
                     //bottom: isLandscape ? 0 : 10
                   ),
                   child: project.imgSrc == null
                       ? Placeholder(
                           color: isInversed ? Colors.white : Colors.blueGrey)
                       : Hero(
-                        tag: project.title + 'image',
-                        child: Image.network(
+                          tag: project.title + 'image',
+                          child: Image.network(
                             project.imgSrc,
                             fit: BoxFit.fill,
                             loadingBuilder: (BuildContext context, Widget child,
@@ -46,7 +56,8 @@ class ProjectCard extends StatelessWidget {
                               if (loadingProgress == null) return child;
                               return Center(
                                 child: CircularProgressIndicator(
-                                  value: loadingProgress.expectedTotalBytes != null
+                                  value: loadingProgress.expectedTotalBytes !=
+                                          null
                                       ? loadingProgress.cumulativeBytesLoaded /
                                           loadingProgress.expectedTotalBytes
                                       : null,
@@ -54,13 +65,13 @@ class ProjectCard extends StatelessWidget {
                               );
                             },
                           ),
-                      ),
+                        ),
                 ),
                 Positioned.fill(
                   left: !isInversed ? 0 : null,
                   right: isInversed ? 0 : null,
                   child: SizedBox(
-                    width: isLandscape? screenWidth / 4 : screenWidth / 2,
+                    width: isLandscape ? screenWidth / 4 : screenWidth / 2,
                     child: Column(
                       children: <Widget>[
                         isLandscape
@@ -99,8 +110,8 @@ class ProjectCard extends StatelessWidget {
                                   children: <Widget>[
                                     Expanded(
                                         flex: 8,
-                                        child:
-                                            FittedBox(child: Text('View work'))),
+                                        child: FittedBox(
+                                            child: Text('View work'))),
                                     Spacer(),
                                     Expanded(
                                       flex: isLandscape ? 2 : 4,
@@ -108,7 +119,14 @@ class ProjectCard extends StatelessWidget {
                                         heroTag: project.title,
                                         backgroundColor: Color(0xFFc34372),
                                         onPressed: () {
-                                          Navigator.push(context,MaterialPageRoute(builder: (context) => ProjectDetails(project: project,),));
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    ProjectDetails(
+                                                  project: project,
+                                                ),
+                                              ));
                                         },
                                         child: FittedBox(
                                           child: Icon(
