@@ -120,13 +120,15 @@ class ProjectCard extends StatelessWidget {
                                         backgroundColor: Color(0xFFc34372),
                                         onPressed: () {
                                           Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    ProjectDetails(
-                                                  project: project,
-                                                ),
-                                              ));
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  ProjectDetailsScreen(
+                                                project: project,
+                                                isInversed: isInversed,
+                                              ),
+                                            ),
+                                          );
                                         },
                                         child: FittedBox(
                                           child: Icon(
