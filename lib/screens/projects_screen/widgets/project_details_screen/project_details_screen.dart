@@ -1,55 +1,57 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:portfolio/screens/projects_screen/models/project.dart';
+import 'package:portfolio/screens/projects_screen/widgets/project_details_screen/widgets/project_details_screen_top_landscape.dart';
+import 'package:portfolio/screens/projects_screen/widgets/project_details_screen/widgets/project_details_screen_top_portrait.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class ProjectDetails extends StatelessWidget {
-  const ProjectDetails({Key key, this.project}) : super(key: key);
+class ProjectDetailsScreen extends StatelessWidget {
+  const ProjectDetailsScreen({this.isInversed, this.project});
+
   final Project project;
+  final bool isInversed;
 
   @override
   Widget build(BuildContext context) {
-    double screenHeight = MediaQuery.of(context).size.height;
     bool isLandscape =
         MediaQuery.of(context).orientation == Orientation.landscape;
     String body = project.details['body'].replaceAll('<br/>', '\n');
-    return Material(
-      child: CustomScrollView(
-        physics: BouncingScrollPhysics(),
-        slivers: <Widget>[
-          SliverAppBar(
-            expandedHeight: screenHeight * 0.25,
-            flexibleSpace: FlexibleSpaceBar(
-              title: Text(project.title),
-              background: Hero(
-                tag: project.title + 'image',
-                child: project.imgSrc == null
-                    ? Placeholder()
-                    : Image.network(
-                        project.imgSrc,
-                        fit: BoxFit.cover,
-                      ),
-              ),
+    return isLandscape
+        ? ProjectDetailsScreenTopLandscape(
+            isInversed: isInversed,
+            project: project,
+            content: ProjectDetails(
+              body: body,
             ),
-          ),
-          SliverFillRemaining(
-            hasScrollBody: false,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: FractionallySizedBox(
-                widthFactor: isLandscape? 3 / 4 : 1,
-                child: MarkdownBody(
-                  data: body,
-                  onTapLink: (String url) => _launchURL(url),
-                  styleSheet: MarkdownStyleSheet(
-                    blockSpacing: 20,
-                  ),
-                  selectable: true ,
-                ),
-              ),
+          )
+        : ProjectDetailsScreenTopPotrait(
+            project: project,
+            content: ProjectDetails(
+              body: body,
             ),
+          );
+  }
+}
+
+class ProjectDetails extends StatelessWidget {
+  const ProjectDetails({this.body});
+  final String body;
+  @override
+  Widget build(BuildContext context) {
+    bool isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: FractionallySizedBox(
+        widthFactor: isLandscape ? 3 / 4 : 1,
+        child: MarkdownBody(
+          data: body,
+          onTapLink: (String url) => _launchURL(url),
+          styleSheet: MarkdownStyleSheet(
+            blockSpacing: 20,
           ),
-        ],
+          selectable: true,
+        ),
       ),
     );
   }
