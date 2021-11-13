@@ -60,6 +60,30 @@ class ContactForm extends StatelessWidget {
               validator: (val) => val.isEmpty ? 'Message is required' : null,
             ),
           ),
+          !isLandscape?
+          SizedBox(
+                height: MediaQuery.of(context).size.height * 0.1,
+                width: double.infinity,
+                child: Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: TextButton(
+                    
+                    onPressed: () {
+                      final form = _formKey.currentState;
+                    if (form.validate()) {
+                      form.save();
+                      message.send(message);
+                      form.reset();}
+                    },
+                    child: FittedBox(
+                      child: Text("Send",style: TextStyle(color: Color(0xFFc34372)),),
+                    ),
+                    style: TextButton.styleFrom(
+                      backgroundColor: Colors.black26,
+                    ),
+                  ),
+                ),
+              ):
           Align(
             alignment: Alignment.centerRight,
             child: ConstrainedBox(
