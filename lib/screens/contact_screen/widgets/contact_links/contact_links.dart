@@ -13,18 +13,21 @@ class ContactLinks extends StatelessWidget {
               child: InfoTile(
             icon: Icons.phone,
             text: "+201012845227",
+            subText: "Phone",
             url: "url://+201012845227",
           )),
           Flexible(
               child: InfoTile(
             icon: Icons.email,
             text: "youssef@lasheen.dev",
+            subText: "Email",
             url: "mailto:youssef@lasheen.dev",
           )),
           Flexible(
               child: InfoTile(
             icon: Icons.location_on,
             text: "Cairo, Egypt",
+            subText: "Location",
             url: "https://www.google.com/maps/place/Cairo+Governorate",
           )),
           Flexible(
@@ -34,6 +37,7 @@ class ContactLinks extends StatelessWidget {
                   child: SocialIcon(
                     icon: FooterIconsFont.github_circled,
                     url: "https://github.com/YoussefLasheen",
+                    color: Colors.green,
                   ),
                 ),
                 SizedBox(
@@ -43,6 +47,7 @@ class ContactLinks extends StatelessWidget {
                   child: SocialIcon(
                     icon: FooterIconsFont.linkedin,
                     url: "http://linkedin.com/in/yousseflasheen",
+                    color: Colors.blue,
                   ),
                 ),
                 SizedBox(
@@ -52,6 +57,7 @@ class ContactLinks extends StatelessWidget {
                   child: SocialIcon(
                     icon: FooterIconsFont.twitter_bird,
                     url: "https://twitter.com/joelasheen",
+                    color: Colors.cyan,
                   ),
                 ),
               ],
@@ -65,9 +71,10 @@ class ContactLinks extends StatelessWidget {
 
 class InfoTile extends StatelessWidget {
   final String text;
+  final String subText;
   final String url;
   final IconData icon;
-  const InfoTile({this.text, this.url, this.icon});
+  const InfoTile({this.text, this.url, this.icon, this.subText});
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +85,7 @@ class InfoTile extends StatelessWidget {
         child: ListTile(
           leading: Icon(icon),
           title: SelectableText(text),
-          subtitle: Text("Phone"),
+          subtitle: Text(subText),
           onTap: () async {
             if (await canLaunch(url)) {
               await launch(url);
@@ -95,7 +102,8 @@ class InfoTile extends StatelessWidget {
 class SocialIcon extends StatelessWidget {
   final icon;
   final url;
-  const SocialIcon({this.icon, this.url});
+  final Color color;
+  const SocialIcon({this.icon, this.url, this.color});
 
   @override
   Widget build(BuildContext context) {
@@ -110,7 +118,7 @@ class SocialIcon extends StatelessWidget {
           }
         },
         child: Container(
-          color: Colors.black54,
+          color: color,
           child: Center(
             child: Padding(
               padding: const EdgeInsets.all(8.0),
