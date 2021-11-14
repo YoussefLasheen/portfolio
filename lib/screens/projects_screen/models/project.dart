@@ -8,8 +8,8 @@ class ProjectMetadata {
 }
 
 class ProjectDescription{
-ProjectDescription({this.projectMetadata, this.text});
-  final String text;
+ProjectDescription( {this.infoSnippet,this.projectMetadata,});
+  final Map infoSnippet;
   final ProjectMetadata projectMetadata;
 
   
