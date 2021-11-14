@@ -3,8 +3,7 @@ import 'package:portfolio/screens/projects_screen/models/project.dart';
 import 'package:portfolio/screens/projects_screen/widgets/project_details_screen/widgets/project_details.dart';
 
 class ProjectDetailsScreenTopPotrait extends StatelessWidget {
-  const ProjectDetailsScreenTopPotrait(
-      { @required this.projectMetadata});
+  const ProjectDetailsScreenTopPotrait({@required this.projectMetadata});
   final ProjectMetadata projectMetadata;
 
   @override
@@ -30,7 +29,12 @@ class ProjectDetailsScreenTopPotrait extends StatelessWidget {
               ),
             ),
           ),
-          SliverFillRemaining(hasScrollBody: false, child: ProjectDetails(projectMetadata: projectMetadata,)),
+          SliverFillRemaining(
+            hasScrollBody: false,
+            child: ProjectDetails(
+              projectMetadata: projectMetadata,
+            ),
+          ),
         ],
       ),
     );
