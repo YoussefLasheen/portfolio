@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/screens/projects_screen/models/project.dart';
+import 'package:portfolio/screens/projects_screen/widgets/project_details_screen/widgets/project_details.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ProjectDetailsScreenTopLandscape extends StatelessWidget {
-  const ProjectDetailsScreenTopLandscape(
-      {@required this.project, @required this.isInversed,@required this.content});
-  final Project project;
-  final Widget content;
+  const ProjectDetailsScreenTopLandscape({
+    @required this.projectMetadata,
+    @required this.isInversed,
+  });
+  final ProjectMetadata projectMetadata;
   final bool isInversed;
 
   @override
@@ -32,14 +34,14 @@ class ProjectDetailsScreenTopLandscape extends StatelessWidget {
                     children: <Widget>[
                       Expanded(
                         flex: 2,
-                        child: project.imgSrc == null
+                        child: projectMetadata.backgroundImageSource == null
                             ? Placeholder(
                                 color:
                                     isInversed ? Colors.white : Colors.blueGrey)
                             : Hero(
-                                tag: project.title + 'image',
+                                tag: projectMetadata.title + 'image',
                                 child: Image.network(
-                                  project.imgSrc,
+                                  projectMetadata.backgroundImageSource,
                                   fit: BoxFit.fitHeight,
                                   loadingBuilder: (BuildContext context,
                                       Widget child,
@@ -73,14 +75,14 @@ class ProjectDetailsScreenTopLandscape extends StatelessWidget {
                               Spacer(),
                               FittedBox(
                                   child: Text(
-                                "#" + project.title,
+                                "#" + projectMetadata.title,
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     color: Color(0xFFc34372)),
                               )),
                               FittedBox(
                                 child: Text(
-                                  "— " + project.subTitle,
+                                  "— " + projectMetadata.shortDescription,
                                 ),
                               ),
                               Spacer(),
@@ -99,7 +101,7 @@ class ProjectDetailsScreenTopLandscape extends StatelessWidget {
                                     Expanded(
                                       flex: isLandscape ? 2 : 4,
                                       child: FloatingActionButton(
-                                        heroTag: project.title,
+                                        heroTag: projectMetadata.title,
                                         backgroundColor: Color(0xFFc34372),
                                         onPressed: () {},
                                         child: FittedBox(
@@ -120,7 +122,7 @@ class ProjectDetailsScreenTopLandscape extends StatelessWidget {
                     ],
                   ),
                 ),
-                content
+                ProjectDetails(projectMetadata: projectMetadata,)
               ],
             ),
           ),
@@ -138,16 +140,9 @@ class ProjectDetailsScreenTopLandscape extends StatelessWidget {
   }
 }
 
-_launchURL(String url) async {
-  if (await canLaunch(url)) {
-    await launch(url);
-  } else {
-    throw 'Could not launch $url';
-  }
-}
 
 class ProjectInfoBar extends StatelessWidget {
-  final Project project;
+  final ProjectMetadata project;
   const ProjectInfoBar({this.project});
 
   @override

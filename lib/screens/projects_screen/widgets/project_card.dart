@@ -4,10 +4,10 @@ import 'package:portfolio/screens/projects_screen/models/project.dart';
 import 'project_details_screen/project_details_screen.dart';
 
 class ProjectCard extends StatelessWidget {
-  final Project project;
+  final ProjectMetadata projectMetadata;
   final bool isInversed;
 
-  const ProjectCard({Key key, this.project, this.isInversed}) : super(key: key);
+  const ProjectCard({Key key, this.projectMetadata, this.isInversed}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -43,13 +43,13 @@ class ProjectCard extends StatelessWidget {
                         : 0,
                     //bottom: isLandscape ? 0 : 10
                   ),
-                  child: project.imgSrc == null
+                  child: projectMetadata.backgroundImageSource == null
                       ? Placeholder(
                           color: isInversed ? Colors.white : Colors.blueGrey)
                       : Hero(
-                          tag: project.title + 'image',
+                          tag: projectMetadata.title + 'image',
                           child: Image.network(
-                            project.imgSrc,
+                            projectMetadata.backgroundImageSource,
                             fit: BoxFit.fill,
                             loadingBuilder: (BuildContext context, Widget child,
                                 ImageChunkEvent loadingProgress) {
@@ -83,7 +83,7 @@ class ProjectCard extends StatelessWidget {
                           flex: 2,
                           child: FittedBox(
                               child: Text(
-                            "#" + project.title,
+                            "#" + projectMetadata.title,
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Color(0xFFc34372)),
@@ -92,7 +92,7 @@ class ProjectCard extends StatelessWidget {
                         Expanded(
                           child: FittedBox(
                               child: Text(
-                            "— " + project.subTitle,
+                            "— " + projectMetadata.shortDescription,
                           )),
                         ),
                         Spacer(
@@ -116,17 +116,19 @@ class ProjectCard extends StatelessWidget {
                                     Expanded(
                                       flex: isLandscape ? 2 : 4,
                                       child: FloatingActionButton(
-                                        heroTag: project.title,
+                                        heroTag: projectMetadata.title,
                                         backgroundColor: Color(0xFFc34372),
                                         onPressed: () {
                                           Navigator.push(
                                             context,
                                             MaterialPageRoute(
                                               builder: (context) =>
+                                              
                                                   ProjectDetailsScreen(
-                                                project: project,
+                                                projectMetadata: projectMetadata,
                                                 isInversed: isInversed,
                                               ),
+                                              
                                             ),
                                           );
                                         },
