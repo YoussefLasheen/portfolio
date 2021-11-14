@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -13,50 +14,261 @@ class ProjectDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     bool isLandscape =
         MediaQuery.of(context).orientation == Orientation.landscape;
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
     return FutureBuilder<DocumentSnapshot>(
-      future: Future.delayed(
+        future: Future.delayed(
             const Duration(
               milliseconds: 350,
             ), () {
-          return Api('Data/projects_screen/projects').getDocumentById(projectMetadata.id);
+          return Api('Data/projects_screen/projects')
+              .getDocumentById(projectMetadata.id);
         }),
-      builder: (context, snapshot) {
-        ProjectDescription projectContent;
+        builder: (context, snapshot) {
+          ProjectDescription projectContent;
           if (!snapshot.hasData) {
-            projectContent = ProjectDescription(text: 'asfd',projectMetadata: projectMetadata);
+            projectContent = ProjectDescription(infoSnippet: {
+              'role': 'Loading..',
+              'client': 'Loading..',
+              'credits': 'Loading..',
+              'date': 'Loading..',
+              'longDescription': 'Loading..'
+            }, projectMetadata: projectMetadata);
           } else {
-            projectContent = ProjectDescription(text: snapshot.data['content'],projectMetadata: projectMetadata);
+            projectContent = ProjectDescription(
+                infoSnippet: snapshot.data['infoSnippet'],
+                projectMetadata: projectMetadata);
           }
-        return Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: FractionallySizedBox(
-            widthFactor: isLandscape ? 3 / 4 : 1,
+          return Theme(
+            data: ThemeData.light(),
             child: Column(
               children: [
-                Text(projectContent.projectMetadata.title),
-                PlatformIndicator({'Android':true,'Ios':true,'Web':true,'Windows':true,'Mac':true,'Linux':true,}),
-                LicenseIndicator(),
-                MarkdownBody(
-                  data: projectMetadata.title,
-                  onTapLink: (String url) => _launchURL(url),
-                  styleSheet: MarkdownStyleSheet(
-                    blockSpacing: 20,
+                Container(
+                  color: Colors.white,
+                  height: isLandscape
+                      ? (3 / 5) * screenHeight
+                      : 1.25 * screenHeight,
+                  width: screenWidth,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 100.0),
+                    child: Column(
+                      children: [
+                        Flexible(
+                          flex: 2,
+                          child: SizedBox(
+                            width: isLandscape
+                                ? (1 / 3) * screenWidth
+                                : screenWidth * 0.9,
+                            child: Column(
+                              children: [
+                                Column(
+                                  children: [
+                                    Text(
+                                      "PROJECT",
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+                                          letterSpacing: 1),
+                                    ),
+                                    Container(
+                                      height: 3,
+                                      width: 30,
+                                      color: Colors.black54,
+                                    ),
+                                  ],
+                                ),
+                                Expanded(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: AutoSizeText(
+                                      projectContent
+                                          .infoSnippet['longDescription'],
+                                      style: TextStyle(
+                                          color: Colors.black54, fontSize: 40),
+                                      wrapWords: true,
+                                      maxFontSize: 50,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 50,
+                        ),
+                        if (isLandscape)
+                          Flexible(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Flexible(
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Flexible(
+                                          child: FittedBox(
+                                              child: InfoSnippet(
+                                                  'ROLE',
+                                                  projectContent
+                                                      .infoSnippet['role']))),
+                                      Spacer(),
+                                      Flexible(
+                                          child: FittedBox(
+                                              child: InfoSnippet(
+                                                  'DATE',
+                                                  projectContent
+                                                      .infoSnippet['date']))),
+                                    ],
+                                  ),
+                                ),
+                                Flexible(
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Flexible(
+                                          child: FittedBox(
+                                              child: InfoSnippet(
+                                                  'CREDITS',
+                                                  projectContent.infoSnippet[
+                                                      'credits']))),
+                                      Spacer(),
+                                      Flexible(
+                                          child: FittedBox(
+                                              child: InfoSnippet(
+                                                  'CLIENT',
+                                                  projectContent
+                                                      .infoSnippet['client']))),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          )
+                        else
+                          Flexible(
+                            child: SizedBox(
+                              width: screenWidth * 0.9,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Flexible(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Flexible(
+                                            child: FittedBox(
+                                                child: InfoSnippet(
+                                                    'ROLE',
+                                                    projectContent
+                                                        .infoSnippet['role']))),
+                                        SizedBox(
+                                          height: 50,
+                                        ),
+                                        Flexible(
+                                            child: FittedBox(
+                                                child: InfoSnippet(
+                                                    'DATE',
+                                                    projectContent
+                                                        .infoSnippet['date']))),
+                                      ],
+                                    ),
+                                  ),
+                                  Flexible(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Flexible(
+                                            child: FittedBox(
+                                                child: InfoSnippet(
+                                                    'CREDITS',
+                                                    projectContent.infoSnippet[
+                                                        'credits']))),
+                                        SizedBox(
+                                          height: 50,
+                                        ),
+                                        Flexible(
+                                            child: FittedBox(
+                                                child: InfoSnippet(
+                                                    'CLIENT',
+                                                    projectContent.infoSnippet[
+                                                        'client']))),
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          )
+                      ],
+                    ),
                   ),
-                  selectable: true,
+                ),
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: 750,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image:
+                          NetworkImage(projectMetadata.backgroundImageSource),
+                    ),
+                  ),
                 ),
               ],
             ),
-          ),
-        );
-      }
-    );
+          );
+        });
   }
 }
+
 _launchURL(String url) async {
   if (await canLaunch(url)) {
     await launch(url);
   } else {
     throw 'Could not launch $url';
+  }
+}
+
+class InfoSnippet extends StatelessWidget {
+  final String text;
+  final String subText;
+
+  const InfoSnippet(this.text, this.subText);
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          text,
+          style: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+              wordSpacing: 1),
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        Container(
+          height: 3,
+          width: 30,
+          color: Colors.black,
+        ),
+        SizedBox(
+          height: 20,
+        ),
+        Text(
+          subText,
+          style: TextStyle(color: Colors.black87, fontSize: 20),
+        )
+      ],
+    );
   }
 }
 
@@ -66,15 +278,21 @@ class PlatformIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(children: [
-      Text("Available for"),
-      platforms['Android']==true?Icon(Icons.android):Container(),
-      platforms['Ios']==true?Icon(Icons.phone_iphone_rounded):Container(),
-      platforms['Web']==true?Icon(Icons.language):Container(),
-      platforms['Windows']==true?Icon(Icons.window):Container(),
-      platforms['Mac']==true?Icon(Icons.laptop_mac):Container(),
-      platforms['Linux']==true?Icon(Icons.precision_manufacturing_outlined):Container()
-    ],);
+    return Row(
+      children: [
+        Text("Available for"),
+        platforms['Android'] == true ? Icon(Icons.android) : Container(),
+        platforms['Ios'] == true
+            ? Icon(Icons.phone_iphone_rounded)
+            : Container(),
+        platforms['Web'] == true ? Icon(Icons.language) : Container(),
+        platforms['Windows'] == true ? Icon(Icons.window) : Container(),
+        platforms['Mac'] == true ? Icon(Icons.laptop_mac) : Container(),
+        platforms['Linux'] == true
+            ? Icon(Icons.precision_manufacturing_outlined)
+            : Container()
+      ],
+    );
   }
 }
 
@@ -84,10 +302,7 @@ class LicenseIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      children: [
-        Text("License is:"),
-        Icon(Icons.military_tech)
-      ],
+      children: [Text("License is:"), Icon(Icons.military_tech)],
     );
   }
 }
