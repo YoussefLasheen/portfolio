@@ -26,8 +26,7 @@ class ProjectDetailsScreenTopLandscape extends StatelessWidget {
                 SizedBox(
                   width: screenWidth,
                   height: screenHeight,
-                  child: Flex(
-                    direction: isLandscape ? Axis.horizontal : Axis.vertical,
+                  child: Row(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     textDirection:
                         isInversed ? TextDirection.rtl : TextDirection.ltr,
@@ -66,55 +65,30 @@ class ProjectDetailsScreenTopLandscape extends StatelessWidget {
                       Expanded(
                         flex: 1,
                         child: Padding(
-                          padding: const EdgeInsets.all(50.0),
+                          padding: const EdgeInsets.symmetric(horizontal: 100),
                           child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             //mainAxisAlignment: MainAxisAlignment.center,
                             mainAxisSize: MainAxisSize.max,
                             children: <Widget>[
-                              Spacer(),
-                              FittedBox(
+                              Spacer(flex: 2,),
+                              Expanded(
+                                child: FittedBox(
+                                    child: Text(
+                                  "#" + projectMetadata.title,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Color(0xFFc34372)),
+                                )),
+                              ),
+                              Expanded(
+                                child: FittedBox(
                                   child: Text(
-                                "#" + projectMetadata.title,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Color(0xFFc34372)),
-                              )),
-                              FittedBox(
-                                child: Text(
-                                  "— " + projectMetadata.shortDescription,
+                                    "— " + projectMetadata.shortDescription,
+                                  ),
                                 ),
                               ),
-                              Spacer(),
-                              Padding(
-                                padding: isInversed
-                                    ? const EdgeInsets.only(left: 0, right: 100)
-                                    : const EdgeInsets.only(
-                                        left: 100, right: 0),
-                                child: Row(
-                                  children: <Widget>[
-                                    Expanded(
-                                        flex: 8,
-                                        child: FittedBox(
-                                            child: Text('View work'))),
-                                    Spacer(),
-                                    Expanded(
-                                      flex: isLandscape ? 2 : 4,
-                                      child: FloatingActionButton(
-                                        heroTag: projectMetadata.title,
-                                        backgroundColor: Color(0xFFc34372),
-                                        onPressed: () {},
-                                        child: FittedBox(
-                                          child: Icon(
-                                            Icons.play_arrow,
-                                            color: Colors.white,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
+                              Spacer(flex: 4,),
                             ],
                           ),
                         ),
@@ -122,7 +96,9 @@ class ProjectDetailsScreenTopLandscape extends StatelessWidget {
                     ],
                   ),
                 ),
-                ProjectDetails(projectMetadata: projectMetadata,)
+                ProjectDetails(
+                  projectMetadata: projectMetadata,
+                )
               ],
             ),
           ),
@@ -136,26 +112,6 @@ class ProjectDetailsScreenTopLandscape extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-}
-
-
-class ProjectInfoBar extends StatelessWidget {
-  final ProjectMetadata project;
-  const ProjectInfoBar({this.project});
-
-  @override
-  Widget build(BuildContext context) {
-    String title = project.title;
-    return Row(
-      children: [
-        Spacer(),
-        Expanded(child: Text('Name:\n$title')),
-        Expanded(child: Text('Name:\n$title')),
-        Expanded(child: Text('Name:\n$title')),
-        Spacer()
-      ],
     );
   }
 }
