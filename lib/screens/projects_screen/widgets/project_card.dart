@@ -1,4 +1,7 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:auto_route/src/router/auto_router_x.dart';
 import 'package:flutter/material.dart';
+import 'package:portfolio/routes/router.gr.dart';
 import 'package:portfolio/screens/projects_screen/models/project.dart';
 
 import 'project_details_screen/project_details_screen.dart';
@@ -120,17 +123,10 @@ class ProjectCard extends StatelessWidget {
                                         heroTag: projectMetadata.title,
                                         backgroundColor: Color(0xFFc34372),
                                         onPressed: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                              
-                                                  ProjectDetailsScreen(
-                                                projectMetadata: projectMetadata,
-                                                isInversed: isInversed,
-                                              ),
-                                              
-                                            ),
+                                          context.router.push(
+                                            ProjectsDetailsRouter(
+                                              id:id,
+                                              isInversed: isInversed, )
                                           );
                                         },
                                         child: FittedBox(
