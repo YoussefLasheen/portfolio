@@ -3,15 +3,16 @@ import 'package:flutter/material.dart';
 import 'pageview_indicator.dart';
 
 class Sidebar extends StatefulWidget {
-  Sidebar({Key key, this.control}) : super(key: key);
-  final PageController control;
+  Sidebar({Key key, this.currentIndex, this.onTap}) : super(key: key);
+
+  final int currentIndex;
+  final Function onTap;
 
   @override
   _SidebarState createState() => _SidebarState();
 }
 
 class _SidebarState extends State<Sidebar> {
-  int currentPageValue = 0;
   @override
   Widget build(BuildContext context) {
     bool isLandscape =
@@ -25,13 +26,9 @@ class _SidebarState extends State<Sidebar> {
         width: double.infinity,
         color: Colors.transparent,
         child: PageViewIndicator(
-          activePage: currentPageValue,
+          activePage: widget.currentIndex,
           callback: (int index) {
-            currentPageValue = index;
-            widget.control.animateToPage(index,
-                duration: Duration(milliseconds: 500),
-                curve: Curves.easeInOutCirc);
-            setState(() {});
+            widget.onTap(index);
           },
         ),
       ),
