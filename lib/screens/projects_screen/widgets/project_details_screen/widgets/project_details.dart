@@ -185,7 +185,9 @@ class ProjectDetails extends StatelessWidget {
                     ),
                   ),
                 ),
-                Container(
+                if (projectDescription.projectMetadata.backgroundImageSource == null) 
+                Center(child: CircularProgressIndicator(),) 
+                else Container(
                   width: MediaQuery.of(context).size.width,
                   height: 750,
                   decoration: BoxDecoration(
