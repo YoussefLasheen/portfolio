@@ -7,8 +7,8 @@ import 'package:portfolio/services/api.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ProjectDetails extends StatelessWidget {
-  const ProjectDetails({this.projectMetadata});
-  final ProjectMetadata projectMetadata;
+  const ProjectDetails({this.projectDescription});
+  final ProjectDescription projectDescription;
   @override
   Widget build(BuildContext context) {
     bool isLandscape =
@@ -59,7 +59,7 @@ class ProjectDetails extends StatelessWidget {
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: AutoSizeText(
-                                      projectContent
+                                      projectDescription
                                           .infoSnippet['longDescription'],
                                       style: TextStyle(
                                           color: Colors.black54, fontSize: 40),
@@ -88,14 +88,14 @@ class ProjectDetails extends StatelessWidget {
                                           child: FittedBox(
                                               child: InfoSnippet(
                                                   'ROLE',
-                                                  projectContent
+                                                  projectDescription
                                                       .infoSnippet['role']))),
                                       Spacer(),
                                       Flexible(
                                           child: FittedBox(
                                               child: InfoSnippet(
                                                   'DATE',
-                                                  projectContent
+                                                  projectDescription
                                                       .infoSnippet['date']))),
                                     ],
                                   ),
@@ -108,14 +108,14 @@ class ProjectDetails extends StatelessWidget {
                                           child: FittedBox(
                                               child: InfoSnippet(
                                                   'CREDITS',
-                                                  projectContent.infoSnippet[
+                                                  projectDescription.infoSnippet[
                                                       'credits']))),
                                       Spacer(),
                                       Flexible(
                                           child: FittedBox(
                                               child: InfoSnippet(
                                                   'CLIENT',
-                                                  projectContent
+                                                  projectDescription
                                                       .infoSnippet['client']))),
                                     ],
                                   ),
@@ -140,7 +140,7 @@ class ProjectDetails extends StatelessWidget {
                                             child: FittedBox(
                                                 child: InfoSnippet(
                                                     'ROLE',
-                                                    projectContent
+                                                    projectDescription
                                                         .infoSnippet['role']))),
                                         SizedBox(
                                           height: 50,
@@ -149,7 +149,7 @@ class ProjectDetails extends StatelessWidget {
                                             child: FittedBox(
                                                 child: InfoSnippet(
                                                     'DATE',
-                                                    projectContent
+                                                    projectDescription
                                                         .infoSnippet['date']))),
                                       ],
                                     ),
@@ -163,7 +163,7 @@ class ProjectDetails extends StatelessWidget {
                                             child: FittedBox(
                                                 child: InfoSnippet(
                                                     'CREDITS',
-                                                    projectContent.infoSnippet[
+                                                    projectDescription.infoSnippet[
                                                         'credits']))),
                                         SizedBox(
                                           height: 50,
@@ -172,7 +172,7 @@ class ProjectDetails extends StatelessWidget {
                                             child: FittedBox(
                                                 child: InfoSnippet(
                                                     'CLIENT',
-                                                    projectContent.infoSnippet[
+                                                    projectDescription.infoSnippet[
                                                         'client']))),
                                       ],
                                     ),
@@ -192,14 +192,13 @@ class ProjectDetails extends StatelessWidget {
                     image: DecorationImage(
                       fit: BoxFit.cover,
                       image:
-                          NetworkImage(projectMetadata.backgroundImageSource),
+                          NetworkImage(projectDescription.projectMetadata.backgroundImageSource),
                     ),
                   ),
                 ),
               ],
             ),
           );
-        });
   }
 }
 

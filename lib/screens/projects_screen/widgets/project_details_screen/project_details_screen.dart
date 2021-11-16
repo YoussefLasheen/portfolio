@@ -1,15 +1,16 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:portfolio/screens/projects_screen/models/project.dart';
 
 import 'package:portfolio/screens/projects_screen/widgets/project_details_screen/widgets/project_details_screen_top_landscape.dart';
 import 'package:portfolio/screens/projects_screen/widgets/project_details_screen/widgets/project_details_screen_top_portrait.dart';
-
+import 'package:portfolio/services/api.dart';
 
 class ProjectDetailsScreen extends StatelessWidget {
   const ProjectDetailsScreen({this.isInversed, @PathParam() this.id});
 
-  final ProjectMetadata projectMetadata;
   final bool isInversed;
   final String id;
 
@@ -46,18 +47,17 @@ class ProjectDetailsScreen extends StatelessWidget {
                   backgroundImageSource: snapshot.data['metadata']['backgroundImageSource'],
                 ));
           }
-    if (isLandscape) {
-      return ProjectDetailsScreenTopLandscape(
-            isInversed: isInversed,
-            projectMetadata: projectMetadata,
-
-          );
-    } else {
-      return ProjectDetailsScreenTopPotrait(
-            projectMetadata: projectMetadata,
-          );
-    }
+          if (isLandscape) {
+            return ProjectDetailsScreenTopLandscape(
+              isInversed: isInversed??true,
+              projectDescription: projectDescription,
+              
+            );
+          } else {
+            return ProjectDetailsScreenTopPotrait(
+              projectDescription: projectDescription ,
+            );
+          }
+        });
   }
 }
-
-

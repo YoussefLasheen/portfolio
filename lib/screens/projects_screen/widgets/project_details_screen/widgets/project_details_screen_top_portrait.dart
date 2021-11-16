@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:portfolio/screens/projects_screen/models/project.dart';
 import 'package:portfolio/screens/projects_screen/widgets/project_details_screen/widgets/project_details.dart';
 
-class ProjectDetailsScreenTopPotrait extends StatelessWidget {
-  const ProjectDetailsScreenTopPotrait({@required this.projectMetadata});
-  final ProjectMetadata projectMetadata;
+class  ProjectDetailsScreenTopPotrait extends StatelessWidget {
+  const ProjectDetailsScreenTopPotrait({@required this.projectDescription});
+  final ProjectDescription projectDescription;
 
   @override
   Widget build(BuildContext context) {
@@ -17,13 +17,13 @@ class ProjectDetailsScreenTopPotrait extends StatelessWidget {
           SliverAppBar(
             expandedHeight: screenHeight * 0.25,
             flexibleSpace: FlexibleSpaceBar(
-              title: Text(projectMetadata.title),
+              title: Text(projectDescription.projectMetadata.title),
               background: Hero(
-                tag: projectMetadata.title + 'image',
-                child: projectMetadata.backgroundImageSource == null
+                tag: projectDescription.projectMetadata.title + 'image',
+                child: projectDescription.projectMetadata.backgroundImageSource == null
                     ? Placeholder()
                     : Image.network(
-                        projectMetadata.backgroundImageSource,
+                        projectDescription.projectMetadata.backgroundImageSource,
                         fit: BoxFit.cover,
                       ),
               ),
@@ -32,7 +32,7 @@ class ProjectDetailsScreenTopPotrait extends StatelessWidget {
           SliverFillRemaining(
             hasScrollBody: false,
             child: ProjectDetails(
-              projectMetadata: projectMetadata,
+              projectDescription: projectDescription,
             ),
           ),
         ],
