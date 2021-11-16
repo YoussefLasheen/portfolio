@@ -15,30 +15,8 @@ class ProjectDetails extends StatelessWidget {
         MediaQuery.of(context).orientation == Orientation.landscape;
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-    return FutureBuilder<DocumentSnapshot>(
-        future: Future.delayed(
-            const Duration(
-              milliseconds: 350,
-            ), () {
-          return Api('Data/projects_screen/projects')
-              .getDocumentById(projectMetadata.id);
-        }),
-        builder: (context, snapshot) {
-          ProjectDescription projectContent;
-          if (!snapshot.hasData) {
-            projectContent = ProjectDescription(infoSnippet: {
-              'role': 'Loading..',
-              'client': 'Loading..',
-              'credits': 'Loading..',
-              'date': 'Loading..',
-              'longDescription': 'Loading..'
-            }, projectMetadata: projectMetadata);
-          } else {
-            projectContent = ProjectDescription(
-                infoSnippet: snapshot.data['infoSnippet'],
-                projectMetadata: projectMetadata);
-          }
-          return Theme(
+    return 
+           Theme(
             data: ThemeData.light(),
             child: Column(
               children: [
