@@ -2,7 +2,6 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:portfolio/screens/projects_screen/models/project.dart';
 import 'package:portfolio/services/api.dart';
 import 'package:url_launcher/url_launcher.dart';
