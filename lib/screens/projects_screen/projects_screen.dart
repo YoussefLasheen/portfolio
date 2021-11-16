@@ -43,6 +43,7 @@ class ProjectsScreen extends StatelessWidget {
             }
             index = index - 1;
             return ProjectCard(
+              id: projectsIndex[index]['id'],
               projectMetadata: ProjectMetadata(
                 title: projectsIndex[index]['title'],
                 shortDescription: projectsIndex[index]['shortDescription'],

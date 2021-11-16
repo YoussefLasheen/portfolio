@@ -7,10 +7,11 @@ import 'package:portfolio/screens/projects_screen/widgets/project_details_screen
 
 
 class ProjectDetailsScreen extends StatelessWidget {
-  const ProjectDetailsScreen({this.isInversed, this.projectMetadata});
+  const ProjectDetailsScreen({this.isInversed, @PathParam() this.id});
 
   final ProjectMetadata projectMetadata;
   final bool isInversed;
+  final String id;
 
   @override
   Widget build(BuildContext context) {

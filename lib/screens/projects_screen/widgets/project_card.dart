@@ -5,9 +5,10 @@ import 'project_details_screen/project_details_screen.dart';
 
 class ProjectCard extends StatelessWidget {
   final ProjectMetadata projectMetadata;
+  final String id;
   final bool isInversed;
 
-  const ProjectCard({Key key, this.projectMetadata, this.isInversed}) : super(key: key);
+  const ProjectCard({Key key, this.projectMetadata, this.isInversed, this.id}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
