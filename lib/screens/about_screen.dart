@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -62,9 +63,16 @@ class AboutScreen extends StatelessWidget {
                             child: Row(
                               children: <Widget>[
                                 Expanded(
-                                  flex: isLandscape ? 3 : 4,
+                                  flex: 3,
                                   child: SizedBox.expand(
-                                    child: FlatButton(
+                                    child: OutlinedButton(
+                                      style: OutlinedButton.styleFrom(
+                                        backgroundColor: Color(0xFF323941),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              new BorderRadius.circular(1500.0),
+                                        ),
+                                      ),
                                       onPressed: () {
                                         _launchURL();
                                       },
@@ -75,15 +83,36 @@ class AboutScreen extends StatelessWidget {
                                             child: Text(
                                               'DOWNLOAD CV',
                                               style: TextStyle(
-                                                  fontWeight: FontWeight.bold),
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.white),
                                             ),
                                           ),
                                         ),
                                       ),
-                                      color: Color(0xFF323941),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            new BorderRadius.circular(1500.0),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 20,
+                                ),
+                                Expanded(
+                                  flex: 1,
+                                  child: SizedBox.expand(
+                                    child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        primary: Color(0xFFc34372),
+                                        shape: CircleBorder()
+                                      ),
+                                      onPressed: () {
+                                        context.tabsRouter.setActiveIndex(1);
+                                      },
+                                      child: SizedBox.expand(
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: FittedBox(
+                                              child: Icon(Icons
+                                                  .arrow_downward_rounded)),
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -135,14 +164,32 @@ class AboutScreen extends StatelessWidget {
             : SizedBox(
                 height: MediaQuery.of(context).size.height * 0.1,
                 width: double.infinity,
-                child: FlatButton(
-                  onPressed: () {
-                    _launchURL();
-                  },
-                  child: FittedBox(
-                    child: Text("DOWNLOAD CV"),
-                  ),
-                  color: Color(0xFF323941),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Expanded(
+                      child: FlatButton(
+                        onPressed: () {
+                          _launchURL();
+                        },
+                        color: Color(0xFF323941),
+                        child: Text("DOWNLOAD CV"),
+                      ),
+                    ),
+                    Expanded(
+                        child: TextButton(
+                      style: TextButton.styleFrom(
+                        backgroundColor: Color(0xFFc34372),
+                      ),
+                      onPressed: () {
+                        context.tabsRouter.setActiveIndex(1);
+                      },
+                      child: Text(
+                        "VIEW PROJECTS",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ))
+                  ],
                 ),
               )
       ],
