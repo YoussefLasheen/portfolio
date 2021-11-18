@@ -105,7 +105,7 @@ class ProjectDetailsScreenTopLandscape extends StatelessWidget {
           ),
           IconButton(
             onPressed: () {
-              context.navigateBack();
+              context.router.navigateNamed('');
             },
             color: Colors.white54,
             icon: Icon(Icons.arrow_back_rounded),
