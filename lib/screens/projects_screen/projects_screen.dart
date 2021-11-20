@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:implicitly_animated_reorderable_list/implicitly_animated_reorderable_list.dart';
+import 'package:implicitly_animated_reorderable_list/transitions.dart';
 import 'package:portfolio/screens/projects_screen/models/project.dart';
 import 'package:portfolio/screens/projects_screen/widgets/project_card.dart';
 
@@ -60,27 +62,33 @@ class AnimatedFilteredList extends StatefulWidget {
 
 class _AnimatedFilteredListState extends State<AnimatedFilteredList> {
   String filterTag = "All";
-  
+
   @override
   Widget build(BuildContext context) {
     List filteredIndex = [];
-    if(filterTag=="All"){
-      filteredIndex = widget.projectsIndex;
-    }else{
+
+    if (filterTag == "All") {
+      filteredIndex
+        ..clear()
+        ..addAll(widget.projectsIndex);
+    } else {
       for (int i = 0; i < widget.projectsIndex.length; i++) {
-      for (int h = 0; h < widget.projectsIndex[i]['tags'].length; h++) {
-        if (filterTag.contains(widget.projectsIndex[i]['tags'][h])) {
-          filteredIndex.add(widget.projectsIndex[i]);
-          break;
+        for (int h = 0; h < widget.projectsIndex[i]['tags'].length; h++) {
+          if (filterTag.contains(widget.projectsIndex[i]['tags'][h])) {
+            filteredIndex.add(widget.projectsIndex[i]);
+            break;
+          }
         }
       }
     }
-    }
-    return ListView.builder(
-      physics: BouncingScrollPhysics(),
-      itemCount: filteredIndex.length + 1,
-      itemBuilder: (BuildContext context, int index) {
-        if (index == 0) {
+    filteredIndex.insert(0, {'id': 'initial'});
+    return ImplicitlyAnimatedList<dynamic>(
+      items: filteredIndex,
+      areItemsTheSame: (a, b) => a['id'] == b['id'],
+      itemBuilder: (context, animation, filteredProjectMetadata, index) {
+        // check for out of bounds index because of a bug in the ImplicitlyAnimatedList widget
+        if (index>=filteredIndex.length) return Container();
+        if (filteredIndex[index]['id'] == 'initial') {
           return Column(
             children: [
               TopSection(),
@@ -96,13 +104,13 @@ class _AnimatedFilteredListState extends State<AnimatedFilteredList> {
                           padding: const EdgeInsets.all(8.0),
                           child: ChoiceChip(
                             selectedColor: Color(0xFFc34372),
-                                label: Text("All",style: TextStyle(color: Colors.white),),
-                                selected: filterTag.contains("All"),
-                                onSelected: (s) {
-                                  filterTag = "All";
-                                  setState(() {});
-                                },
-                              ),
+                            label: Text("All",style: TextStyle(color: Colors.white),),
+                            selected: filterTag.contains("All"),
+                            onSelected: (s) {
+                              filterTag = "All";
+                              setState(() {});
+                            },
+                          ),
                         ),
                         for (var tag in widget.allTags)
                           Padding(
@@ -125,20 +133,27 @@ class _AnimatedFilteredListState extends State<AnimatedFilteredList> {
             ],
           );
         }
-        index = index - 1;
-        return ProjectCard(
-          //id: filteredIndex[index]['id'],
-          projectMetadata: ProjectMetadata(
-            title: filteredIndex[index]['title'],
-            shortDescription: filteredIndex[index]['shortDescription'],
-            backgroundImageSource: filteredIndex[index]
-                ['backgroundImageSource'],
-            tags: filteredIndex[index]['tags'],
-            id: filteredIndex[index]['id'],
-          ),
-          isInversed: index.isEven,
+        return SizeFadeTransition(
+          sizeFraction: 0.7,
+          curve: Curves.easeInOut,
+          animation: animation,
+          child: _buildCard(filteredIndex, index),
         );
       },
     );
   }
+}
+
+Widget _buildCard(List filteredIndex, int index) {
+  return ProjectCard(
+    //id: filteredIndex[index]['id'],
+    projectMetadata: ProjectMetadata(
+      title: filteredIndex[index]['title'],
+      shortDescription: filteredIndex[index]['shortDescription'],
+      backgroundImageSource: filteredIndex[index]['backgroundImageSource'],
+      tags: filteredIndex[index]['tags'],
+      id: filteredIndex[index]['id'],
+    ),
+    isInversed: index.isEven,
+  );
 }
