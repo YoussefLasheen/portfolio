@@ -16,6 +16,19 @@ class ProjectDetailsScreenTopPotrait extends StatelessWidget {
         slivers: <Widget>[
           SliverAppBar(
             expandedHeight: screenHeight * 0.25,
+            bottom: PreferredSize(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    for (var tag in projectMetadata.tags)
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Chip(label: Text(tag)),
+                      )
+                  ],
+                ),
+                preferredSize: Size.fromHeight(50)),
+            actions: [],
             flexibleSpace: FlexibleSpaceBar(
               title: Text(projectMetadata.title),
               background: Hero(
