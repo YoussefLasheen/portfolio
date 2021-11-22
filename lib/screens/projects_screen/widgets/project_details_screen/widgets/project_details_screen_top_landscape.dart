@@ -1,3 +1,4 @@
+import 'package:auto_route/src/router/auto_router_x.dart';
 import 'package:flutter/material.dart';
 import 'package:portfolio/screens/projects_screen/models/project.dart';
 import 'package:portfolio/screens/projects_screen/widgets/project_details_screen/widgets/project_details.dart';
@@ -5,10 +6,10 @@ import 'package:url_launcher/url_launcher.dart';
 
 class ProjectDetailsScreenTopLandscape extends StatelessWidget {
   const ProjectDetailsScreenTopLandscape({
-    @required this.projectMetadata,
-    @required this.isInversed,
+    @required this.projectDescription,
+    this.isInversed = true,
   });
-  final ProjectMetadata projectMetadata;
+  final ProjectDescription projectDescription;
   final bool isInversed;
 
   @override
@@ -33,14 +34,14 @@ class ProjectDetailsScreenTopLandscape extends StatelessWidget {
                     children: <Widget>[
                       Expanded(
                         flex: 2,
-                        child: projectMetadata.backgroundImageSource == null
+                        child: projectDescription.projectMetadata.backgroundImageSource == null
                             ? Placeholder(
                                 color:
                                     isInversed ? Colors.white : Colors.blueGrey)
                             : Hero(
-                                tag: projectMetadata.title + 'image',
+                                tag: projectDescription.projectMetadata.title + 'image',
                                 child: Image.network(
-                                  projectMetadata.backgroundImageSource,
+                                  projectDescription.projectMetadata.backgroundImageSource,
                                   fit: BoxFit.fitHeight,
                                   loadingBuilder: (BuildContext context,
                                       Widget child,
@@ -75,7 +76,7 @@ class ProjectDetailsScreenTopLandscape extends StatelessWidget {
                               Expanded(
                                 child: FittedBox(
                                     child: Text(
-                                  "#" + projectMetadata.title,
+                                  "#" + projectDescription.projectMetadata.title,
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       color: Color(0xFFc34372)),
@@ -84,14 +85,14 @@ class ProjectDetailsScreenTopLandscape extends StatelessWidget {
                               Expanded(
                                 child: FittedBox(
                                   child: Text(
-                                    "— " + projectMetadata.shortDescription,
+                                    "— " + projectDescription.projectMetadata.shortDescription,
                                   ),
                                 ),
                               ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                  for (var tag in projectMetadata.tags)
+                                  for (var tag in projectDescription.projectMetadata.tags)
                                     Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: Chip(label: Text(tag)),
@@ -107,14 +108,14 @@ class ProjectDetailsScreenTopLandscape extends StatelessWidget {
                   ),
                 ),
                 ProjectDetails(
-                  projectMetadata: projectMetadata,
+                  projectDescription: projectDescription,
                 )
               ],
             ),
           ),
           IconButton(
             onPressed: () {
-              Navigator.of(context).maybePop();
+              context.router.navigateNamed('');
             },
             color: Colors.white54,
             icon: Icon(Icons.arrow_back_rounded),

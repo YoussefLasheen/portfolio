@@ -146,7 +146,7 @@ class _AnimatedFilteredListState extends State<AnimatedFilteredList> {
 
 Widget _buildCard(List filteredIndex, int index) {
   return ProjectCard(
-    //id: filteredIndex[index]['id'],
+    id: filteredIndex[index]['id'],
     projectMetadata: ProjectMetadata(
       title: filteredIndex[index]['title'],
       shortDescription: filteredIndex[index]['shortDescription'],

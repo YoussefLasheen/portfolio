@@ -1,8 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:portfolio/navigation/widgets/sidebar.dart';
-import 'package:portfolio/screens/about_screen.dart';
-import 'package:portfolio/screens/contact_screen/contact_screen.dart';
-import 'package:portfolio/screens/projects_screen/projects_screen.dart';
+import 'package:portfolio/routes/router.gr.dart';
 
 class Root extends StatelessWidget {
   // Set(viewportFraction: 0.9999). It's a Dirty little trick to preload the next and previous pages
@@ -10,31 +9,34 @@ class Root extends StatelessWidget {
       PageController(initialPage: 0, viewportFraction: 0.9999);
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance
-        .addPostFrameCallback((_) => limitOrientation(context));
+    //WidgetsBinding.instance.addPostFrameCallback((_) => limitOrientation(context));
     bool isLandscape =
         MediaQuery.of(context).orientation == Orientation.landscape;
-    return Material(
-      child: Flex(
-        direction: isLandscape ? Axis.horizontal : Axis.vertical,
-        children: <Widget>[
-          Sidebar(
-            control: controller,
+    return AutoTabsRouter(
+      routes: [AboutRouter(), ProjectsRouter(), ContactRouter()],
+      builder: (context, child, animation) {
+        final tabsRouter = AutoTabsRouter.of(context);
+        return Material(
+          child: Flex(
+            direction: isLandscape ? Axis.horizontal : Axis.vertical,
+            children: <Widget>[
+              Sidebar(
+                currentIndex: tabsRouter.activeIndex,
+                onTap: (index) {
+                  tabsRouter.setActiveIndex(index);
+                },
+              ),
+              Expanded(
+                child: FadeTransition(
+                  opacity: animation,
+                  // the passed child is techinaclly our animated selected-tab page
+                  child: child,
+                ),
+              )
+            ],
           ),
-          Expanded(
-            child: PageView(
-              controller: controller,
-              physics: NeverScrollableScrollPhysics(),
-              scrollDirection: isLandscape ? Axis.vertical : Axis.horizontal,
-              children: <Widget>[
-                AboutScreen(),
-                ProjectsScreen(),
-                ContactScreen()
-              ],
-            ),
-          )
-        ],
-      ),
+        );
+      },
     );
   }
 }
