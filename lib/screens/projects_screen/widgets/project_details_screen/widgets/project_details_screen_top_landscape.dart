@@ -1,6 +1,7 @@
 import 'package:auto_route/src/router/auto_router_x.dart';
 import 'package:flutter/material.dart';
 import 'package:portfolio/screens/projects_screen/models/project.dart';
+import 'package:portfolio/screens/projects_screen/widgets/project_details_screen/widgets/access_options.dart';
 import 'package:portfolio/screens/projects_screen/widgets/project_details_screen/widgets/project_details.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -99,7 +100,9 @@ class ProjectDetailsScreenTopLandscape extends StatelessWidget {
                                     )
                                 ],
                               ),
-                              Spacer(flex: 4,),
+                              Spacer(flex: 3,),
+                              AccessOptions(accessOptions: projectDescription.accessOptions,),
+                              Spacer()
                             ],
                           ),
                         ),
