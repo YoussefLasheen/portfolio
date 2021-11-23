@@ -10,7 +10,10 @@ class AccessOptions extends StatelessWidget {
     double screenHeight = MediaQuery.of(context).size.height;
     bool isLandscape =
         MediaQuery.of(context).orientation == Orientation.landscape;
-    return Align(
+
+    return accessOptions.isEmpty?
+    Container():
+    Align(
       alignment: Alignment.bottomCenter,
       child: SizedBox(
         height: screenHeight * 0.1,
