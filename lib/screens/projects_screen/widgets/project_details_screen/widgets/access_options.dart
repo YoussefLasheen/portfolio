@@ -38,6 +38,8 @@ class AccessOptions extends StatelessWidget {
                 ),
               ),
             ),
+            accessOptions.length==1?
+            Container():
             Expanded(
               child: Container(
                 color: Color(0xFFc34372),
