@@ -50,26 +50,31 @@ class ProjectCard extends StatelessWidget {
                   child: projectMetadata.backgroundImageSource == null
                       ? Placeholder(
                           color: isInversed ? Colors.white : Colors.blueGrey)
-                      : Hero(
-                          tag: projectMetadata.title + 'image',
-                          child: Image.network(
-                            projectMetadata.backgroundImageSource,
-                            fit: BoxFit.fill,
-                            loadingBuilder: (BuildContext context, Widget child,
-                                ImageChunkEvent loadingProgress) {
-                              if (loadingProgress == null) return child;
-                              return Center(
-                                child: CircularProgressIndicator(
-                                  value: loadingProgress.expectedTotalBytes !=
-                                          null
-                                      ? loadingProgress.cumulativeBytesLoaded /
-                                          loadingProgress.expectedTotalBytes
-                                      : null,
-                                ),
-                              );
-                            },
+                      : Container(
+                        decoration: BoxDecoration(boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.3),
+                                    offset: Offset(2, 2),
+                                    blurRadius: 15)]),
+                        child: Hero(
+                            tag: projectMetadata.title + 'image',
+                            child: Image.network(
+                              projectMetadata.backgroundImageSource,
+                              fit: BoxFit.fill,
+                              loadingBuilder: (BuildContext context, Widget child,
+                                  ImageChunkEvent loadingProgress) {
+                                if (loadingProgress == null) return child;
+                                return Center(
+                                  child: CircularProgressIndicator(
+                                    value: loadingProgress.expectedTotalBytes !=
+                                            null
+                                        ? loadingProgress.cumulativeBytesLoaded /
+                                            loadingProgress.expectedTotalBytes
+                                        : null,
+                                  ),
+                                );
+                              },
+                            ),
                           ),
-                        ),
+                      ),
                 ),
                 Positioned.fill(
                   left: !isInversed ? 0 : null,
@@ -90,7 +95,14 @@ class ProjectCard extends StatelessWidget {
                             "#" + projectMetadata.title,
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                color: Color(0xFFc34372)),
+                                color: Color(0xFFc34372),
+                                shadows: [
+                                  Shadow(
+                                    color: Colors.black.withOpacity(0.3),
+                                    offset: Offset(2, 2),
+                                    blurRadius: 5
+                                  )
+                                ]),
                           )),
                         ),
                         Expanded(
