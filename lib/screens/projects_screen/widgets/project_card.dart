@@ -19,7 +19,7 @@ class ProjectCard extends StatelessWidget {
     bool isLandscape =
         MediaQuery.of(context).orientation == Orientation.landscape;
     return Padding(
-      padding: EdgeInsets.only(bottom: screenHeight * 0.1),
+      padding: EdgeInsets.symmetric(vertical: screenHeight * 0.05, horizontal: isLandscape? 50:0),
       child: Align(
         alignment: isLandscape
             ? isInversed
