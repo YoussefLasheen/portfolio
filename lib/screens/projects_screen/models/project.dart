@@ -8,9 +8,10 @@ class ProjectMetadata {
 }
 
 class ProjectDescription{
-ProjectDescription( {this.infoSnippet,this.projectMetadata,});
+ProjectDescription( {this.accessOptions,this.infoSnippet,this.projectMetadata,});
   final Map infoSnippet;
   final ProjectMetadata projectMetadata;
+  final List accessOptions;
 
   
 }
