@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:portfolio/screens/projects_screen/models/project.dart';
+import 'package:portfolio/screens/projects_screen/widgets/project_details_screen/widgets/access_options.dart';
 
 import 'package:portfolio/screens/projects_screen/widgets/project_details_screen/widgets/project_details_screen_top_landscape.dart';
 import 'package:portfolio/screens/projects_screen/widgets/project_details_screen/widgets/project_details_screen_top_portrait.dart';
@@ -35,7 +36,7 @@ class ProjectDetailsScreen extends StatelessWidget {
               'credits': 'Loading..',
               'date': 'Loading..',
               'longDescription': 'Loading..'
-            }, projectMetadata: ProjectMetadata(backgroundImageSource: null,shortDescription: '',title: '',tags: [],id: ''));
+            }, projectMetadata: ProjectMetadata(backgroundImageSource: null,shortDescription: '',title: '',tags: [],id: ''),accessOptions: [{'value':'','url':''}]);
           } else {
             projectDescription = ProjectDescription(
                 infoSnippet: snapshot.data['infoSnippet'],
@@ -45,7 +46,8 @@ class ProjectDetailsScreen extends StatelessWidget {
                   shortDescription: snapshot.data['metadata']['shortDescription'],
                   tags: snapshot.data['metadata']['tags'],
                   backgroundImageSource: snapshot.data['metadata']['backgroundImageSource'],
-                ));
+                ),
+                accessOptions: snapshot.data['accessOptions']);
           }
           if (isLandscape) {
             return ProjectDetailsScreenTopLandscape(
@@ -54,8 +56,13 @@ class ProjectDetailsScreen extends StatelessWidget {
               
             );
           } else {
-            return ProjectDetailsScreenTopPotrait(
-              projectDescription: projectDescription ,
+            return Stack(
+              children: [
+                ProjectDetailsScreenTopPotrait(
+                  projectDescription: projectDescription ,
+                ),
+                AccessOptions(accessOptions: projectDescription.accessOptions,),
+              ],
             );
           }
         });
