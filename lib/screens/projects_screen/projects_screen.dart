@@ -81,42 +81,38 @@ class _AnimatedFilteredListState extends State<AnimatedFilteredList> {
         }
       }
     }
-    filteredIndex.insert(0, {'id': 'initial'});
-    return ImplicitlyAnimatedList<dynamic>(
-      items: filteredIndex,
-      areItemsTheSame: (a, b) => a['id'] == b['id'],
-      itemBuilder: (context, animation, filteredProjectMetadata, index) {
-        // check for out of bounds index because of a bug in the ImplicitlyAnimatedList widget
-        if (index>=filteredIndex.length) return Container();
-        if (filteredIndex[index]['id'] == 'initial') {
-          return Column(
-            children: [
-              TopSection(),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: ChoiceChip(
-                            selectedColor: Color(0xFFc34372),
-                            label: Text("All",style: TextStyle(color: Colors.white),),
-                            selected: filterTag.contains("All"),
-                            onSelected: (s) {
-                              filterTag = "All";
-                              setState(() {});
-                            },
-                          ),
-                        ),
-                        for (var tag in widget.allTags)
-                          Padding(
-                            padding: const EdgeInsets.all(5.0),
-                            child: ChoiceChip(
-                              selectedColor: Color(0xFFc34372),
+
+    return ListView(
+      children: [
+        TopSection(),
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ChoiceChip(
+                      selectedColor: Color(0xFFc34372),
+                      label: Text(
+                        "All",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      selected: filterTag.contains("All"),
+                      onSelected: (s) {
+                        filterTag = "All";
+                        setState(() {});
+                      },
+                    ),
+                  ),
+                  for (var tag in widget.allTags)
+                    Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: ChoiceChip(
+                        selectedColor: Color(0xFFc34372),
                               label: Text(tag,style: TextStyle(color: Colors.white),),
                               selected: filterTag.contains(tag),
                               onSelected: (s) {
