@@ -82,7 +82,7 @@ class _AnimatedFilteredListState extends State<AnimatedFilteredList> {
               sizeFraction: 0.7,
               curve: Curves.easeInOut,
               animation: animation,
-              child: _buildCard(filteredIndex, index),
+              child: _buildCard(filteredProjectMetadata, index.isEven),
             );
           },
         ),
@@ -91,17 +91,17 @@ class _AnimatedFilteredListState extends State<AnimatedFilteredList> {
   }
 }
 
-Widget _buildCard(List filteredIndex, int index) {
+Widget _buildCard(Map project, bool isInversed) {
   return ProjectCard(
-    id: filteredIndex[index]['id'],
+    id: project['id'],
     projectMetadata: ProjectMetadata(
-      title: filteredIndex[index]['title'],
-      shortDescription: filteredIndex[index]['shortDescription'],
-      backgroundImageSource: filteredIndex[index]['backgroundImageSource'],
-      tags: filteredIndex[index]['tags'],
-      id: filteredIndex[index]['id'],
+      title: project['title'],
+      shortDescription: project['shortDescription'],
+      backgroundImageSource: project['backgroundImageSource'],
+      tags: project['tags'],
+      id: project['id'],
     ),
-    isInversed: index.isEven,
+    isInversed: isInversed,
   );
 }
 
