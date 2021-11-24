@@ -4,7 +4,6 @@ import 'package:implicitly_animated_reorderable_list/transitions.dart';
 import 'package:portfolio/screens/projects_screen/models/project.dart';
 import 'package:portfolio/screens/projects_screen/widgets/project_card.dart';
 
-import 'widgets/bottom_section.dart';
 import 'widgets/top_section.dart';
 
 import 'package:portfolio/services/api.dart';
@@ -14,33 +13,11 @@ class ProjectsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<DocumentSnapshot>(
-      future: Future.delayed(
-          const Duration(
-            milliseconds: 350,
-          ), () {
-        return Api('Data').getDocumentById('projects_screen');
-      }),
+      future: Api('Data').getDocumentById('projects_screen'),
       builder: (context, snapshot) {
-        List projectsIndex;
-        List allTags;
-        if (!snapshot.hasData) {
-          projectsIndex = [
-            {
-              'title': 'Loading',
-              'shortDescription': 'Loading',
-              'backgroundImageSource': null,
-              'id': 's',
-              'tags': []
-            }
-          ];
-          allTags = [''];
-        } else {
-          projectsIndex = snapshot.data['projectsIndex'];
-          allTags = snapshot.data['allTags'];
-        }
-
         return AnimatedFilteredList(
-            projectsIndex: projectsIndex, allTags: allTags);
+            projectsIndex: snapshot.data['projectsIndex'],
+            allTags: snapshot.data['allTags']);
       },
     );
   }
@@ -113,29 +90,38 @@ class _AnimatedFilteredListState extends State<AnimatedFilteredList> {
                       padding: const EdgeInsets.all(5.0),
                       child: ChoiceChip(
                         selectedColor: Color(0xFFc34372),
-                              label: Text(tag,style: TextStyle(color: Colors.white),),
-                              selected: filterTag.contains(tag),
-                              onSelected: (s) {
-                                filterTag = tag;
-                                setState(() {});
-                              },
-                            ),
-                          )
-                      ],
-                    ),
-                  ),
-                ),
+                        label: Text(
+                          tag,
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        selected: filterTag.contains(tag),
+                        onSelected: (s) {
+                          filterTag = tag;
+                          setState(() {});
+                        },
+                      ),
+                    )
+                ],
               ),
-            ],
-          );
-        }
-        return SizeFadeTransition(
-          sizeFraction: 0.7,
-          curve: Curves.easeInOut,
-          animation: animation,
-          child: _buildCard(filteredIndex, index),
-        );
-      },
+            ),
+          ),
+        ),
+        ImplicitlyAnimatedList<dynamic>(
+          shrinkWrap: true,
+          items: filteredIndex,
+          areItemsTheSame: (a, b) => a['id'] == b['id'],
+          itemBuilder: (context, animation, filteredProjectMetadata, index) {
+            // check for out of bounds index because of a bug in the ImplicitlyAnimatedList widget
+            if (index >= filteredIndex.length) return Container();
+            return SizeFadeTransition(
+              sizeFraction: 0.7,
+              curve: Curves.easeInOut,
+              animation: animation,
+              child: _buildCard(filteredIndex, index),
+            );
+          },
+        ),
+      ],
     );
   }
 }
