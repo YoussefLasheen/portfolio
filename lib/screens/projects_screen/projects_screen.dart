@@ -15,9 +15,10 @@ class ProjectsScreen extends StatelessWidget {
     return FutureBuilder<DocumentSnapshot>(
       future: Api('Data').getDocumentById('projects_screen'),
       builder: (context, snapshot) {
+        bool hasData = snapshot.hasData;
         return AnimatedFilteredList(
-            projectsIndex: snapshot.data['projectsIndex'],
-            allTags: snapshot.data['allTags']);
+            projectsIndex: hasData?snapshot.data['projectsIndex']:[],
+            allTags: hasData?snapshot.data['allTags']:[]);
       },
     );
   }
@@ -53,6 +54,8 @@ class _AnimatedFilteredListState extends State<AnimatedFilteredList> {
         for (int h = 0; h < widget.projectsIndex[i]['tags'].length; h++) {
           if (filterTag.contains(widget.projectsIndex[i]['tags'][h])) {
             filteredIndex.add(widget.projectsIndex[i]);
+            setState(() {
+            });
             break;
           }
         }
