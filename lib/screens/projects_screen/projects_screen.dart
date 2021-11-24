@@ -62,49 +62,14 @@ class _AnimatedFilteredListState extends State<AnimatedFilteredList> {
     return ListView(
       children: [
         TopSection(),
-        Align(
-          alignment: Alignment.centerLeft,
-          child: Padding(
-            padding: const EdgeInsets.all(15.0),
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: ChoiceChip(
-                      selectedColor: Color(0xFFc34372),
-                      label: Text(
-                        "All",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      selected: filterTag.contains("All"),
-                      onSelected: (s) {
-                        filterTag = "All";
-                        setState(() {});
-                      },
-                    ),
-                  ),
-                  for (var tag in widget.allTags)
-                    Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: ChoiceChip(
-                        selectedColor: Color(0xFFc34372),
-                        label: Text(
-                          tag,
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        selected: filterTag.contains(tag),
-                        onSelected: (s) {
-                          filterTag = tag;
-                          setState(() {});
-                        },
-                      ),
-                    )
-                ],
-              ),
-            ),
-          ),
+        ChoiceTags(
+          allTags: widget.allTags,
+          filterTag: filterTag,
+          onSelected: (tag) {
+            setState(() {
+              filterTag = tag;
+            });
+          },
         ),
         ImplicitlyAnimatedList<dynamic>(
           shrinkWrap: true,
@@ -138,4 +103,52 @@ Widget _buildCard(List filteredIndex, int index) {
     ),
     isInversed: index.isEven,
   );
+}
+
+class ChoiceTags extends StatelessWidget {
+  final Function onSelected;
+  final String filterTag;
+  final List allTags;
+
+  const ChoiceTags({this.onSelected, this.filterTag, this.allTags});
+
+  @override
+  Widget build(BuildContext context) {
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: Padding(
+        padding: const EdgeInsets.all(15.0),
+        child: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ChoiceChip(
+                    selectedColor: Color(0xFFc34372),
+                    label: Text(
+                      "All",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    selected: filterTag.contains("All"),
+                    onSelected: (_) => onSelected("All")),
+              ),
+              for (var tag in allTags)
+                Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: ChoiceChip(
+                      selectedColor: Color(0xFFc34372),
+                      label: Text(
+                        tag,
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      selected: filterTag.contains(tag),
+                      onSelected: (_) => onSelected(tag)),
+                )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 }
