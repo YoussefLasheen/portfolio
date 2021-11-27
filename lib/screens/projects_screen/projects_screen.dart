@@ -63,6 +63,7 @@ class _AnimatedFilteredListState extends State<AnimatedFilteredList> {
     }
 
     return ListView(
+      physics: BouncingScrollPhysics(),
       children: [
         TopSection(),
         ChoiceTags(
@@ -76,6 +77,7 @@ class _AnimatedFilteredListState extends State<AnimatedFilteredList> {
         ),
         ImplicitlyAnimatedList<dynamic>(
           shrinkWrap: true,
+          physics: NeverScrollableScrollPhysics(),
           items: filteredIndex,
           areItemsTheSame: (a, b) => a['id'] == b['id'],
           itemBuilder: (context, animation, filteredProjectMetadata, index) {
