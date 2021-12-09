@@ -199,7 +199,7 @@ class AboutScreen extends StatelessWidget {
 
 _launchURL() async {
   DocumentSnapshot snapshot = await Api('Data').getDocumentById('about_screen');
-  String url = snapshot.data['CVDownloadURL'];
+  String url = snapshot.get('CVDownloadURL');
   if (await canLaunch(url)) {
     await launch(url);
   } else {

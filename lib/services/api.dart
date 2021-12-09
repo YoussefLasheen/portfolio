@@ -3,20 +3,16 @@ import 'dart:async';
 
 
 class Api {
-  final Firestore _db = Firestore.instance;
+  final FirebaseFirestore _db = FirebaseFirestore.instance;
   final String path;
   CollectionReference ref;
 
   Api(this.path) {
     ref = _db.collection(path);
   }
-
-  Future<QuerySnapshot> getDataCollection() {
-    return ref.getDocuments() ;
-  }
   
   Future<DocumentSnapshot> getDocumentById(String id) {
-    return ref.document(id).get();
+    return ref.doc(id).get();
   }
 
   Future<DocumentReference> addDocument(Map data) {
@@ -24,6 +20,6 @@ class Api {
   }
 
   Future<DocumentReference> updateDocument(Map data, String id) {
-    return ref.document(id).setData(data);
+    return ref.doc(id).set(data);
   }
 }
