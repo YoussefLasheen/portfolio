@@ -23,7 +23,6 @@ class CTextFormField extends FormField<String> {
     bool obscureText = false,
     bool autocorrect = true,
     bool enableSuggestions = true,
-    bool autovalidate = false,
     bool maxLengthEnforced = true,
     int maxLines = 1,
     int minLines,
@@ -51,7 +50,6 @@ class CTextFormField extends FormField<String> {
         assert(obscureText != null),
         assert(autocorrect != null),
         assert(enableSuggestions != null),
-        assert(autovalidate != null),
         assert(maxLengthEnforced != null),
         assert(scrollPadding != null),
         assert(maxLines == null || maxLines > 0),
@@ -75,7 +73,7 @@ class CTextFormField extends FormField<String> {
               controller != null ? controller.text : (initialValue ?? ''),
           onSaved: onSaved,
           validator: validator,
-          autovalidate: autovalidate,
+          autovalidateMode: AutovalidateMode.disabled,
           enabled: enabled,
           builder: (FormFieldState<String> field) {
             final _CTextFormFieldState state = field;
