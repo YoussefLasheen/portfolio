@@ -19,17 +19,18 @@ class _SidebarState extends State<Sidebar> {
         MediaQuery.of(context).orientation == Orientation.landscape;
     return RotatedBox(
       quarterTurns: isLandscape ? -1 : 0,
-      child: Container(
-        height: isLandscape
-            ? MediaQuery.of(context).size.width * 0.085
-            : MediaQuery.of(context).size.height * 0.1,
-        width: double.infinity,
-        color: Colors.transparent,
-        child: PageViewIndicator(
-          activePage: widget.currentIndex,
-          callback: (int index) {
-            widget.onTap(index);
-          },
+      child: Center(
+        child: Padding(
+          padding: const EdgeInsets.only(top: 60, bottom: 45),
+          child: ConstrainedBox(
+            constraints: BoxConstraints(maxHeight: 50, maxWidth: 500),
+            child: PageViewIndicator(
+              activePage: widget.currentIndex,
+              callback: (int index) {
+                widget.onTap(index);
+              },
+            ),
+          ),
         ),
       ),
     );
