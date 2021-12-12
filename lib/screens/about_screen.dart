@@ -13,153 +13,153 @@ class AboutScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     bool isLandscape =
         MediaQuery.of(context).orientation == Orientation.landscape;
+    double screenHeight = MediaQuery.of(context).size.height;
     return Column(
       children: [
         Expanded(
           child: Row(
             children: <Widget>[
-              isLandscape
-                  ? Spacer()
-                  : Spacer(
-                      flex: 4,
-                    ),
               Expanded(
-                flex: isLandscape ? 20 : 60,
                 child: Padding(
-                  padding: const EdgeInsets.only(right: 60),
+                  padding: isLandscape
+                      ? EdgeInsets.only(
+                          right: 60,
+                        )
+                      : EdgeInsets.all(20),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       AutoSizeText(
                         "Hello, I'm\nYoussef Lasheen",
+                        wrapWords: false,
                         textAlign: TextAlign.left,
+                        textScaleFactor: isLandscape ? 3 : 1,
                         style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 150),
+                            fontWeight: FontWeight.bold, fontSize: 50),
                         maxLines: 2,
                       ),
-                      SizedBox(height: 20,),
-                      AutoSizeText(
-                        'A freelance Flutter developer based in Egypt.\nI make quality, commented, and reusable code.\nMy services include product analysis through to full product design - from wireframing and prototyping to interface design and Flutter development.',
-                        style: TextStyle(
-                          color: Colors.white70,
-                          fontSize: 25,
-                          fontWeight: FontWeight.w100,
-                          height: 1.3
-                        ),
-                        maxLines: 6,
+                      SizedBox(
+                        height: 20,
                       ),
-                      SizedBox(height: 20,),
+                      SizedBox(
+                        height: screenHeight * 0.3,
+                        child: AutoSizeText(
+                          'A freelance Flutter developer based in Egypt.\nI make quality, commented, and reusable code.\nMy services include product analysis through to full product design - from wireframing and prototyping to interface design and Flutter development.',
+                          textScaleFactor: isLandscape ? 1.5 : 1,
+                          maxLines: 7,
+                          style: TextStyle(
+                              color: Colors.white70,
+                              fontWeight: FontWeight.w100,
+                              fontSize: 28,
+                              height: 1.3),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
                       !isLandscape
                           ? Container()
-                          : Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: <Widget>[
-                              OutlinedButton(
-                                style: OutlinedButton.styleFrom(
-                                  backgroundColor: Color(0xFF323941),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius:
-                                        new BorderRadius.circular(1500.0),
-                                  ),
-                                ),
-                                onPressed: () {
-                                  _launchURL();
-                                },
-                                child: Padding(
-                                  padding: const EdgeInsets.all(18.0),
-                                  child: Text(
-                                    'DOWNLOAD CV',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white,
-                                        fontSize: 20),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                width: 20,
-                              ),
-                              FloatingActionButton(
-                                backgroundColor: Color(0xFFc34372),
-                                child: Icon(
-                                  Icons.arrow_downward_rounded,
-                                  color: Colors.white,
-                                ),
-                                onPressed: () {
-                                  context.tabsRouter.setActiveIndex(1);
-                                },
-                                ),
-                            ],
-                          ),
+                          : _buildLandscapeButtons(context),
                     ],
                   ),
                 ),
               ),
-              Spacer(
-                flex: 4,
-              ),
               isLandscape
                   ? Expanded(
-                      flex: 10,
-                      child: Column(
-                        children: <Widget>[
-                          Spacer(),
-                          Expanded(
-                              flex: 5,
-                              child: Image.asset(
-                                'assets/images/P1Logo.png',
-                                fit: BoxFit.contain,
-                              )),
-                          Spacer(
-                            flex: 3,
-                          )
-                        ],
+                      child: Center(
+                        child: ConstrainedBox(
+                          constraints:
+                              BoxConstraints.expand(width: 400, height: 400),
+                          child: Image.asset(
+                            'assets/images/P1Logo.png',
+                            fit: BoxFit.contain,
+                          ),
+                        ),
                       ),
-                    )
-                  : Container(),
-              isLandscape
-                  ? Spacer(
-                      flex: 4,
                     )
                   : Container(),
             ],
           ),
         ),
-        isLandscape
-            ? Container()
-            : SizedBox(
-                height: MediaQuery.of(context).size.height * 0.1,
-                width: double.infinity,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Expanded(
-                      child: FlatButton(
-                        onPressed: () {
-                          _launchURL();
-                        },
-                        color: Color(0xFF323941),
-                        child: Text("DOWNLOAD CV"),
-                      ),
-                    ),
-                    Expanded(
-                        child: TextButton(
-                      style: TextButton.styleFrom(
-                        backgroundColor: Color(0xFFc34372),
-                      ),
-                      onPressed: () {
-                        context.tabsRouter.setActiveIndex(1);
-                      },
-                      child: Text(
-                        "VIEW PROJECTS",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ))
-                  ],
-                ),
-              )
+        isLandscape ? Container() : _buildVerticalButtons(context)
       ],
+    );
+  }
+
+  Widget _buildLandscapeButtons(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: <Widget>[
+        OutlinedButton(
+          style: OutlinedButton.styleFrom(
+            backgroundColor: Color(0xFF323941),
+            shape: RoundedRectangleBorder(
+              borderRadius: new BorderRadius.circular(1500.0),
+            ),
+          ),
+          onPressed: () {
+            _launchURL();
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(18.0),
+            child: Text(
+              'DOWNLOAD CV',
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                  fontSize: 20),
+            ),
+          ),
+        ),
+        SizedBox(
+          width: 20,
+        ),
+        FloatingActionButton(
+          backgroundColor: Color(0xFFc34372),
+          child: Icon(
+            Icons.arrow_downward_rounded,
+            color: Colors.white,
+          ),
+          onPressed: () {
+            context.tabsRouter.setActiveIndex(1);
+          },
+        ),
+      ],
+    );
+  }
+
+  Widget _buildVerticalButtons(BuildContext context) {
+    return SizedBox(
+      height: MediaQuery.of(context).size.height * 0.1,
+      width: double.infinity,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Expanded(
+            child: FlatButton(
+              onPressed: () {
+                _launchURL();
+              },
+              color: Color(0xFF323941),
+              child: Text("DOWNLOAD CV"),
+            ),
+          ),
+          Expanded(
+              child: TextButton(
+            style: TextButton.styleFrom(
+              backgroundColor: Color(0xFFc34372),
+            ),
+            onPressed: () {
+              context.tabsRouter.setActiveIndex(1);
+            },
+            child: Text(
+              "VIEW PROJECTS",
+              style: TextStyle(color: Colors.white),
+            ),
+          ))
+        ],
+      ),
     );
   }
 }
