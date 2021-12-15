@@ -1,3 +1,5 @@
+import 'package:auto_route/annotations.dart';
+import 'package:auto_route/src/router/auto_router_x.dart';
 import 'package:flutter/material.dart';
 import 'package:implicitly_animated_reorderable_list/implicitly_animated_reorderable_list.dart';
 import 'package:implicitly_animated_reorderable_list/transitions.dart';
@@ -10,6 +12,9 @@ import 'package:portfolio/services/api.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ProjectsScreen extends StatelessWidget {
+  final String queryTag;
+
+  const ProjectsScreen({Key key, @queryParam this.queryTag}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<DocumentSnapshot>(
@@ -40,6 +45,16 @@ class AnimatedFilteredList extends StatefulWidget {
 
 class _AnimatedFilteredListState extends State<AnimatedFilteredList> {
   String filterTag = "All";
+  @protected
+  @mustCallSuper
+  void initState() {
+    super.initState();
+    String queryTag  = context.routeData.queryParams.toString();
+    if (queryTag.isNotEmpty){
+      filterTag = queryTag;
+    }
+    print(queryTag);
+  }
 
   @override
   Widget build(BuildContext context) {
