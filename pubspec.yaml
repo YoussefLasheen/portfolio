@@ -28,6 +28,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
   implicitly_animated_reorderable_list: ^0.4.2
+  carousel_slider: ^4.0.0
 
 dev_dependencies:
   flutter_test:

@@ -12,7 +12,7 @@ import 'package:auto_route/auto_route.dart' as _i3;
 import 'package:flutter/material.dart' as _i7;
 
 import '../navigation/root.dart' as _i1;
-import '../screens/about_screen.dart' as _i2;
+import '../screens/about_screen/about_screen.dart' as _i2;
 import '../screens/contact_screen/contact_screen.dart' as _i4;
 import '../screens/projects_screen/projects_screen.dart' as _i5;
 import '../screens/projects_screen/widgets/project_details_screen/project_details_screen.dart'
