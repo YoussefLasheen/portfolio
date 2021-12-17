@@ -17,7 +17,7 @@ class AboutScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.only(right: 100),
+        padding: const EdgeInsets.only(right: 100, left: 50),
         child: Column(
           children: [
             SizedBox(height: 150,),
