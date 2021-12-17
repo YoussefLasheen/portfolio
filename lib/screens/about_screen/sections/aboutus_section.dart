@@ -47,7 +47,7 @@ class AboutusSection extends StatelessWidget {
           ),
           Expanded(
             child: Image.asset(
-              'assets/images/P2Logo.png',
+              'assets/images/P1Logo.png',
               fit: BoxFit.contain,
             ),
           ),
