@@ -33,7 +33,7 @@ class AboutusSection extends StatelessWidget {
                     ),
                     Flexible(
                       child: Text(
-                        'Nullam nisl lectus, dignissim at nibh eget, egestas pulvinar diam. Suspendisse rhoncus lectus eget nibh malesuada, eget venenatis turpis fermentum. Suspendisse potenti. Proin imperdiet condimentum lobortis. Nam a massa non diam tincidunt sagittis sed maximus nulla. Fusce mattis nisl id lacus pharetra lobortis. ',
+                        'A freelance Flutter developer based in Egypt. I make quality, commented, and reusable code. My services include product analysis through to full product design - from wireframing and prototyping to interface design and Flutter development. ',
                         style: TextStyle(
                           color: Colors.white70,
                           height: 1.5,

@@ -30,7 +30,7 @@ class EndSection extends StatelessWidget {
                         style: TextStyle(fontSize: 70),
                       ),
                       SizedBox(height: 10,),
-                      Text('af afsfja asfa s f af afsfja asfa sff af afsfja asfa sff af afsfja asfa sff af afsfja asfa sff af afsfja asfa sf af afsfja asfa sf af afsfja asfa sf', style: TextStyle(color: Colors.white54),)
+                      Text('Contact us now. and get a price quote with detailed cost overview for free', style: TextStyle(color: Colors.white54),)
                     ],
                   ),
                 ),
