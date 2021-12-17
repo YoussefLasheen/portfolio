@@ -1,4 +1,5 @@
 import 'package:auto_route/annotations.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:auto_route/src/router/auto_router_x.dart';
 import 'package:flutter/material.dart';
 import 'package:implicitly_animated_reorderable_list/implicitly_animated_reorderable_list.dart';
@@ -49,9 +50,9 @@ class _AnimatedFilteredListState extends State<AnimatedFilteredList> {
   @mustCallSuper
   void initState() {
     super.initState();
-    String queryTag  = context.routeData.queryParams.toString();
+    Parameters queryTag  = context.routeData.queryParams;
     if (queryTag.isNotEmpty){
-      filterTag = queryTag;
+      filterTag = queryTag.rawMap['tag'];
     }
     print(queryTag);
   }
