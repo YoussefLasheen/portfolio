@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio/assets/constants.dart';
+import 'package:portfolio/screens/shared_components/frostedglass_container.dart';
 
 class EndSection extends StatelessWidget {
   @override
@@ -7,11 +9,7 @@ class EndSection extends StatelessWidget {
       constraints: BoxConstraints.expand(height: 500),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 100),
-        child: Container(
-          decoration: BoxDecoration(
-          color: Colors.deepPurple,
-          borderRadius: BorderRadius.circular(50)
-          ),
+        child: FrostedGlassContainer(
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 100),
             child: Row(

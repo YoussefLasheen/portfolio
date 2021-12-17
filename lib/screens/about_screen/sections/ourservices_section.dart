@@ -1,4 +1,7 @@
+import 'package:auto_route/src/router/auto_router_x.dart';
 import 'package:flutter/material.dart';
+import 'package:portfolio/assets/constants.dart';
+import 'package:portfolio/screens/shared_components/frostedglass_container.dart';
 
 class OurservicesSection extends StatelessWidget {
   @override
@@ -39,9 +42,7 @@ class OurservicesSection extends StatelessWidget {
 class OurservicesCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-          color: Colors.deepPurple, borderRadius: BorderRadius.circular(40)),
+    return FrostedGlassContainer(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 70),
         child: Column(
@@ -84,7 +85,7 @@ class OurservicesCard extends StatelessWidget {
           ],
         ),
         Spacer(),
-        IconButton(onPressed: null, icon: Icon(Icons.navigate_next_rounded))
+        IconButton(onPressed: link, icon: Icon(Icons.navigate_next_rounded))
       ],
     );
   }

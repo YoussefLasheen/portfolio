@@ -1,5 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:portfolio/assets/constants.dart';
+import 'package:portfolio/screens/shared_components/frostedglass_container.dart';
 
 class WelcomeSection extends StatelessWidget {
   @override
@@ -20,30 +22,51 @@ class WelcomeSection extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 50,),
+                SizedBox(
+                  height: 50,
+                ),
                 Text(
                   'Book an evaluation now for free. And get a price quote the same day guarnteed',
                   style: TextStyle(color: Colors.white70, fontSize: 24),
                 ),
-                SizedBox(height: 5,),
+                SizedBox(
+                  height: 5,
+                ),
                 Text(
                   'Special prices for NPOs',
                   style: TextStyle(color: Colors.white54),
                 ),
-                SizedBox(height: 70,),
+                SizedBox(
+                  height: 70,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     ColoredButton(
                       text: 'ABOUT US',
-                      color: Color(0xFF323941),
                       onPressed: null,
                     ),
-                    SizedBox(width: 10,),
-                    ColoredButton(
-                      text: 'VIEW WORK',
-                      color: Colors.deepPurple,
+                    SizedBox(
+                      width: 10,
+                    ),
+                    TextButton(
                       onPressed: null,
+                      child: Ink(
+                        decoration: BoxDecoration(
+                          color: Colors.grey[600],
+                            borderRadius: BorderRadius.circular(20)),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 30, vertical: 20),
+                          child: Text(
+                            'VIEW WORK',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                                fontSize: 20),
+                          ),
+                        ),
+                      ),
                     ),
                   ],
                 )
@@ -58,27 +81,27 @@ class WelcomeSection extends StatelessWidget {
 
 class ColoredButton extends StatelessWidget {
   final String text;
-  final Color color;
   final Function onPressed;
 
-  const ColoredButton({Key key, this.color, this.onPressed, this.text})
+  const ColoredButton({Key key, this.onPressed, this.text})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return OutlinedButton(
-      style: OutlinedButton.styleFrom(
-        backgroundColor: color,
-        shape: RoundedRectangleBorder(
-          borderRadius: new BorderRadius.circular(1500.0),
-        ),
-      ),
-      onPressed: onPressed,
-      child: Padding(
-        padding: const EdgeInsets.all(18.0),
-        child: Text(
-          text,
-          style: TextStyle(
-              fontWeight: FontWeight.bold, color: Colors.white, fontSize: 20),
+    return FrostedGlassContainer(
+      child: TextButton(
+        onPressed: onPressed,
+        child: Ink(
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(1500)),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+            child: Text(
+              text,
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                  fontSize: 20),
+            ),
+          ),
         ),
       ),
     );

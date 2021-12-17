@@ -22,18 +22,13 @@ class FrostedGlassContainer extends StatelessWidget {
           Positioned.fill(
               child: Container(
             decoration: decoration,
-            foregroundDecoration: BoxDecoration(
-              border: Border.all(
-                  color: Colors.white.withOpacity(0.3),
-                  width: 0.3,
-                  style: BorderStyle.solid),
-            ),
+            
           )),
           Positioned.fill(
             child: BackdropFilter(
-              filter: new ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+              filter: new ImageFilter.blur(sigmaX: 0.5, sigmaY: 0.5),
               child: new Container(
-                color:Colors.grey[100].withOpacity(0.05))
+                color:Colors.grey[100].withOpacity(0.1)),
             ),
           ),
           child,
