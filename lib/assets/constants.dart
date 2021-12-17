@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 
 const Gradient mainGradient = LinearGradient(
-    begin: Alignment.topLeft,
-    end: Alignment.bottomRight,
-    stops: [
-      0.05,
-      0.95,
-    ],
+    begin: Alignment.bottomRight,
+    end: Alignment.topLeft,
+    stops: [0.0, 0.5, 1.0],
     colors: [
-      Color.fromRGBO(22, 0, 64, 1),
-      Color.fromRGBO(121, 1, 140, 1),
+      Color(0xFFFF057C),
+      Color(0xFF8D0B93),
+      Color(0xFF321575),
+      
     ]);
 
