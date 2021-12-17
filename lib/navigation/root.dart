@@ -17,6 +17,7 @@ class Root extends StatelessWidget {
       builder: (context, child, animation) {
         final tabsRouter = AutoTabsRouter.of(context);
         return Material(
+          color: Colors.grey[900],
           child: Flex(
             direction: isLandscape ? Axis.horizontal : Axis.vertical,
             children: <Widget>[
