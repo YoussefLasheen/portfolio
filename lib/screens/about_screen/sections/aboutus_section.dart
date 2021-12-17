@@ -1,8 +1,11 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 class AboutusSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    bool isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
     return ConstrainedBox(
       constraints: BoxConstraints.expand(height: 300),
       child: Row(
@@ -12,8 +15,9 @@ class AboutusSection extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                AutoSizeText(
                   'About Us',
+                  maxLines: 1,
                   style: TextStyle(fontSize: 70),
                 ),
                 Row(
@@ -42,16 +46,25 @@ class AboutusSection extends StatelessWidget {
               ],
             ),
           ),
-          Spacer(
-            flex: 2,
-          ),
-          Expanded(
-            child: Image.asset(
-              'assets/images/P1Logo.png',
-              fit: BoxFit.contain,
-            ),
-          ),
-          Spacer()
+          isLandscape
+              ? Expanded(
+                flex: 2 ,
+                child: Row(
+                    children: [
+                      Spacer(
+                        flex: 2,
+                      ),
+                      Expanded(
+                        child: Image.asset(
+                          'assets/images/P1Logo.png',
+                          fit: BoxFit.contain,
+                        ),
+                      ),
+                      Spacer()
+                    ],
+                  ),
+              )
+              : SizedBox.shrink()
         ],
       ),
     );

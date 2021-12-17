@@ -15,22 +15,25 @@ class AboutScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
+    SizedBox _buildSpacer() => SizedBox(height: isLandscape? 150 : 50,);
     return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.only(right: 100, left: 50),
+        padding: isLandscape? EdgeInsets.only(right: 100, left: 50): EdgeInsets.all(20),
         child: Column(
           children: [
-            SizedBox(height: 150,),
+            _buildSpacer(),
             WelcomeSection(),
-            SizedBox(height: 150,),
+            _buildSpacer(),
             AboutusSection(),
-            SizedBox(height: 150,),
+            _buildSpacer(),
             OurservicesSection(),
-            SizedBox(height: 150,),
+            _buildSpacer(),
             CertificationsSection(),
-            SizedBox(height: 150,),
+            _buildSpacer(),
             EndSection(),
-            SizedBox(height: 150,),
+            _buildSpacer(),
           ],
         ),
       ),

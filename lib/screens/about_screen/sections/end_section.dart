@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:portfolio/assets/constants.dart';
 import 'package:portfolio/screens/shared_components/frostedglass_container.dart';
@@ -5,14 +6,17 @@ import 'package:portfolio/screens/shared_components/frostedglass_container.dart'
 class EndSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    bool isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
     return ConstrainedBox(
       constraints: BoxConstraints.expand(height: 500),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 100),
+        padding: isLandscape? EdgeInsets.symmetric(horizontal: 100):EdgeInsets.symmetric(horizontal: 10),
         child: FrostedGlassContainer(
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 100),
-            child: Row(
+            padding: isLandscape? EdgeInsets.symmetric(vertical: 50, horizontal: 100):EdgeInsets.symmetric(vertical: 50, horizontal: 25),
+            child: Flex(
+              direction: isLandscape? Axis.horizontal:Axis.vertical,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Expanded(
@@ -20,8 +24,9 @@ class EndSection extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
+                      AutoSizeText(
                         'Ready to explore',
+                        maxLines: 1,
                         style: TextStyle(fontSize: 70),
                       ),
                       SizedBox(height: 10,),
