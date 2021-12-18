@@ -1,69 +1,75 @@
+import 'package:decorated_icon/decorated_icon.dart';
 import 'package:flutter/material.dart';
-import 'package:portfolio/Icons/FooterIconsFont.dart';
+import 'package:portfolio/Icons/icons.dart';
+import 'package:portfolio/screens/shared_components/frostedglass_container.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ContactLinks extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        children: [
-          Flexible(
-              child: InfoTile(
-            icon: Icons.phone,
-            text: "+201012845227",
-            subText: "Phone",
-            url: "url://+201012845227",
-          )),
-          Flexible(
-              child: InfoTile(
-            icon: Icons.email,
-            text: "youssef@lasheen.dev",
-            subText: "Email",
-            url: "mailto:youssef@lasheen.dev",
-          )),
-          Flexible(
-              child: InfoTile(
-            icon: Icons.location_on,
-            text: "Cairo, Egypt",
-            subText: "Location",
-            url: "https://www.google.com/maps/place/Cairo+Governorate",
-          )),
-          Flexible(
-            child: Row(
-              children: [
-                Flexible(
-                  child: SocialIcon(
-                    icon: FooterIconsFont.github_circled,
-                    url: "https://github.com/YoussefLasheen",
-                    color: Colors.green,
+    return FrostedGlassContainer(
+      decoration: BoxDecoration(color: Colors.black38,),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 50),
+        child: Column(
+          children: [
+            Expanded(
+                child: InfoTile(
+              icon: Icons.phone,
+              text: "+201012845227",
+              subText: "Phone",
+              url: "url://+201012845227",
+            )),
+            Expanded(
+                child: InfoTile(
+              icon: Icons.email,
+              text: "youssef@lasheen.dev",
+              subText: "Email",
+              url: "mailto:youssef@lasheen.dev",
+            )),
+            Expanded(
+                child: InfoTile(
+              icon: Icons.location_on,
+              text: "Cairo, Egypt",
+              subText: "Location",
+              url: "https://www.google.com/maps/place/Cairo+Governorate",
+            )),
+            
+            Expanded(
+              child: Row(
+                children: [
+                  Flexible(
+                    child: SocialIcon(
+                      icon: CustomIcons.github_icon,
+                      url: "https://github.com/YoussefLasheen",
+                      color: Color(0xFF238636),
+                    ),
                   ),
-                ),
-                SizedBox(
-                  width: 20,
-                ),
-                Flexible(
-                  child: SocialIcon(
-                    icon: FooterIconsFont.linkedin,
-                    url: "http://linkedin.com/in/yousseflasheen",
-                    color: Colors.blue,
+                  SizedBox(
+                    width: 20,
                   ),
-                ),
-                SizedBox(
-                  width: 20,
-                ),
-                Flexible(
-                  child: SocialIcon(
-                    icon: FooterIconsFont.twitter_bird,
-                    url: "https://twitter.com/joelasheen",
-                    color: Colors.cyan,
+                  Flexible(
+                    child: SocialIcon(
+                      icon: CustomIcons.linkedin_icon,
+                      url: "http://linkedin.com/in/yousseflasheen",
+                      color: Color(0xFF0a66c2),
+                    ),
                   ),
-                ),
-              ],
-            ),
-          )
-        ],
+                  SizedBox(
+                    width: 20,
+                  ),
+                  Flexible(
+                    child: SocialIcon(
+                      icon: CustomIcons.twitter_icon,
+                      url: "https://twitter.com/joelasheen",
+                      color: Color(0xFF1d9bf0),
+                    ),
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
@@ -78,56 +84,43 @@ class InfoTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10.0),
-      child: Container(
-        color: Colors.black54,
-        child: ListTile(
-          leading: Icon(icon),
-          title: SelectableText(text),
-          subtitle: Text(subText),
-          onTap: () async {
-            if (await canLaunch(url)) {
-              await launch(url);
-            } else {
-              throw 'Could not launch $url';
-            }
-          },
-        ),
-      ),
+    return ListTile(
+      leading: Icon(icon),
+      title: SelectableText(text),
+      subtitle: Text(subText),
+      onTap: () async {
+        if (await canLaunch(url)) {
+          await launch(url);
+        } else {
+          throw 'Could not launch $url';
+        }
+      },
     );
   }
 }
 
 class SocialIcon extends StatelessWidget {
-  final icon;
-  final url;
+  final IconData icon;
   final Color color;
+  final url;
   const SocialIcon({this.icon, this.url, this.color});
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10.0),
-      child: InkWell(
-        onTap: () async {
-          if (await canLaunch(url)) {
-            await launch(url);
-          } else {
-            throw 'Could not launch $url';
-          }
-        },
-        child: Container(
+    return InkWell(
+      onTap: () async {
+        if (await canLaunch(url)) {
+          await launch(url);
+        } else {
+          throw 'Could not launch $url';
+        }
+      },
+      child: Center(
+        child: DecoratedIcon(
+          icon,
           color: color,
-          child: Center(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Icon(
-                icon,
-                color: Colors.white,
-              ),
-            ),
-          ),
+          shadows: [BoxShadow(color: Colors.white24, blurRadius: 5, offset: Offset(2, 2))],
+          size: 72,
         ),
       ),
     );

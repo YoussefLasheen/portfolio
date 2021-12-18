@@ -29,6 +29,7 @@ dependencies:
   cupertino_icons: ^0.1.2
   implicitly_animated_reorderable_list: ^0.4.2
   carousel_slider: ^4.0.0
+  decorated_icon: ^1.2.1
 
 dev_dependencies:
   flutter_test:
@@ -53,6 +54,10 @@ flutter:
     - assets/icons/
     - assets/textures/
   #   - images/a_dot_ham.jpeg
+  fonts:
+    - family:  icons
+      fonts:
+       - asset: assets/fonts/icons.ttf
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
