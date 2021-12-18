@@ -1,3 +1,4 @@
+import 'package:auto_route/src/router/auto_router_x.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:portfolio/assets/constants.dart';
@@ -43,7 +44,7 @@ class EndSection extends StatelessWidget {
                           borderRadius: new BorderRadius.circular(5.0),
                         ),
                       ),
-                      onPressed: null,
+                      onPressed: ()=> context.router.navigateNamed('contact'),
                       child: Padding(
                         padding: const EdgeInsets.all(18.0),
                         child: Text(
