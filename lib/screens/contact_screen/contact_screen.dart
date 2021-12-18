@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio/assets/constants.dart';
 import 'package:portfolio/screens/contact_screen/widgets/contact_form/contact_form.dart';
 import 'package:portfolio/screens/contact_screen/widgets/contact_links/contact_links.dart';
 
@@ -29,7 +30,9 @@ class ContactScreen extends StatelessWidget {
             ),
             Expanded(
               child: Container(
-                color: Color(0xFFc34372),
+                decoration: BoxDecoration(
+                  gradient: mainGradient
+                ),
                 constraints: BoxConstraints.expand(),
                 child: Align(
                   alignment: Alignment.center,
