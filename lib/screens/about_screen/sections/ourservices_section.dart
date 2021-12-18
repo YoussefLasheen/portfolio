@@ -32,7 +32,7 @@ class OurservicesSection extends StatelessWidget {
                   ),
                   SizedBox(height: 50,),
                   AutoSizeText(
-                    'Nullam nisl lectus, dignissim at nibh eget, egestas pulvinar diam. Suspendisse rhoncus lectus eget nibh malesuada, eget venenatis turpis fermentum. Suspendisse potenti. Proin imperdiet condimentum lobortis. Nam a massa non diam tincidunt sagittis sed maximus nulla. Fusce mattis nisl id lacus pharetra lobortis. ',
+                    'We offer highly efficient app development for the web and mobile - or both. We can do maps, eCommerce, Live Streaming, or even just a simple data viewer.',
                     style: TextStyle(
                         color: Colors.white70, height: 2, wordSpacing: 1.5,),
                   ),

@@ -48,7 +48,7 @@ class WelcomeSection extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       ColoredButton(
-                        text: 'ABOUT US',
+                        text: 'CONTACT US',
                         onPressed: null,
                       ),
                       SizedBox(
