@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:portfolio/routes/router.gr.dart';
+import 'package:portfolio/screens/about_screen/sections/welcome_section.dart';
 import 'package:portfolio/screens/projects_screen/models/project.dart';
 
 class ProjectCard extends StatelessWidget {
@@ -77,10 +78,10 @@ class ProjectCard extends StatelessWidget {
               )),
             ),
             Spacer(
-              flex: isLandscape ? 5 : 8,
+              flex: 5,
             ),
-            Expanded(
-                flex: 2,
+            Flexible(
+                flex: 3,
                 child: Align(
                   alignment:
                       isInversed ? Alignment.centerRight : Alignment.centerLeft,
@@ -92,11 +93,10 @@ class ProjectCard extends StatelessWidget {
                             flex: 8,
                             child: FittedBox(child: Text('View work'))),
                         Spacer(),
-                        Expanded(
-                          flex: isLandscape ? 2 : 4,
-                          child: FloatingActionButton(
-                            heroTag: projectMetadata.title,
-                            backgroundColor: Color(0xFFc34372),
+                        Flexible(
+                          flex: isLandscape ? 4 : 4,
+                          child: ColoredButton(
+                            decoration: BoxDecoration(color: Colors.grey.withOpacity(0.1)),
                             onPressed: () {
                               context.router.push(ProjectsDetailsRouter(
                                 id: id,
@@ -104,9 +104,13 @@ class ProjectCard extends StatelessWidget {
                               ));
                             },
                             child: FittedBox(
-                              child: Icon(
-                                Icons.play_arrow,
-                                color: Colors.white,
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 10),
+                                child: Icon(
+                                  Icons.play_arrow,
+                                  color: Colors.white,
+                                  size: 50,
+                                ),
                               ),
                             ),
                           ),
