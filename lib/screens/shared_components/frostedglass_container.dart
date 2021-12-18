@@ -10,7 +10,7 @@ class FrostedGlassContainer extends StatelessWidget {
   const FrostedGlassContainer(
       {Key key,
       this.child,
-      this.decoration = const BoxDecoration(gradient: mainGradient)})
+      this.decoration = const BoxDecoration(gradient: mainGradient,)})
       : super(key: key);
 
   @override
@@ -33,17 +33,18 @@ class FrostedGlassContainer extends StatelessWidget {
           ),
           Positioned.fill(
             child: Opacity(
-                  opacity: 0.15,
+                  opacity: 0.1,
                   child: Image.asset(
-                    "assets/textures/noise.png",
-                    fit: BoxFit.cover,
+                    "assets/textures/noise-300x300.png",
+                    fit: BoxFit.scaleDown,
+                    repeat: ImageRepeat.repeat,
                   )),
           ),
           Container(
               decoration: BoxDecoration(
                   boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.25), blurRadius: 30, offset: Offset(2, 2))],
                   borderRadius: BorderRadius.circular(20.0),
-                  border: Border.all(color: Colors.white.withOpacity(0.2), width: 1.0),
+                  border: Border.all(color: Colors.white.withOpacity(0.3), width: 0.3),
                   gradient: LinearGradient(begin: Alignment.topLeft, end: Alignment.bottomRight, colors: [
                     Colors.white.withOpacity(0.1),
                     Colors.white.withOpacity(0.08),
