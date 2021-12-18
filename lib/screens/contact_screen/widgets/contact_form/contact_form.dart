@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio/screens/about_screen/sections/welcome_section.dart';
 import 'package:portfolio/screens/contact_screen/models/message.dart';
 import 'package:portfolio/screens/contact_screen/widgets/contact_form/input.dart';
 
@@ -61,54 +62,63 @@ class ContactForm extends StatelessWidget {
             ),
           ),
           !isLandscape?
-          SizedBox(
-                height: MediaQuery.of(context).size.height * 0.1,
-                width: double.infinity,
-                child: Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: TextButton(
-                    
-                    onPressed: () {
-                      final form = _formKey.currentState;
-                    if (form.validate()) {
-                      form.save();
-                      message.send(message);
-                      form.reset();}
-                    },
-                    child: FittedBox(
-                      child: Text("Send",style: TextStyle(color: Color(0xFFc34372)),),
-                    ),
-                    style: TextButton.styleFrom(
-                      backgroundColor: Colors.black26,
+          Align(
+            alignment: AlignmentDirectional.centerStart,
+            child: ConstrainedBox(
+                  constraints: BoxConstraints(maxHeight: 70, maxWidth: 150),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: ColoredButton(
+                      onPressed: () {
+                        final form = _formKey.currentState;
+                      if (form.validate()) {
+                        form.save();
+                        message.send(message);
+                        form.reset();}
+                      },
+                      child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 5),
+                          child: Text(
+                            'Send',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                                fontSize: 20),
+                          ),
+                        ),
                     ),
                   ),
                 ),
-              ):
+          ):
           Align(
             alignment: Alignment.centerRight,
             child: ConstrainedBox(
-              constraints: BoxConstraints.expand(height: 50, width: 100),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextButton(
-                  onPressed: () {
-                    final form = _formKey.currentState;
-                    if (form.validate()) {
-                      form.save();
-                      message.send(message);
-                      form.reset();
-                    }
-                  },
-                  child: Text(
-                    "Send",
-                    style: TextStyle(color: Color(0xFFc34372)),
-                  ),
-                  style: TextButton.styleFrom(
-                    backgroundColor: Colors.black26,
+                  constraints: BoxConstraints(maxHeight: 70, maxWidth: 150),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: ColoredButton(
+                      onPressed: () {
+                        final form = _formKey.currentState;
+                      if (form.validate()) {
+                        form.save();
+                        message.send(message);
+                        form.reset();}
+                      },
+                      child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 5),
+                          child: Text(
+                            'Send',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                                fontSize: 20),
+                          ),
+                        ),
+                    ),
                   ),
                 ),
-              ),
-            ),
           ),
         ],
       ),

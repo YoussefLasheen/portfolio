@@ -49,7 +49,17 @@ class WelcomeSection extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       ColoredButton(
-                        text: 'CONTACT US',
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 30, vertical: 20),
+                          child: Text(
+                             'CONTACT US',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                                fontSize: 20),
+                          ),
+                        ),
                         onPressed: ()=> context.router.navigateNamed('contact'),
                       ),
                       SizedBox(
@@ -88,29 +98,17 @@ class WelcomeSection extends StatelessWidget {
 }
 
 class ColoredButton extends StatelessWidget {
-  final String text;
+  final Widget child;
   final Function onPressed;
 
-  const ColoredButton({Key key, this.onPressed, this.text})
+  const ColoredButton({Key key, this.onPressed, this.child})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
     return FrostedGlassContainer(
       child: TextButton(
         onPressed: onPressed,
-        child: Ink(
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(1500)),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
-            child: Text(
-              text,
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                  fontSize: 20),
-            ),
-          ),
-        ),
+        child: child,
       ),
     );
   }
