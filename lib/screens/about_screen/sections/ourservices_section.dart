@@ -53,7 +53,7 @@ class OurservicesCard extends StatelessWidget {
         MediaQuery.of(context).orientation == Orientation.landscape;
     return FrostedGlassContainer(
       child: Padding(
-        padding: isLandscape? EdgeInsets.symmetric(horizontal: 70): EdgeInsets.symmetric(horizontal: 15),
+        padding: isLandscape? EdgeInsets.symmetric(horizontal: 90, vertical: 65): EdgeInsets.symmetric(horizontal: 15),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
