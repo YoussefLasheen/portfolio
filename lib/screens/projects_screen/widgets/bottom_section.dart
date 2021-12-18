@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio/assets/constants.dart';
 
 class BottomSection extends StatelessWidget {
   const BottomSection({
@@ -17,7 +18,7 @@ class BottomSection extends StatelessWidget {
         width: double.infinity,
         height: double.infinity,
         decoration: BoxDecoration(
-          color: Color(0xFFc34372),
+          color: mainColor,
         ),
         child: Center(
           child: Row(

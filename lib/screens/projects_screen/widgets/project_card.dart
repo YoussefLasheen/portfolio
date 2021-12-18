@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:portfolio/assets/constants.dart';
 import 'package:portfolio/routes/router.gr.dart';
 import 'package:portfolio/screens/about_screen/sections/welcome_section.dart';
 import 'package:portfolio/screens/projects_screen/models/project.dart';
@@ -62,7 +63,7 @@ class ProjectCard extends StatelessWidget {
                 "#" + projectMetadata.title,
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: Color(0xFFc34372),
+                    color: mainColor,
                     shadows: [
                       Shadow(
                           color: Colors.black.withOpacity(0.3),

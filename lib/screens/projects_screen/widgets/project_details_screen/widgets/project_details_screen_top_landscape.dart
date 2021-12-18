@@ -1,5 +1,6 @@
 import 'package:auto_route/src/router/auto_router_x.dart';
 import 'package:flutter/material.dart';
+import 'package:portfolio/assets/constants.dart';
 import 'package:portfolio/screens/projects_screen/models/project.dart';
 import 'package:portfolio/screens/projects_screen/widgets/project_details_screen/widgets/access_options.dart';
 import 'package:portfolio/screens/projects_screen/widgets/project_details_screen/widgets/project_details.dart';
@@ -80,7 +81,7 @@ class ProjectDetailsScreenTopLandscape extends StatelessWidget {
                                   "#" + projectDescription.projectMetadata.title,
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
-                                      color: Color(0xFFc34372)),
+                                      color: mainColor),
                                 )),
                               ),
                               Expanded(

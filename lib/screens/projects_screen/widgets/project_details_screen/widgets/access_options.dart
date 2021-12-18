@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio/assets/constants.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AccessOptions extends StatelessWidget {
@@ -42,7 +43,7 @@ class AccessOptions extends StatelessWidget {
             Container():
             Expanded(
               child: Container(
-                color: Color(0xFFc34372),
+                color: mainColor,
                 child: PopupMenuButton(
                   offset: isLandscape? Offset(-MediaQuery.of(context).size.width*0.105,screenHeight *0.1):Offset.zero,
                   itemBuilder: (BuildContext context) =>

@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:portfolio/assets/constants.dart';
 
 class AboutusSection extends StatelessWidget {
   @override
@@ -28,7 +29,7 @@ class AboutusSection extends StatelessWidget {
                       child: Container(
                         width: 30,
                         height: 10,
-                        color: Colors.deepPurple,
+                        color: mainColor,
                       ),
                     ),
                     Flexible(

@@ -11,3 +11,4 @@ const Gradient mainGradient = LinearGradient(
       
     ]);
 
+const Color mainColor = Color(0xFF4C3F91);
