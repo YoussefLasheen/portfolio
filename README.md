@@ -12,3 +12,23 @@ The website includes some of the projects that I have worked on and contact deta
 - A contact form in contact screen 
 ### License
 Unfortunatly The website's code and design are not under any licence currently.
+
+### Privacy Policy
+This app uses Firebase Firstore, a third party service.
+link: https://firebase.google.com/support/privacy
+
+It collects the following information:
+
+A form that contains:
+fullname
+email
+subject
+body
+
+It uses the information to:
+
+It saves the data to be viewed by the developer.
+
+
+The user submits the data himself and no data is collected automatically.
+The user is free not to send any messages.
