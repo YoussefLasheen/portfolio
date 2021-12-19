@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "23616548175",
+    "firebase_url": "https://yousseflasheen-portfolio.firebaseio.com",
+    "project_id": "yousseflasheen-portfolio",
+    "storage_bucket": "yousseflasheen-portfolio.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:23616548175:android:895653cd5ab3007b0be93a",
+        "android_client_info": {
+          "package_name": "dev.lasheen.portfolio"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "23616548175-ub1dhgavpnj6p4slqo0ivlcpf6lv9pvl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCBvnvYkW6X4qxXWxR3fDtDdzyPlkftnj8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "23616548175-ub1dhgavpnj6p4slqo0ivlcpf6lv9pvl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
