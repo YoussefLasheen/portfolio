@@ -1,3 +1,5 @@
+import 'package:portfolio/assets/constants.dart';
+
 import 'custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 
@@ -50,7 +52,7 @@ class _AnimTFFState extends State<AnimTFF> {
         () {
           if (focusNode.hasFocus) {
             setState(() {
-              var color = Color(0xFFc34372);
+              var color = mainColor;
               border = getBorder(color);
             });
           } else {

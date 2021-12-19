@@ -1,8 +1,10 @@
 import 'package:auto_route/annotations.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:auto_route/src/router/auto_router_x.dart';
 import 'package:flutter/material.dart';
 import 'package:implicitly_animated_reorderable_list/implicitly_animated_reorderable_list.dart';
 import 'package:implicitly_animated_reorderable_list/transitions.dart';
+import 'package:portfolio/assets/constants.dart';
 import 'package:portfolio/screens/projects_screen/models/project.dart';
 import 'package:portfolio/screens/projects_screen/widgets/project_card.dart';
 
@@ -49,9 +51,9 @@ class _AnimatedFilteredListState extends State<AnimatedFilteredList> {
   @mustCallSuper
   void initState() {
     super.initState();
-    String queryTag  = context.routeData.queryParams.toString();
+    Parameters queryTag  = context.routeData.queryParams;
     if (queryTag.isNotEmpty){
-      filterTag = queryTag;
+      filterTag = queryTag.rawMap['tag'];
     }
     print(queryTag);
   }
@@ -145,7 +147,7 @@ class ChoiceTags extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: ChoiceChip(
-                    selectedColor: Color(0xFFc34372),
+                    selectedColor: mainColor,
                     label: Text(
                       "All",
                       style: TextStyle(color: Colors.white),
@@ -157,7 +159,7 @@ class ChoiceTags extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(5.0),
                   child: ChoiceChip(
-                      selectedColor: Color(0xFFc34372),
+                      selectedColor: mainColor,
                       label: Text(
                         tag,
                         style: TextStyle(color: Colors.white),

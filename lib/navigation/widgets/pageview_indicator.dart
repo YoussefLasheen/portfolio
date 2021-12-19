@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio/assets/constants.dart';
 
 class PageViewIndicator extends StatelessWidget {
   final int activePage;
@@ -51,7 +52,7 @@ Widget circleBar(bool isActive, String content, bool isLandscape, double underLi
         margin: EdgeInsets.symmetric(horizontal: 8),
         height: 4,
         width: underLineWidth,
-        color: isActive ? Color(0xFFc34372) : Colors.transparent,
+        color: isActive ? mainColor : Colors.transparent,
       ),
     ],
   );
