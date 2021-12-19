@@ -24,6 +24,7 @@ class ProjectDetailsScreenTopLandscape extends StatelessWidget {
       child: Stack(
         children: [
           SingleChildScrollView(
+            physics: BouncingScrollPhysics(),
             child: Column(
               children: [
                 SizedBox(

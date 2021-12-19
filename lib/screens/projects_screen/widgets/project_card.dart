@@ -96,21 +96,26 @@ class ProjectCard extends StatelessWidget {
                         Spacer(),
                         Flexible(
                           flex: isLandscape ? 4 : 4,
-                          child: ColoredButton(
-                            decoration: BoxDecoration(color: Colors.grey.withOpacity(0.1)),
-                            onPressed: () {
-                              context.router.push(ProjectsDetailsRouter(
-                                id: id,
-                                isInversed: isInversed,
-                              ));
-                            },
-                            child: FittedBox(
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 10),
-                                child: Icon(
-                                  Icons.play_arrow,
-                                  color: Colors.white,
-                                  size: 50,
+                          child: AspectRatio(
+                            aspectRatio: 1,
+                            child: ColoredButton(
+                              decoration: BoxDecoration(color: Colors.grey.withOpacity(0.1)),
+                              onPressed: () {
+                                context.router.push(ProjectsDetailsRouter(
+                                  id: id,
+                                  isInversed: isInversed,
+                                ));
+                              },
+                              child: Center(
+                                child: FittedBox(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(10),
+                                    child: Icon(
+                                      Icons.play_arrow,
+                                      color: Colors.white,
+                                      size: 50,
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),

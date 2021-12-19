@@ -57,7 +57,7 @@ class OurservicesCard extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            _buildTile('Mobile App Development', '4 projects', ()=>context.router.navigateNamed('projects?tag=Mobile'),
+            _buildTile('Mobile Development', '4 projects', ()=>context.router.navigateNamed('projects?tag=Mobile'),
                 AssetImage('assets/icons/mobile-development.png')),
             _buildSeparator(),
             _buildTile('Web Development', '4 projects', ()=>context.router.navigateNamed('projects?tag=Web'),
