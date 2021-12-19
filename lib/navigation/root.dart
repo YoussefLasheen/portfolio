@@ -4,12 +4,9 @@ import 'package:portfolio/navigation/widgets/sidebar.dart';
 import 'package:portfolio/routes/router.gr.dart';
 
 class Root extends StatelessWidget {
-  // Set(viewportFraction: 0.9999). It's a Dirty little trick to preload the next and previous pages
-  final PageController controller =
-      PageController(initialPage: 0, viewportFraction: 0.9999);
   @override
   Widget build(BuildContext context) {
-    //WidgetsBinding.instance.addPostFrameCallback((_) => limitOrientation(context));
+    WidgetsBinding.instance.addPostFrameCallback((_) => limitOrientation(context));
     bool isLandscape =
         MediaQuery.of(context).orientation == Orientation.landscape;
     return AutoTabsRouter(
