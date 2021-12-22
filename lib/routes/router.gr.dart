@@ -19,7 +19,7 @@ import '../screens/projects_screen/widgets/project_details_screen/project_detail
     as _i6;
 
 class AppRouter extends _i3.RootStackRouter {
-  AppRouter([_i7.GlobalKey<_i7.NavigatorState> navigatorKey])
+  AppRouter([_i7.GlobalKey<_i7.NavigatorState>? navigatorKey])
       : super(navigatorKey);
 
   @override
@@ -41,14 +41,19 @@ class AppRouter extends _i3.RootStackRouter {
           routeData: routeData, child: const _i4.ContactScreen());
     },
     ProjectsScreen.name: (routeData) {
+      final queryParams = routeData.queryParams;
+      final args = routeData.argsAs<ProjectsScreenArgs>(
+          orElse: () =>
+              ProjectsScreenArgs(queryTag: queryParams.optString('queryTag')));
       return _i3.MaterialPageX<dynamic>(
-          routeData: routeData, child: _i5.ProjectsScreen());
+          routeData: routeData,
+          child: _i5.ProjectsScreen(key: args.key, queryTag: args.queryTag));
     },
     ProjectsDetailsRouter.name: (routeData) {
       final pathParams = routeData.inheritedPathParams;
       final args = routeData.argsAs<ProjectsDetailsRouterArgs>(
           orElse: () =>
-              ProjectsDetailsRouterArgs(id: pathParams.getString('id')));
+              ProjectsDetailsRouterArgs(id: pathParams.optString('id')));
       return _i3.MaterialPageX<dynamic>(
           routeData: routeData,
           child: _i6.ProjectDetailsScreen(
@@ -75,48 +80,71 @@ class AppRouter extends _i3.RootStackRouter {
       ];
 }
 
-/// generated route for [_i1.Root]
+/// generated route for
+/// [_i1.Root]
 class Root extends _i3.PageRouteInfo<void> {
-  const Root({List<_i3.PageRouteInfo> children})
-      : super(name, path: '/', initialChildren: children);
+  const Root({List<_i3.PageRouteInfo>? children})
+      : super(Root.name, path: '/', initialChildren: children);
 
   static const String name = 'Root';
 }
 
-/// generated route for [_i2.AboutScreen]
+/// generated route for
+/// [_i2.AboutScreen]
 class AboutRouter extends _i3.PageRouteInfo<void> {
-  const AboutRouter() : super(name, path: 'about');
+  const AboutRouter() : super(AboutRouter.name, path: 'about');
 
   static const String name = 'AboutRouter';
 }
 
-/// generated route for [_i3.EmptyRouterPage]
+/// generated route for
+/// [_i3.EmptyRouterPage]
 class ProjectsRouter extends _i3.PageRouteInfo<void> {
-  const ProjectsRouter({List<_i3.PageRouteInfo> children})
-      : super(name, path: 'projects', initialChildren: children);
+  const ProjectsRouter({List<_i3.PageRouteInfo>? children})
+      : super(ProjectsRouter.name, path: 'projects', initialChildren: children);
 
   static const String name = 'ProjectsRouter';
 }
 
-/// generated route for [_i4.ContactScreen]
+/// generated route for
+/// [_i4.ContactScreen]
 class ContactRouter extends _i3.PageRouteInfo<void> {
-  const ContactRouter() : super(name, path: 'contact');
+  const ContactRouter() : super(ContactRouter.name, path: 'contact');
 
   static const String name = 'ContactRouter';
 }
 
-/// generated route for [_i5.ProjectsScreen]
-class ProjectsScreen extends _i3.PageRouteInfo<void> {
-  const ProjectsScreen() : super(name, path: '');
+/// generated route for
+/// [_i5.ProjectsScreen]
+class ProjectsScreen extends _i3.PageRouteInfo<ProjectsScreenArgs> {
+  ProjectsScreen({_i7.Key? key, String? queryTag})
+      : super(ProjectsScreen.name,
+            path: '',
+            args: ProjectsScreenArgs(key: key, queryTag: queryTag),
+            rawQueryParams: {'queryTag': queryTag});
 
   static const String name = 'ProjectsScreen';
 }
 
-/// generated route for [_i6.ProjectDetailsScreen]
+class ProjectsScreenArgs {
+  const ProjectsScreenArgs({this.key, this.queryTag});
+
+  final _i7.Key? key;
+
+  final String? queryTag;
+
+  @override
+  String toString() {
+    return 'ProjectsScreenArgs{key: $key, queryTag: $queryTag}';
+  }
+}
+
+/// generated route for
+/// [_i6.ProjectDetailsScreen]
 class ProjectsDetailsRouter
     extends _i3.PageRouteInfo<ProjectsDetailsRouterArgs> {
-  ProjectsDetailsRouter({bool isInversed, String id})
-      : super(name,
+  ProjectsDetailsRouter({bool? isInversed, String? id})
+      : super(ProjectsDetailsRouter.name,
             path: ':id',
             args: ProjectsDetailsRouterArgs(isInversed: isInversed, id: id),
             rawPathParams: {'id': id});
@@ -127,9 +155,9 @@ class ProjectsDetailsRouter
 class ProjectsDetailsRouterArgs {
   const ProjectsDetailsRouterArgs({this.isInversed, this.id});
 
-  final bool isInversed;
+  final bool? isInversed;
 
-  final String id;
+  final String? id;
 
   @override
   String toString() {
