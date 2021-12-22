@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 enum InputStatus { valid, invalid, none }
 
 class AnimTFF extends StatefulWidget {
-  final FormFieldValidator<String> validator;
-  final String labelText;
+  final FormFieldValidator<String>? validator;
+  final String? labelText;
   final bool suffix;
   final Color errorColor;
   final Color backgroundColor;
@@ -18,13 +18,13 @@ class AnimTFF extends StatefulWidget {
   final int maxLines;
 
   const AnimTFF({
-    Key key,
+    Key? key,
     this.validator,
     this.errorIcon = const Icon(
       Icons.warning,
       color: Colors.grey,
     ),
-    @required this.inputIcon,
+    required this.inputIcon,
     this.labelText,
     this.suffix = true,
     this.errorColor = Colors.red,
@@ -39,10 +39,10 @@ class AnimTFF extends StatefulWidget {
 
 class _AnimTFFState extends State<AnimTFF> {
   InputStatus inputStatus = InputStatus.none;
-  String lableText;
-  Border border;
-  Color labelColor;
-  FocusNode focusNode;
+  String? lableText;
+  Border? border;
+  Color? labelColor;
+  FocusNode? focusNode;
 
   @override
   void initState() {
@@ -50,7 +50,7 @@ class _AnimTFFState extends State<AnimTFF> {
     focusNode = FocusNode()
       ..addListener(
         () {
-          if (focusNode.hasFocus) {
+          if (focusNode!.hasFocus) {
             setState(() {
               var color = mainColor;
               border = getBorder(color);
@@ -66,9 +66,9 @@ class _AnimTFFState extends State<AnimTFF> {
     setInputDetails();
   }
 
-  String validator(String text) {
+  String? validator(String? text) {
     if (widget.validator == null) return null;
-    String error = widget.validator(text);
+    String? error = widget.validator!(text);
     InputStatus inst;
     if (error == null)
       inst = InputStatus.valid;
@@ -88,7 +88,7 @@ class _AnimTFFState extends State<AnimTFF> {
     return Border.all(width: 3, color: color);
   }
 
-  void setInputDetails([String error]) {
+  void setInputDetails([String? error]) {
     switch (inputStatus) {
       case InputStatus.invalid:
         var color = widget.errorColor;

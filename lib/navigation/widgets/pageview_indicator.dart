@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:portfolio/assets/constants.dart';
 
 class PageViewIndicator extends StatelessWidget {
-  final int activePage;
-  final void Function(int) callback;
+  final int? activePage;
+  final void Function(int)? callback;
 
-  const PageViewIndicator({Key key, this.activePage, this.callback})
+  const PageViewIndicator({Key? key, this.activePage, this.callback})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -20,19 +20,19 @@ class PageViewIndicator extends StatelessWidget {
       children: <Widget>[
         SizedBox(width: 10,),
         GestureDetector(
-            onTap: () => callback(keysList[2]),
+            onTap: () => callback!(keysList[2]),
             child: circleBar(activePage == keysList[2], list[2], isLandscape, 50)),
         SizedBox(
           width: 25,
         ),
         GestureDetector(
-            onTap: () => callback(keysList[1]),
+            onTap: () => callback!(keysList[1]),
             child: circleBar(activePage == keysList[1], list[1], isLandscape, 80)),
                     SizedBox(
           width: 25,
         ),
         GestureDetector(
-            onTap: () => callback(keysList[0]),
+            onTap: () => callback!(keysList[0]),
             child: circleBar(activePage == keysList[0], list[0], isLandscape, 70.0)),
         SizedBox(width: 10,),
       ],

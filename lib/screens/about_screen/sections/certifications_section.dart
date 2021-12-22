@@ -60,9 +60,9 @@ class CertificationsSection extends StatelessWidget {
 }
 
 class Certificate extends StatelessWidget {
-  final String certificateImageSrc;
+  final String? certificateImageSrc;
 
-  const Certificate({Key key, this.certificateImageSrc}) : super(key: key);
+  const Certificate({Key? key, this.certificateImageSrc}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -89,7 +89,7 @@ class Certificate extends StatelessWidget {
             child: ClipRRect(
                 borderRadius: BorderRadius.circular(25),
                 child: Image.asset(
-                  'images/certifications/' + certificateImageSrc,
+                  'images/certifications/' + certificateImageSrc!,
                   fit: BoxFit.contain,
                 )),
           )

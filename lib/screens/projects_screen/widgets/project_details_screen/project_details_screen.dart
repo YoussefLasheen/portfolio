@@ -12,8 +12,8 @@ import 'package:portfolio/services/api.dart';
 class ProjectDetailsScreen extends StatelessWidget {
   const ProjectDetailsScreen({this.isInversed, @PathParam() this.id});
 
-  final bool isInversed;
-  final String id;
+  final bool? isInversed;
+  final String? id;
 
   @override
   Widget build(BuildContext context) {
@@ -39,15 +39,15 @@ class ProjectDetailsScreen extends StatelessWidget {
             }, projectMetadata: ProjectMetadata(backgroundImageSource: null,shortDescription: '',title: '',tags: [],id: ''),accessOptions: [{'value':'','url':''}]);
           } else {
             projectDescription = ProjectDescription(
-                infoSnippet: snapshot.data['infoSnippet'],
+                infoSnippet: snapshot.data!['infoSnippet'],
                 projectMetadata: ProjectMetadata(
-                  title: snapshot.data['metadata']['title'],
-                  id: snapshot.data['metadata']['id'],
-                  shortDescription: snapshot.data['metadata']['shortDescription'],
-                  tags: snapshot.data['metadata']['tags'],
-                  backgroundImageSource: snapshot.data['metadata']['backgroundImageSource'],
+                  title: snapshot.data!['metadata']['title'],
+                  id: snapshot.data!['metadata']['id'],
+                  shortDescription: snapshot.data!['metadata']['shortDescription'],
+                  tags: snapshot.data!['metadata']['tags'],
+                  backgroundImageSource: snapshot.data!['metadata']['backgroundImageSource'],
                 ),
-                accessOptions: snapshot.data['accessOptions']);
+                accessOptions: snapshot.data!['accessOptions']);
           }
           if (isLandscape) {
             return ProjectDetailsScreenTopLandscape(

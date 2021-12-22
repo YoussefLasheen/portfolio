@@ -94,7 +94,7 @@ class OurservicesCard extends StatelessWidget {
           ],
         ),
         Spacer(),
-        IconButton(onPressed: link, icon: Icon(Icons.navigate_next_rounded))
+        IconButton(onPressed: link as void Function()?, icon: Icon(Icons.navigate_next_rounded))
       ],
     );
   }

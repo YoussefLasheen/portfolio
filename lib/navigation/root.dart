@@ -6,7 +6,7 @@ import 'package:portfolio/routes/router.gr.dart';
 class Root extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance.addPostFrameCallback((_) => limitOrientation(context));
+    WidgetsBinding.instance!.addPostFrameCallback((_) => limitOrientation(context));
     bool isLandscape =
         MediaQuery.of(context).orientation == Orientation.landscape;
     return AutoTabsRouter(

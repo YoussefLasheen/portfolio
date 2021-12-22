@@ -5,13 +5,13 @@ import 'dart:async';
 class Api {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
   final String path;
-  CollectionReference ref;
+  late CollectionReference ref;
 
   Api(this.path) {
     ref = _db.collection(path);
   }
   
-  Future<DocumentSnapshot> getDocumentById(String id) {
+  Future<DocumentSnapshot> getDocumentById(String? id) {
     return ref.doc(id).get();
   }
 
@@ -19,7 +19,7 @@ class Api {
     return ref.add(data);
   }
 
-  Future<DocumentReference> updateDocument(Map data, String id) {
-    return ref.doc(id).set(data);
+  Future<DocumentReference?> updateDocument(Map data, String id) {
+    return ref.doc(id).set(data).then((value) => value as DocumentReference<Object>?);
   }
 }

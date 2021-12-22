@@ -8,7 +8,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 class ProjectDetails extends StatelessWidget {
   const ProjectDetails({this.projectDescription});
-  final ProjectDescription projectDescription;
+  final ProjectDescription? projectDescription;
   @override
   Widget build(BuildContext context) {
     bool isLandscape =
@@ -59,8 +59,8 @@ class ProjectDetails extends StatelessWidget {
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: AutoSizeText(
-                                      projectDescription
-                                          .infoSnippet['longDescription'],
+                                      projectDescription!
+                                          .infoSnippet!['longDescription'],
                                       style: TextStyle(
                                           color: Colors.black54, fontSize: 40),
                                       wrapWords: true,
@@ -88,15 +88,15 @@ class ProjectDetails extends StatelessWidget {
                                           child: FittedBox(
                                               child: InfoSnippet(
                                                   'ROLE',
-                                                  projectDescription
-                                                      .infoSnippet['role']))),
+                                                  projectDescription!
+                                                      .infoSnippet!['role']))),
                                       Spacer(),
                                       Flexible(
                                           child: FittedBox(
                                               child: InfoSnippet(
                                                   'DATE',
-                                                  projectDescription
-                                                      .infoSnippet['date']))),
+                                                  projectDescription!
+                                                      .infoSnippet!['date']))),
                                     ],
                                   ),
                                 ),
@@ -108,15 +108,15 @@ class ProjectDetails extends StatelessWidget {
                                           child: FittedBox(
                                               child: InfoSnippet(
                                                   'CREDITS',
-                                                  projectDescription.infoSnippet[
+                                                  projectDescription!.infoSnippet![
                                                       'credits']))),
                                       Spacer(),
                                       Flexible(
                                           child: FittedBox(
                                               child: InfoSnippet(
                                                   'CLIENT',
-                                                  projectDescription
-                                                      .infoSnippet['client']))),
+                                                  projectDescription!
+                                                      .infoSnippet!['client']))),
                                     ],
                                   ),
                                 )
@@ -140,8 +140,8 @@ class ProjectDetails extends StatelessWidget {
                                             child: FittedBox(
                                                 child: InfoSnippet(
                                                     'ROLE',
-                                                    projectDescription
-                                                        .infoSnippet['role']))),
+                                                    projectDescription!
+                                                        .infoSnippet!['role']))),
                                         SizedBox(
                                           height: 50,
                                         ),
@@ -149,8 +149,8 @@ class ProjectDetails extends StatelessWidget {
                                             child: FittedBox(
                                                 child: InfoSnippet(
                                                     'DATE',
-                                                    projectDescription
-                                                        .infoSnippet['date']))),
+                                                    projectDescription!
+                                                        .infoSnippet!['date']))),
                                       ],
                                     ),
                                   ),
@@ -163,7 +163,7 @@ class ProjectDetails extends StatelessWidget {
                                             child: FittedBox(
                                                 child: InfoSnippet(
                                                     'CREDITS',
-                                                    projectDescription.infoSnippet[
+                                                    projectDescription!.infoSnippet![
                                                         'credits']))),
                                         SizedBox(
                                           height: 50,
@@ -172,7 +172,7 @@ class ProjectDetails extends StatelessWidget {
                                             child: FittedBox(
                                                 child: InfoSnippet(
                                                     'CLIENT',
-                                                    projectDescription.infoSnippet[
+                                                    projectDescription!.infoSnippet![
                                                         'client']))),
                                       ],
                                     ),
@@ -185,7 +185,7 @@ class ProjectDetails extends StatelessWidget {
                     ),
                   ),
                 ),
-                if (projectDescription.projectMetadata.backgroundImageSource == null) 
+                if (projectDescription!.projectMetadata!.backgroundImageSource == null) 
                 Center(child: CircularProgressIndicator(),) 
                 else Container(
                   width: MediaQuery.of(context).size.width,
@@ -194,7 +194,7 @@ class ProjectDetails extends StatelessWidget {
                     image: DecorationImage(
                       fit: BoxFit.cover,
                       image:
-                          NetworkImage(projectDescription.projectMetadata.backgroundImageSource),
+                          NetworkImage(projectDescription!.projectMetadata!.backgroundImageSource!),
                     ),
                   ),
                 ),
@@ -214,7 +214,7 @@ _launchURL(String url) async {
 
 class InfoSnippet extends StatelessWidget {
   final String text;
-  final String subText;
+  final String? subText;
 
   const InfoSnippet(this.text, this.subText);
   @override
@@ -242,7 +242,7 @@ class InfoSnippet extends StatelessWidget {
           height: 20,
         ),
         Text(
-          subText,
+          subText!,
           style: TextStyle(color: Colors.black87, fontSize: 20),
         )
       ],

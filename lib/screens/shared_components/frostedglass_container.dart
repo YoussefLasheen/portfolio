@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:portfolio/assets/constants.dart';
 
 class FrostedGlassContainer extends StatelessWidget {
-  final Widget child;
+  final Widget? child;
   final Decoration decoration;
 
   const FrostedGlassContainer(
-      {Key key,
+      {Key? key,
       this.child,
       this.decoration = const BoxDecoration(gradient: mainGradient,)})
       : super(key: key);

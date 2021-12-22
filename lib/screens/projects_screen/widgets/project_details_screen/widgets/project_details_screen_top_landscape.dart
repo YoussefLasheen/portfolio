@@ -8,7 +8,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 class ProjectDetailsScreenTopLandscape extends StatelessWidget {
   const ProjectDetailsScreenTopLandscape({
-    @required this.projectDescription,
+    required this.projectDescription,
     this.isInversed = true,
   });
   final ProjectDescription projectDescription;
@@ -37,18 +37,18 @@ class ProjectDetailsScreenTopLandscape extends StatelessWidget {
                     children: <Widget>[
                       Expanded(
                         flex: 2,
-                        child: projectDescription.projectMetadata.backgroundImageSource == null
+                        child: projectDescription.projectMetadata!.backgroundImageSource == null
                             ? Placeholder(
                                 color:
                                     isInversed ? Colors.white : Colors.blueGrey)
                             : Hero(
-                                tag: projectDescription.projectMetadata.title + 'image',
+                                tag: projectDescription.projectMetadata!.title! + 'image',
                                 child: Image.network(
-                                  projectDescription.projectMetadata.backgroundImageSource,
+                                  projectDescription.projectMetadata!.backgroundImageSource!,
                                   fit: BoxFit.fitHeight,
                                   loadingBuilder: (BuildContext context,
                                       Widget child,
-                                      ImageChunkEvent loadingProgress) {
+                                      ImageChunkEvent? loadingProgress) {
                                     if (loadingProgress == null) return child;
                                     return Center(
                                       child: CircularProgressIndicator(
@@ -58,7 +58,7 @@ class ProjectDetailsScreenTopLandscape extends StatelessWidget {
                                             ? loadingProgress
                                                     .cumulativeBytesLoaded /
                                                 loadingProgress
-                                                    .expectedTotalBytes
+                                                    .expectedTotalBytes!
                                             : null,
                                       ),
                                     );
@@ -79,7 +79,7 @@ class ProjectDetailsScreenTopLandscape extends StatelessWidget {
                               Expanded(
                                 child: FittedBox(
                                     child: Text(
-                                  "#" + projectDescription.projectMetadata.title,
+                                  "#" + projectDescription.projectMetadata!.title!,
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       color: mainColor),
@@ -88,14 +88,14 @@ class ProjectDetailsScreenTopLandscape extends StatelessWidget {
                               Expanded(
                                 child: FittedBox(
                                   child: Text(
-                                    "— " + projectDescription.projectMetadata.shortDescription,
+                                    "— " + projectDescription.projectMetadata!.shortDescription!,
                                   ),
                                 ),
                               ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                  for (var tag in projectDescription.projectMetadata.tags)
+                                  for (var tag in projectDescription.projectMetadata!.tags!)
                                     Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: Chip(label: Text(tag)),

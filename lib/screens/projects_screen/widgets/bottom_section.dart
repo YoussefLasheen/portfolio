@@ -3,7 +3,7 @@ import 'package:portfolio/assets/constants.dart';
 
 class BottomSection extends StatelessWidget {
   const BottomSection({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override

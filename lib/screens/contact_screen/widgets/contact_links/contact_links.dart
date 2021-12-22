@@ -76,21 +76,21 @@ class ContactLinks extends StatelessWidget {
 }
 
 class InfoTile extends StatelessWidget {
-  final String text;
-  final String subText;
-  final String url;
-  final IconData icon;
+  final String? text;
+  final String? subText;
+  final String? url;
+  final IconData? icon;
   const InfoTile({this.text, this.url, this.icon, this.subText});
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
       leading: Icon(icon),
-      title: SelectableText(text),
-      subtitle: Text(subText),
+      title: SelectableText(text!),
+      subtitle: Text(subText!),
       onTap: () async {
-        if (await canLaunch(url)) {
-          await launch(url);
+        if (await canLaunch(url!)) {
+          await launch(url!);
         } else {
           throw 'Could not launch $url';
         }
@@ -100,8 +100,8 @@ class InfoTile extends StatelessWidget {
 }
 
 class SocialIcon extends StatelessWidget {
-  final IconData icon;
-  final Color color;
+  final IconData? icon;
+  final Color? color;
   final url;
   const SocialIcon({this.icon, this.url, this.color});
 
@@ -117,7 +117,7 @@ class SocialIcon extends StatelessWidget {
       },
       child: Center(
         child: DecoratedIcon(
-          icon,
+          icon!,
           color: color,
           shadows: [BoxShadow(color: Colors.white24, blurRadius: 5, offset: Offset(2, 2))],
           size: 72,

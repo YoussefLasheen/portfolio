@@ -4,7 +4,7 @@ import 'package:portfolio/screens/contact_screen/widgets/contact_form/contact_fo
 import 'package:portfolio/screens/contact_screen/widgets/contact_links/contact_links.dart';
 
 class ContactScreen extends StatelessWidget {
-  const ContactScreen({Key key}) : super(key: key);
+  const ContactScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

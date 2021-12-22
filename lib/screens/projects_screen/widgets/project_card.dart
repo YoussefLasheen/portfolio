@@ -6,9 +6,9 @@ import 'package:portfolio/screens/about_screen/sections/welcome_section.dart';
 import 'package:portfolio/screens/projects_screen/models/project.dart';
 
 class ProjectCard extends StatelessWidget {
-  final ProjectMetadata projectMetadata;
-  final String id;
-  final bool isInversed;
+  final ProjectMetadata? projectMetadata;
+  final String? id;
+  final bool? isInversed;
 
   const ProjectCard({this.projectMetadata, this.isInversed, this.id});
   @override
@@ -22,7 +22,7 @@ class ProjectCard extends StatelessWidget {
           vertical: screenHeight * 0.05, horizontal: isLandscape ? 50 : 0),
       child: Align(
         alignment: isLandscape
-            ? isInversed
+            ? isInversed!
                 ? Alignment.centerLeft
                 : Alignment.centerRight
             : Alignment.center,
@@ -45,8 +45,8 @@ class ProjectCard extends StatelessWidget {
   Widget _buildOverlayText(
       bool isLandscape, double screenWidth, BuildContext context) {
     return Positioned.fill(
-      left: !isInversed ? 0 : null,
-      right: isInversed ? 0 : null,
+      left: !isInversed! ? 0 : null,
+      right: isInversed! ? 0 : null,
       child: SizedBox(
         width: isLandscape ? screenWidth / 4 : screenWidth / 2,
         child: Column(
@@ -60,7 +60,7 @@ class ProjectCard extends StatelessWidget {
               flex: 2,
               child: FittedBox(
                   child: Text(
-                "#" + projectMetadata.title,
+                "#" + projectMetadata!.title!,
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: mainColor,
@@ -75,7 +75,7 @@ class ProjectCard extends StatelessWidget {
             Expanded(
               child: FittedBox(
                   child: Text(
-                "— " + projectMetadata.shortDescription,
+                "— " + projectMetadata!.shortDescription!,
               )),
             ),
             Spacer(
@@ -85,7 +85,7 @@ class ProjectCard extends StatelessWidget {
                 flex: 3,
                 child: Align(
                   alignment:
-                      isInversed ? Alignment.centerRight : Alignment.centerLeft,
+                      isInversed! ? Alignment.centerRight : Alignment.centerLeft,
                   child: FractionallySizedBox(
                     widthFactor: 3 / 4,
                     child: Row(
@@ -102,8 +102,8 @@ class ProjectCard extends StatelessWidget {
                               decoration: BoxDecoration(color: Colors.grey.withOpacity(0.1)),
                               onPressed: () {
                                 context.router.push(ProjectsDetailsRouter(
-                                  id: id,
-                                  isInversed: isInversed,
+                                  id: id!,
+                                  isInversed: isInversed!,
                                 ));
                               },
                               child: Center(
@@ -140,18 +140,18 @@ class ProjectCard extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(
         right: isLandscape
-            ? isInversed
+            ? isInversed!
                 ? screenWidth * 0.1
                 : 0
             : 0,
         left: isLandscape
-            ? !isInversed
+            ? !isInversed!
                 ? screenWidth * 0.1
                 : 0
             : 0,
       ),
-      child: projectMetadata.backgroundImageSource == null
-          ? Placeholder(color: isInversed ? Colors.white : Colors.blueGrey)
+      child: projectMetadata!.backgroundImageSource == null
+          ? Placeholder(color: isInversed! ? Colors.white : Colors.blueGrey)
           : Container(
               decoration: BoxDecoration(boxShadow: [
                 BoxShadow(
@@ -160,18 +160,18 @@ class ProjectCard extends StatelessWidget {
                     blurRadius: 15)
               ]),
               child: Hero(
-                tag: projectMetadata.title + 'image',
+                tag: projectMetadata!.title! + 'image',
                 child: Image.network(
-                  projectMetadata.backgroundImageSource,
+                  projectMetadata!.backgroundImageSource!,
                   fit: BoxFit.fill,
                   loadingBuilder: (BuildContext context, Widget child,
-                      ImageChunkEvent loadingProgress) {
+                      ImageChunkEvent? loadingProgress) {
                     if (loadingProgress == null) return child;
                     return Center(
                       child: CircularProgressIndicator(
                         value: loadingProgress.expectedTotalBytes != null
                             ? loadingProgress.cumulativeBytesLoaded /
-                                loadingProgress.expectedTotalBytes
+                                loadingProgress.expectedTotalBytes!
                             : null,
                       ),
                     );

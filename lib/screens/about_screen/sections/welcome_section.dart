@@ -98,19 +98,19 @@ class WelcomeSection extends StatelessWidget {
 }
 
 class ColoredButton extends StatelessWidget {
-  final Widget child;
-  final Function onPressed;
+  final Widget? child;
+  final Function? onPressed;
   final Decoration decoration;
 
-  const ColoredButton({Key key, this.onPressed, this.child, this.decoration = const BoxDecoration(gradient: mainGradient)})
+  const ColoredButton({Key? key, this.onPressed, this.child, this.decoration = const BoxDecoration(gradient: mainGradient)})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
     return FrostedGlassContainer(
       decoration: decoration,
       child: TextButton(
-        onPressed: onPressed,
-        child: child,
+        onPressed: onPressed as void Function()?,
+        child: child!,
       ),
     );
   }

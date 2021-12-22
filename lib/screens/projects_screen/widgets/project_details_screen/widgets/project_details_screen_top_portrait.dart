@@ -5,7 +5,7 @@ import 'package:portfolio/screens/projects_screen/models/project.dart';
 import 'package:portfolio/screens/projects_screen/widgets/project_details_screen/widgets/project_details.dart';
 
 class  ProjectDetailsScreenTopPotrait extends StatelessWidget {
-  const ProjectDetailsScreenTopPotrait({@required this.projectDescription});
+  const ProjectDetailsScreenTopPotrait({required this.projectDescription});
   final ProjectDescription projectDescription;
 
   @override
@@ -23,7 +23,7 @@ class  ProjectDetailsScreenTopPotrait extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    for (var tag in projectDescription.projectMetadata.tags)
+                    for (var tag in projectDescription.projectMetadata!.tags!)
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Chip(label: Text(tag)),
@@ -33,13 +33,13 @@ class  ProjectDetailsScreenTopPotrait extends StatelessWidget {
                 preferredSize: Size.fromHeight(50)),
             actions: [],
             flexibleSpace: FlexibleSpaceBar(
-              title: Text(projectDescription.projectMetadata.title),
+              title: Text(projectDescription.projectMetadata!.title!),
               background: Hero(
-                tag: projectDescription.projectMetadata.title + 'image',
-                child: projectDescription.projectMetadata.backgroundImageSource == null
+                tag: projectDescription.projectMetadata!.title! + 'image',
+                child: projectDescription.projectMetadata!.backgroundImageSource == null
                     ? Placeholder()
                     : Image.network(
-                        projectDescription.projectMetadata.backgroundImageSource,
+                        projectDescription.projectMetadata!.backgroundImageSource!,
                         fit: BoxFit.cover,
                       ),
               ),

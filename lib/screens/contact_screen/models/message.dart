@@ -4,11 +4,11 @@ import 'package:portfolio/services/api.dart';
 class Message {
   Message();
 
-  String name;
-  String email;
-  String subject;
-  String budget;
-  String messageText;
+  String? name;
+  String? email;
+  String? subject;
+  String? budget;
+  String? messageText;
 
   send(Message msg) {
     String currentTime = Timestamp.now().millisecondsSinceEpoch.toString();

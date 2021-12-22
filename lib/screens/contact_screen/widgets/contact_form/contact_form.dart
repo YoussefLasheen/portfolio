@@ -26,7 +26,7 @@ class ContactForm extends StatelessWidget {
                   child: AnimTFF(
                     labelText: 'Name',
                     inputIcon: Icon(Icons.person),
-                    validator: (val) => val.isEmpty ? 'Name is required' : null,
+                    validator: (val) => val!.isEmpty ? 'Name is required' : null,
                   ),
                 ),
                 Expanded(
@@ -50,7 +50,7 @@ class ContactForm extends StatelessWidget {
             child: AnimTFF(
               labelText: 'Subject',
               inputIcon: Icon(Icons.subject),
-              validator: (val) => val.isEmpty ? 'Subject is required' : null,
+              validator: (val) => val!.isEmpty ? 'Subject is required' : null,
             ),
           ),
           Flexible(
@@ -58,7 +58,7 @@ class ContactForm extends StatelessWidget {
               maxLines: 5,
               labelText: 'Message Text',
               inputIcon: Icon(Icons.message),
-              validator: (val) => val.isEmpty ? 'Message is required' : null,
+              validator: (val) => val!.isEmpty ? 'Message is required' : null,
             ),
           ),
           !isLandscape?
@@ -70,7 +70,7 @@ class ContactForm extends StatelessWidget {
                     padding: const EdgeInsets.all(8),
                     child: ColoredButton(
                       onPressed: () {
-                        final form = _formKey.currentState;
+                        final form = _formKey.currentState!;
                       if (form.validate()) {
                         form.save();
                         message.send(message);
@@ -99,7 +99,7 @@ class ContactForm extends StatelessWidget {
                     padding: const EdgeInsets.all(8),
                     child: ColoredButton(
                       onPressed: () {
-                        final form = _formKey.currentState;
+                        final form = _formKey.currentState!;
                       if (form.validate()) {
                         form.save();
                         message.send(message);
