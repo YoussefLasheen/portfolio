@@ -5,6 +5,15 @@ class ProjectMetadata {
   final String? shortDescription;
   final String? backgroundImageSource;
   final List? tags;
+
+  ProjectMetadata.fromJson(Map<String, Object?> json)
+    : this(
+        id: json['id']! as String,
+        title: json['title']! as String,
+        shortDescription: json['shortDescription']! as String,
+        backgroundImageSource: json['backgroundImageSource']! as String,
+        tags: json['tags']! as List,
+      );
 }
 
 class ProjectDescription{

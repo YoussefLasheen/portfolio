@@ -14,45 +14,62 @@ import 'package:portfolio/services/api.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ProjectsScreen extends StatelessWidget {
-  final String queryTag;
+  final String? queryTag;
 
-  const ProjectsScreen({Key key, @queryParam this.queryTag}) : super(key: key);
+  const ProjectsScreen({Key? key, @queryParam this.queryTag}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<DocumentSnapshot>(
       future: Api('Data').getDocumentById('projects_screen'),
       builder: (context, snapshot) {
-        bool hasData = snapshot.hasData;
-        return AnimatedFilteredList(
-            projectsIndex: hasData?snapshot.data['projectsIndex']:[],
-            allTags: hasData?snapshot.data['allTags']:[]);
+        if (snapshot.hasError) {
+          return Text("Something went wrong");
+        }
+
+        if (snapshot.hasData && !snapshot.data!.exists) {
+          return Text("Document does not exist");
+        }
+
+        if (snapshot.connectionState == ConnectionState.done) {
+          Map<String, dynamic> data =
+              snapshot.data!.data() as Map<String, dynamic>;
+          
+          List<ProjectMetadata> myModels = (data['projectsIndex'] as List).map((i) =>
+              ProjectMetadata.fromJson(i)).toList();
+           
+          return AnimatedFilteredList(
+            projectsIndex: myModels,
+            allTags: data['allTags'],
+          );
+        }
+        return CircularProgressIndicator();
       },
     );
   }
 }
 
 class AnimatedFilteredList extends StatefulWidget {
-  final List allTags;
+  final List? allTags;  
   const AnimatedFilteredList({
-    Key key,
-    @required this.projectsIndex,
+    Key? key,
+    required this.projectsIndex,
     this.allTags,
   }) : super(key: key);
 
-  final List projectsIndex;
+  final List<ProjectMetadata> projectsIndex;
 
   @override
   State<AnimatedFilteredList> createState() => _AnimatedFilteredListState();
 }
 
 class _AnimatedFilteredListState extends State<AnimatedFilteredList> {
-  String filterTag = "All";
+  String? filterTag = "All";
   @protected
   @mustCallSuper
   void initState() {
     super.initState();
-    Parameters queryTag  = context.routeData.queryParams;
-    if (queryTag.isNotEmpty){
+    Parameters queryTag = context.routeData.queryParams;
+    if (queryTag.isNotEmpty) {
       filterTag = queryTag.rawMap['tag'];
     }
     print(queryTag);
@@ -60,7 +77,7 @@ class _AnimatedFilteredListState extends State<AnimatedFilteredList> {
 
   @override
   Widget build(BuildContext context) {
-    List filteredIndex = [];
+    List<ProjectMetadata> filteredIndex = [];
 
     if (filterTag == "All") {
       filteredIndex
@@ -68,11 +85,10 @@ class _AnimatedFilteredListState extends State<AnimatedFilteredList> {
         ..addAll(widget.projectsIndex);
     } else {
       for (int i = 0; i < widget.projectsIndex.length; i++) {
-        for (int h = 0; h < widget.projectsIndex[i]['tags'].length; h++) {
-          if (filterTag.contains(widget.projectsIndex[i]['tags'][h])) {
+        for (int h = 0; h < widget.projectsIndex[i].tags!.length; h++) {
+          if (filterTag!.contains(widget.projectsIndex[i].tags![h])) {
             filteredIndex.add(widget.projectsIndex[i]);
-            setState(() {
-            });
+            setState(() {});
             break;
           }
         }
@@ -92,11 +108,11 @@ class _AnimatedFilteredListState extends State<AnimatedFilteredList> {
             });
           },
         ),
-        ImplicitlyAnimatedList<dynamic>(
+        ImplicitlyAnimatedList<ProjectMetadata>(
           shrinkWrap: true,
           physics: NeverScrollableScrollPhysics(),
           items: filteredIndex,
-          areItemsTheSame: (a, b) => a['id'] == b['id'],
+          areItemsTheSame: (a, b) => a.id == b.id,
           itemBuilder: (context, animation, filteredProjectMetadata, index) {
             // check for out of bounds index because of a bug in the ImplicitlyAnimatedList widget
             if (index >= filteredIndex.length) return Container();
@@ -104,7 +120,7 @@ class _AnimatedFilteredListState extends State<AnimatedFilteredList> {
               sizeFraction: 0.7,
               curve: Curves.easeInOut,
               animation: animation,
-              child: _buildCard(filteredProjectMetadata, index.isEven),
+              child: ProjectCard(projectMetadata: filteredProjectMetadata, isInversed: index.isEven, id: filteredProjectMetadata.id,),
             );
           },
         ),
@@ -113,24 +129,10 @@ class _AnimatedFilteredListState extends State<AnimatedFilteredList> {
   }
 }
 
-Widget _buildCard(Map project, bool isInversed) {
-  return ProjectCard(
-    id: project['id'],
-    projectMetadata: ProjectMetadata(
-      title: project['title'],
-      shortDescription: project['shortDescription'],
-      backgroundImageSource: project['backgroundImageSource'],
-      tags: project['tags'],
-      id: project['id'],
-    ),
-    isInversed: isInversed,
-  );
-}
-
 class ChoiceTags extends StatelessWidget {
-  final Function onSelected;
-  final String filterTag;
-  final List allTags;
+  final Function? onSelected;
+  final String? filterTag;
+  final List? allTags;
 
   const ChoiceTags({this.onSelected, this.filterTag, this.allTags});
 
@@ -152,10 +154,10 @@ class ChoiceTags extends StatelessWidget {
                       "All",
                       style: TextStyle(color: Colors.white),
                     ),
-                    selected: filterTag.contains("All"),
-                    onSelected: (_) => onSelected("All")),
+                    selected: filterTag!.contains("All"),
+                    onSelected: (_) => onSelected!("All")),
               ),
-              for (var tag in allTags)
+              for (var tag in allTags!)
                 Padding(
                   padding: const EdgeInsets.all(5.0),
                   child: ChoiceChip(
@@ -164,8 +166,8 @@ class ChoiceTags extends StatelessWidget {
                         tag,
                         style: TextStyle(color: Colors.white),
                       ),
-                      selected: filterTag.contains(tag),
-                      onSelected: (_) => onSelected(tag)),
+                      selected: filterTag!.contains(tag),
+                      onSelected: (_) => onSelected!(tag)),
                 )
             ],
           ),
