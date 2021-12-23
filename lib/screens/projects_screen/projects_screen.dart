@@ -64,19 +64,14 @@ class AnimatedFilteredList extends StatefulWidget {
 
 class _AnimatedFilteredListState extends State<AnimatedFilteredList> {
   String? filterTag = "All";
-  @protected
-  @mustCallSuper
-  void initState() {
-    super.initState();
-    Parameters queryTag = context.routeData.queryParams;
-    if (queryTag.isNotEmpty) {
-      filterTag = queryTag.rawMap['tag'];
-    }
-    print(queryTag);
-  }
+  
 
   @override
   Widget build(BuildContext context) {
+    Parameters queryTag = context.routeData.queryParams;
+    if (queryTag.isNotEmpty && widget.allTags!.contains(queryTag.rawMap['tag'])) {
+      filterTag = queryTag.rawMap['tag'];
+    }
     List<ProjectMetadata> filteredIndex = [];
 
     if (filterTag == "All") {
