@@ -1,7 +1,0 @@
-{
-    "dart.flutterSdkPaths": [
-		"D:\\Work\\Current Projects\\Coding\\Flutter\\Flutter Source\\Stable\\flutter", // Can be a specific SDK folder
-		"D:\\Work\\Current Projects\\Coding\\Flutter\\Flutter Source\\Beta\\flutter" // Or can be a folder that contains multiple SDKs
-	],
-	"dart.flutterSdkPath": "D:\\Work\\Current Projects\\Coding\\Flutter\\Flutter Source\\Beta\\flutter",
-}
