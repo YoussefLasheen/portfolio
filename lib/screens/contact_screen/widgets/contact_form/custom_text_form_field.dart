@@ -77,8 +77,7 @@ class CTextFormField extends FormField<String> {
           enabled: enabled,
           builder: (FormFieldState<String> field) {
             final _CTextFormFieldState state = field as _CTextFormFieldState;
-            final InputDecoration effectiveDecoration = (decoration ??
-                    const InputDecoration())
+            final InputDecoration effectiveDecoration = decoration
                 .applyDefaults(Theme.of(field.context).inputDecorationTheme);
 
             void onChangedHandler(String value) {
