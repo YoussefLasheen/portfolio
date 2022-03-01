@@ -92,8 +92,8 @@ class ProjectDetailsScreenTopLandscape extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
+                              Wrap(
+                                alignment:WrapAlignment.end,
                                 children: [
                                   for (var tag in projectDescription.projectMetadata!.tags!)
                                     Padding(
