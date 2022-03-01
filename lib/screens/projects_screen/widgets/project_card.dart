@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:portfolio/assets/constants.dart';
 import 'package:portfolio/routes/router.gr.dart';
@@ -58,25 +59,36 @@ class ProjectCard extends StatelessWidget {
                 : Container(),
             Expanded(
               flex: 2,
-              child: FittedBox(
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: FittedBox(
                   child: Text(
-                "#" + projectMetadata!.title!,
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: mainColor,
-                    shadows: [
-                      Shadow(
-                          color: Colors.black.withOpacity(0.3),
-                          offset: Offset(2, 2),
-                          blurRadius: 5)
-                    ]),
-              )),
+                    "#" + projectMetadata!.title!,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: mainColor,
+                      fontSize: 50,
+                      shadows: [
+                        Shadow(
+                            color: Colors.black.withOpacity(0.3),
+                            offset: Offset(2, 2),
+                            blurRadius: 5)
+                      ],
+                    ),
+                  ),
+                ),
+              ),
             ),
             Expanded(
-              child: FittedBox(
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: FittedBox(
                   child: Text(
-                "— " + projectMetadata!.shortDescription!,
-              )),
+                    "— " + projectMetadata!.shortDescription!,
+                    style: TextStyle(fontSize: 25),
+                  ),
+                ),
+              ),
             ),
             Spacer(
               flex: 5,
@@ -91,8 +103,19 @@ class ProjectCard extends StatelessWidget {
                     child: Row(
                       children: <Widget>[
                         Expanded(
-                            flex: 8,
-                            child: FittedBox(child: Text('View work'))),
+                          flex: 8,
+                          child: FittedBox(
+                            child: Text(
+                              'VIEW WORK',
+                              maxLines: 1,
+                              textAlign: TextAlign.right,
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 24,
+                              ),
+                            ),
+                          ),
+                        ),
                         Spacer(),
                         Flexible(
                           flex: isLandscape ? 4 : 4,
@@ -111,7 +134,7 @@ class ProjectCard extends StatelessWidget {
                                   child: Padding(
                                     padding: const EdgeInsets.all(10),
                                     child: Icon(
-                                      Icons.play_arrow,
+                                      Icons.open_in_new,
                                       color: Colors.white,
                                       size: 50,
                                     ),
