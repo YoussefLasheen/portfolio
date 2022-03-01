@@ -18,7 +18,9 @@ class AboutScreen extends StatelessWidget {
     bool isLandscape =
         MediaQuery.of(context).orientation == Orientation.landscape;
     SizedBox _buildSpacer() => SizedBox(height: isLandscape? 150 : 50,);
+    final ScrollController _scrollController = ScrollController();
     return SingleChildScrollView(
+      controller: _scrollController,
       physics: BouncingScrollPhysics(),
       child: Padding(
         padding: isLandscape? EdgeInsets.only(right: 100, left: 50): EdgeInsets.all(20),

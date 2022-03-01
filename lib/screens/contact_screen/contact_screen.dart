@@ -11,7 +11,9 @@ class ContactScreen extends StatelessWidget {
     bool isLandscape =
         MediaQuery.of(context).orientation == Orientation.landscape;
     double screenHeight = MediaQuery.of(context).size.height;
+    final ScrollController _scrollController = ScrollController();
     return SingleChildScrollView(
+      controller: _scrollController,
       physics: isLandscape
           ? NeverScrollableScrollPhysics()
           : BouncingScrollPhysics(),
