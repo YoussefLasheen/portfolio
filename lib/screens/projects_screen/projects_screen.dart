@@ -42,7 +42,7 @@ class ProjectsScreen extends StatelessWidget {
             allTags: data['allTags'],
           );
         }
-        return CircularProgressIndicator();
+        return Center(child: CircularProgressIndicator());
       },
     );
   }
