@@ -61,8 +61,9 @@ class ProjectDetails extends StatelessWidget {
                                     child: AutoSizeText(
                                       projectDescription!
                                           .infoSnippet!['longDescription'],
+                                      textAlign: TextAlign.justify,
                                       style: TextStyle(
-                                          color: Colors.black54, fontSize: 40),
+                                          color: Colors.black54, fontSize: 40,),
                                       wrapWords: true,
                                       maxFontSize: 50,
                                     ),
@@ -127,53 +128,46 @@ class ProjectDetails extends StatelessWidget {
                           Flexible(
                             child: SizedBox(
                               width: screenWidth * 0.9,
-                              child: Row(
+                              child: Column(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Flexible(
-                                    child: Column(
+                                    child: Row(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
                                         Flexible(
-                                            child: FittedBox(
-                                                child: InfoSnippet(
-                                                    'ROLE',
-                                                    projectDescription!
-                                                        .infoSnippet!['role']))),
-                                        SizedBox(
-                                          height: 50,
-                                        ),
+                                            child: InfoSnippet(
+                                                'ROLE',
+                                                projectDescription!
+                                                    .infoSnippet!['role'])),
+                                        Spacer(),
                                         Flexible(
-                                            child: FittedBox(
-                                                child: InfoSnippet(
-                                                    'DATE',
-                                                    projectDescription!
-                                                        .infoSnippet!['date']))),
+                                            child: InfoSnippet(
+                                                'DATE',
+                                                projectDescription!
+                                                    .infoSnippet!['date'])),
                                       ],
                                     ),
                                   ),
                                   Flexible(
-                                    child: Column(
+                                    child: Row(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
                                         Flexible(
-                                            child: FittedBox(
-                                                child: InfoSnippet(
-                                                    'CREDITS',
-                                                    projectDescription!.infoSnippet![
-                                                        'credits']))),
-                                        SizedBox(
-                                          height: 50,
-                                        ),
+                                            child: InfoSnippet(
+                                                'CREDITS',
+                                                projectDescription!.infoSnippet![
+                                                    'credits'])),
+                                        Spacer(),
                                         Flexible(
-                                            child: FittedBox(
-                                                child: InfoSnippet(
-                                                    'CLIENT',
-                                                    projectDescription!.infoSnippet![
-                                                        'client']))),
+                                            child: InfoSnippet(
+                                                'CLIENT',
+                                                projectDescription!.infoSnippet![
+                                                    'client'])),
                                       ],
                                     ),
                                   )
@@ -243,7 +237,7 @@ class InfoSnippet extends StatelessWidget {
         ),
         Text(
           subText!,
-          style: TextStyle(color: Colors.black87, fontSize: 20),
+          style: TextStyle(color: Colors.black87, fontSize: 18),
         )
       ],
     );
