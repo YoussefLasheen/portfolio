@@ -27,7 +27,7 @@ class EndSection extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       AutoSizeText(
-                        'Ready to explore',
+                        'Ready to explore?',
                         maxLines: 1,
                         style: TextStyle(fontSize: 70),
                       ),
