@@ -1,5 +1,6 @@
 import 'package:decorated_icon/decorated_icon.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:portfolio/Icons/icons.dart';
 import 'package:portfolio/screens/shared_components/frostedglass_container.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -7,71 +8,72 @@ import 'package:url_launcher/url_launcher.dart';
 class ContactLinks extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return FrostedGlassContainer(
-      borderRadius: BorderRadius.circular(20.0),
-      decoration: BoxDecoration(color: Colors.black38,),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 50),
-        child: Column(
-          children: [
-            Expanded(
-                child: InfoTile(
-              icon: Icons.phone,
-              text: "+201012845227",
-              subText: "Phone",
-              url: "url://+201012845227",
-            )),
-            Expanded(
-                child: InfoTile(
-              icon: Icons.email,
-              text: "youssef@lasheen.dev",
-              subText: "Email",
-              url: "mailto:youssef@lasheen.dev",
-            )),
-            Expanded(
-                child: InfoTile(
-              icon: Icons.location_on,
-              text: "Cairo, Egypt",
-              subText: "Location",
-              url: "https://www.google.com/maps/place/Cairo+Governorate",
-            )),
-            
-            Expanded(
-              child: Row(
+    return Column(
+      children: [
+        Expanded(
+          flex: 3,
+          child: FrostedGlassContainer(
+            borderRadius: BorderRadius.circular(20.0),
+            decoration: BoxDecoration(color: Colors.black26,),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 50),
+              child: Column(
                 children: [
-                  Flexible(
-                    child: SocialIcon(
-                      icon: CustomIcons.github_icon,
-                      url: "https://github.com/YoussefLasheen",
-                      color: Color(0xFF238636),
-                    ),
+                  Expanded(
+                      child: InfoTile(
+                    icon: Icons.email,
+                    text: "youssef@lasheen.dev",
+                    subText: "Email",
+                    url: "mailto:youssef@lasheen.dev",
+                  )),
+                  Expanded(
+                      child: InfoTile(
+                    icon: Icons.phone,
+                    text: "+201012845227",
+                    subText: "Phone",
+                    url: "url://+201012845227",
+                  )),
+                  Expanded(
+                      child: InfoTile(
+                    icon: Icons.location_on,
+                    text: "Cairo, Egypt",
+                    subText: "Location",
+                    url: "https://www.google.com/maps/place/Cairo+Governorate",
+                  )),
+                ],
+              ),
+            ),
+          ),
+        ),
+        SizedBox(height: 50,),
+        Expanded(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  SocialIcon(
+                    icon: FontAwesomeIcons.githubAlt,
+                    url: "https://github.com/YoussefLasheen",
+                    color: Color(0xFF238636),
                   ),
-                  SizedBox(
-                    width: 20,
+                  SocialIcon(
+                    icon: FontAwesomeIcons.linkedinIn,
+                    url: "http://linkedin.com/in/yousseflasheen",
+                    color: Color(0xFF0a66c2),
                   ),
-                  Flexible(
-                    child: SocialIcon(
-                      icon: CustomIcons.linkedin_icon,
-                      url: "http://linkedin.com/in/yousseflasheen",
-                      color: Color(0xFF0a66c2),
-                    ),
+                  SocialIcon(
+                    icon: FontAwesomeIcons.stackOverflow,
+                    url: "https://stackoverflow.com/users/10240634/youssef-lasheen",
+                    color: Color(0xFFef8236),
                   ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Flexible(
-                    child: SocialIcon(
-                      icon: CustomIcons.twitter_icon,
-                      url: "https://twitter.com/joelasheen",
-                      color: Color(0xFF1d9bf0),
-                    ),
+                  SocialIcon(
+                    icon: FontAwesomeIcons.twitter,
+                    url: "https://twitter.com/joelasheen",
+                    color: Color(0xFF1d9bf0),
                   ),
                 ],
               ),
             )
-          ],
-        ),
-      ),
+      ],
     );
   }
 }
@@ -116,12 +118,18 @@ class SocialIcon extends StatelessWidget {
           throw 'Could not launch $url';
         }
       },
-      child: Center(
-        child: DecoratedIcon(
-          icon!,
-          color: color,
-          shadows: [BoxShadow(color: Colors.white24, blurRadius: 5, offset: Offset(2, 2))],
-          size: 72,
+      child: SizedBox.fromSize(
+        size: Size.square(72),
+        child: FrostedGlassContainer(
+          decoration: BoxDecoration(color: color!.withOpacity(0.6),),
+          borderRadius: BorderRadius.circular(20.0),
+          child: Center(
+            child: Icon(
+              icon!,
+              color: color,
+              size: 50,
+            ),
+          ),
         ),
       ),
     );
