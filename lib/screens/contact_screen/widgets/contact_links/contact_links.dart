@@ -8,6 +8,7 @@ class ContactLinks extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FrostedGlassContainer(
+      borderRadius: BorderRadius.circular(20.0),
       decoration: BoxDecoration(color: Colors.black38,),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 50),

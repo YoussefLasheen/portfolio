@@ -54,6 +54,7 @@ class OurservicesCard extends StatelessWidget {
     bool isLandscape =
         MediaQuery.of(context).orientation == Orientation.landscape;
     return FrostedGlassContainer(
+      borderRadius: isLandscape?BorderRadius.circular(20.0):BorderRadius.circular(0.0),
       child: Padding(
         padding: isLandscape? EdgeInsets.symmetric(horizontal: 90, vertical: 65): EdgeInsets.symmetric(horizontal: 15),
         child: Column(

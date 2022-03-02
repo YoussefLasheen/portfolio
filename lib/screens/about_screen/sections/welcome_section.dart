@@ -108,6 +108,7 @@ class ColoredButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FrostedGlassContainer(
+      borderRadius: BorderRadius.circular(20.0),
       decoration: decoration,
       child: TextButton(
         onPressed: onPressed as void Function()?,

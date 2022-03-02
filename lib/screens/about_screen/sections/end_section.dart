@@ -12,8 +12,9 @@ class EndSection extends StatelessWidget {
     return ConstrainedBox(
       constraints: BoxConstraints.expand(height: 500),
       child: Padding(
-        padding: isLandscape? EdgeInsets.symmetric(horizontal: 100):EdgeInsets.symmetric(horizontal: 10),
+        padding: isLandscape? EdgeInsets.symmetric(horizontal: 100):EdgeInsets.all(0.0),
         child: FrostedGlassContainer(
+          borderRadius: isLandscape?BorderRadius.circular(20.0):BorderRadius.circular(0.0),
           child: Padding(
             padding: isLandscape? EdgeInsets.symmetric(vertical: 50, horizontal: 100):EdgeInsets.symmetric(vertical: 50, horizontal: 25),
             child: Flex(
@@ -60,9 +61,9 @@ class EndSection extends StatelessWidget {
                 )
               ],
             ),
-          ),
-        ),
-      ),
-    );
+                ),
+              ),
+            ),
+          );
   }
 }

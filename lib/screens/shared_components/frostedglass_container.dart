@@ -5,18 +5,19 @@ import 'package:portfolio/assets/constants.dart';
 
 class FrostedGlassContainer extends StatelessWidget {
   final Widget? child;
+  final BorderRadius borderRadius;
   final Decoration decoration;
 
   const FrostedGlassContainer(
       {Key? key,
       this.child,
-      this.decoration = const BoxDecoration(gradient: mainGradient,)})
+      this.decoration = const BoxDecoration(gradient: mainGradient,), required this.borderRadius})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(20.0),
+      borderRadius: borderRadius,
       child: Stack(
         children: [
           Positioned.fill(
@@ -43,7 +44,7 @@ class FrostedGlassContainer extends StatelessWidget {
           Container(
               decoration: BoxDecoration(
                   boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.25), blurRadius: 30, offset: Offset(2, 2))],
-                  borderRadius: BorderRadius.circular(20.0),
+                  borderRadius: borderRadius,
                   border: Border.all(color: Colors.white.withOpacity(0.3), width: 0.3),
                   gradient: LinearGradient(begin: Alignment.topLeft, end: Alignment.bottomRight, colors: [
                     Colors.white.withOpacity(0.1),
