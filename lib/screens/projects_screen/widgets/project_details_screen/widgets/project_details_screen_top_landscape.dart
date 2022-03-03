@@ -4,6 +4,7 @@ import 'package:portfolio/assets/constants.dart';
 import 'package:portfolio/screens/projects_screen/models/project.dart';
 import 'package:portfolio/screens/projects_screen/widgets/project_details_screen/widgets/access_options.dart';
 import 'package:portfolio/screens/projects_screen/widgets/project_details_screen/widgets/project_details.dart';
+import 'package:portfolio/screens/shared_components/blend_mask.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ProjectDetailsScreenTopLandscape extends StatelessWidget {
@@ -122,8 +123,11 @@ class ProjectDetailsScreenTopLandscape extends StatelessWidget {
             onPressed: () {
               context.router.navigateNamed('');
             },
-            color: Colors.white54,
-            icon: Icon(Icons.arrow_back_rounded),
+            color: Colors.white,
+            icon: BlendMask(
+              blendMode: BlendMode.difference,
+              child: Icon(Icons.arrow_back_rounded),
+            ),
             iconSize: 100,
           ),
         ],
