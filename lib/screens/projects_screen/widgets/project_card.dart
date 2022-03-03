@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:mouse_parallax/mouse_parallax.dart';
 import 'package:portfolio/assets/constants.dart';
 import 'package:portfolio/routes/router.gr.dart';
 import 'package:portfolio/screens/about_screen/sections/welcome_section.dart';
@@ -31,10 +32,20 @@ class ProjectCard extends StatelessWidget {
           width: isLandscape ? screenWidth * 0.7 : screenWidth * 0.9,
           child: AspectRatio(
             aspectRatio: 3 / 2,
-            child: Stack(
-              children: <Widget>[
-                _buildBackgroundImage(isLandscape, screenWidth),
-                _buildOverlayText(isLandscape, screenWidth, context)
+            child: ParallaxStack(
+              layers: <Widget>[
+                ParallaxLayer(
+                  xOffset: 10,
+                  yOffset: 5,
+                  xRotation: 0.01,
+                  yRotation: 0.01,
+                  child: _buildBackgroundImage(isLandscape, screenWidth),
+                ),
+                ParallaxLayer(
+                   xOffset: 5,
+                   yOffset: 0,
+                  child: _buildOverlayText(isLandscape, screenWidth, context),
+                )
               ],
             ),
           ),
@@ -45,9 +56,8 @@ class ProjectCard extends StatelessWidget {
 
   Widget _buildOverlayText(
       bool isLandscape, double screenWidth, BuildContext context) {
-    return Positioned.fill(
-      left: !isInversed! ? 0 : null,
-      right: isInversed! ? 0 : null,
+    return Align(
+      alignment: isInversed!?Alignment.centerRight:Alignment.centerLeft,
       child: SizedBox(
         width: isLandscape ? screenWidth / 4 : screenWidth / 2,
         child: Column(
