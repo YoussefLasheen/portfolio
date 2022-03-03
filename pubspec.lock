@@ -120,13 +120,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "8.1.3"
-  carousel_slider:
-    dependency: "direct main"
-    description:
-      name: carousel_slider
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "4.0.0"
   characters:
     dependency: transitive
     description:
@@ -225,13 +218,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.2.1"
-  decorated_icon:
-    dependency: "direct main"
-    description:
-      name: decorated_icon
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.2.1"
   fake_async:
     dependency: transitive
     description:
