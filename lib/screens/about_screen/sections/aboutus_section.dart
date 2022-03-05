@@ -47,23 +47,14 @@ class AboutusSection extends StatelessWidget {
               ],
             ),
           ),
+          Spacer(),
           isLandscape
               ? Expanded(
-                flex: 2 ,
-                child: Row(
-                    children: [
-                      Spacer(
-                        flex: 2,
-                      ),
-                      Expanded(
-                        child: Image.asset(
-                          'assets/images/P1Logo.png',
-                          fit: BoxFit.contain,
-                        ),
-                      ),
-                      Spacer()
-                    ],
-                  ),
+                flex:2 ,
+                child: Image.asset(
+                  'assets/images/LLLogoT.png',
+                  fit: BoxFit.contain,
+                ),
               )
               : SizedBox.shrink()
         ],
