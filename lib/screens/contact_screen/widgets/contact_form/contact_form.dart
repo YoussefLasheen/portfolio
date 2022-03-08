@@ -12,7 +12,13 @@ class ContactForm extends StatelessWidget {
   Widget build(BuildContext context) {
     bool isLandscape =
         MediaQuery.of(context).orientation == Orientation.landscape;
-    Message message = Message();
+    Map message = {
+      'name':'',
+      'email':'',
+      'subject':'',
+      'budget':'',
+      'messageText':'',
+    };
     return Form(
       key: _formKey,
       child: Column(
@@ -27,6 +33,7 @@ class ContactForm extends StatelessWidget {
                     labelText: 'Name',
                     inputIcon: Icon(Icons.person),
                     validator: (val) => val!.isEmpty ? 'Name is required' : null,
+                    onSaved: (val) => message['name'] = val,
                   ),
                 ),
                 Expanded(
@@ -36,11 +43,12 @@ class ContactForm extends StatelessWidget {
                     validator: (val) {
                       if (val == null ||
                           val.isEmpty ||
-                          RegExp(p).hasMatch(val)) {
+                          !RegExp(p).hasMatch(val)) {
                         return 'Email not Valid';
                       }
                       return null;
                     },
+                    onSaved: (val) => message['email'] = val,
                   ),
                 ),
               ],
@@ -51,6 +59,7 @@ class ContactForm extends StatelessWidget {
               labelText: 'Subject',
               inputIcon: Icon(Icons.subject),
               validator: (val) => val!.isEmpty ? 'Subject is required' : null,
+              onSaved: (val) => message['subject'] = val,
             ),
           ),
           Flexible(
@@ -59,6 +68,7 @@ class ContactForm extends StatelessWidget {
               labelText: 'Message Text',
               inputIcon: Icon(Icons.message),
               validator: (val) => val!.isEmpty ? 'Message is required' : null,
+              onSaved: (val) => message['messageText'] = val,
             ),
           ),
           !isLandscape?
@@ -73,7 +83,7 @@ class ContactForm extends StatelessWidget {
                         final form = _formKey.currentState!;
                       if (form.validate()) {
                         form.save();
-                        message.send(message);
+                        sendEmail(message);
                         form.reset();}
                       },
                       child: Padding(
@@ -102,7 +112,7 @@ class ContactForm extends StatelessWidget {
                         final form = _formKey.currentState!;
                       if (form.validate()) {
                         form.save();
-                        message.send(message);
+                        sendEmail(message);
                         form.reset();}
                       },
                       child: Padding(
@@ -123,6 +133,17 @@ class ContactForm extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void sendEmail(message) {
+    Message(
+      name: message['name'],
+      email: message['email'],
+      subject: message['subject'],
+      budget: message['budget'],
+      messageText: message['messageText'],
+    ).send();
+
   }
 }
 /*

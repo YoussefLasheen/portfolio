@@ -17,6 +17,11 @@ class AnimTFF extends StatefulWidget {
 
   final int maxLines;
 
+  final void Function(String?)? onSaved;
+
+
+
+
   const AnimTFF({
     Key? key,
     this.validator,
@@ -31,6 +36,7 @@ class AnimTFF extends StatefulWidget {
     this.backgroundColor = Colors.black26,
     this.labelColor = Colors.grey,
     this.maxLines = 1,
+    this.onSaved,
   }) : super(key: key);
 
   @override
@@ -134,6 +140,7 @@ class _AnimTFFState extends State<AnimTFF> {
                       labelStyle: TextStyle(color: labelColor),
                       contentPadding: EdgeInsets.all(10)),
                   validator: validator,
+                  onSaved: widget.onSaved,
                 ),
               ),
               if (widget.suffix) getInputIcon()
