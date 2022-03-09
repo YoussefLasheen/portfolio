@@ -52,7 +52,7 @@ class TopSection extends StatelessWidget {
                       ),
                       Expanded(
                           flex: isLandscape?4:2,
-                          child: Image.asset('assets/images/LLLogoT.png',fit: BoxFit.contain,)),
+                          child: Image.asset('assets/images/LLLogoClipArtOulined.png',fit: BoxFit.contain,)),
                       //Spacer()
                     ],
                   ),
