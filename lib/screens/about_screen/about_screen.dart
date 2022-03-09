@@ -9,6 +9,8 @@ import 'package:portfolio/screens/about_screen/sections/welcome_section.dart';
 import 'package:portfolio/services/api.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import 'sections/certificates_section.dart';
+
 class AboutScreen extends StatelessWidget {
   const AboutScreen({Key? key}) : super(key: key);
 
@@ -32,8 +34,8 @@ class AboutScreen extends StatelessWidget {
             _buildSpacer(),
             OurservicesSection(),
             _buildSpacer(),
-            //CertificationsSection(),
-            //_buildSpacer(),
+            CertificatesSection(),
+            _buildSpacer(),
             EndSection(),
             _buildSpacer(),
           ],
