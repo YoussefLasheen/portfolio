@@ -55,29 +55,32 @@ class OurservicesCard extends StatelessWidget {
         MediaQuery.of(context).orientation == Orientation.landscape;
     return FrostedGlassContainer(
       borderRadius: isLandscape?BorderRadius.circular(20.0):BorderRadius.circular(0.0),
-      child: Padding(
-        padding: isLandscape? EdgeInsets.symmetric(horizontal: 90, vertical: 65): EdgeInsets.symmetric(horizontal: 15),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            AnimatedTile(
-                'Mobile Development',
-                '4 projects',
-                () => context.router.navigateNamed('projects?tag=Mobile'),
-                'assets/animations/mobile-development.riv'),
-            _buildSeparator(),
-            AnimatedTile(
-                'Web Development',
-                '4 projects',
-                () => context.router.navigateNamed('projects?tag=Web'),
-                'assets/animations/web-development.riv'),
-            _buildSeparator(),
-            AnimatedTile(
-                'UI/UX Design',
-                '4 projects',
-                () => context.router.navigateNamed('projects'),
-                'assets/animations/ui-design.riv'),
-          ],
+      child: Center(
+        child: FractionallySizedBox(
+          heightFactor: 7/10,
+          widthFactor: 7/10,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              AnimatedTile(
+                  'Mobile Development',
+                  '4 projects',
+                  () => context.router.navigateNamed('projects?tag=Mobile'),
+                  'assets/animations/mobile-development.riv'),
+              _buildSeparator(),
+              AnimatedTile(
+                  'Web Development',
+                  '4 projects',
+                  () => context.router.navigateNamed('projects?tag=Web'),
+                  'assets/animations/web-development.riv'),
+              _buildSeparator(),
+              AnimatedTile(
+                  'UI/UX Design',
+                  '4 projects',
+                  () => context.router.navigateNamed('projects'),
+                  'assets/animations/ui-design.riv'),
+            ],
+          ),
         ),
       ),
     );
