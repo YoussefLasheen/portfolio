@@ -58,7 +58,7 @@ class OurservicesCard extends StatelessWidget {
       child: Center(
         child: FractionallySizedBox(
           heightFactor: 7/10,
-          widthFactor: 7/10,
+          widthFactor: isLandscape?7/10:8/10,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -149,7 +149,7 @@ class _AnimatedTileState extends State<AnimatedTile> {
                   ),
           ),
           SizedBox(
-            width: 40,
+            width: 15,
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,

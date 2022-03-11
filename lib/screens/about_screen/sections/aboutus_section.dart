@@ -47,7 +47,7 @@ class AboutusSection extends StatelessWidget {
               ],
             ),
           ),
-          Spacer(),
+          isLandscape?Spacer():SizedBox.shrink(),
           isLandscape
               ? Expanded(
                 flex:2 ,
