@@ -14,32 +14,35 @@ class ContactLinks extends StatelessWidget {
           child: FrostedGlassContainer(
             borderRadius: BorderRadius.circular(20.0),
             decoration: BoxDecoration(color: Colors.black26,),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 50),
-              child: Column(
-                children: [
-                  Expanded(
-                      child: InfoTile(
-                    icon: Icons.email,
-                    text: "youssef@lasheen.dev",
-                    subText: "Email",
-                    url: "mailto:youssef@lasheen.dev",
-                  )),
-                  Expanded(
-                      child: InfoTile(
-                    icon: Icons.phone,
-                    text: "+201012845227",
-                    subText: "Phone",
-                    url: "url://+201012845227",
-                  )),
-                  Expanded(
-                      child: InfoTile(
-                    icon: Icons.location_on,
-                    text: "Cairo, Egypt",
-                    subText: "Location",
-                    url: "https://www.google.com/maps/place/Cairo+Governorate",
-                  )),
-                ],
+            child: Center(
+              child: FractionallySizedBox(
+                widthFactor: 8/10,
+                heightFactor: 7/10,
+                child: Column(
+                  children: [
+                    Expanded(
+                        child: InfoTile(
+                      icon: Icons.email,
+                      text: "youssef@lasheen.dev",
+                      subText: "Email",
+                      url: "mailto:youssef@lasheen.dev",
+                    )),
+                    Expanded(
+                        child: InfoTile(
+                      icon: Icons.phone,
+                      text: "+201012845227",
+                      subText: "Phone",
+                      url: "url://+201012845227",
+                    )),
+                    Expanded(
+                        child: InfoTile(
+                      icon: Icons.location_on,
+                      text: "Cairo, Egypt",
+                      subText: "Location",
+                      url: "https://www.google.com/maps/place/Cairo+Governorate",
+                    )),
+                  ],
+                ),
               ),
             ),
           ),
