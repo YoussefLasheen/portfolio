@@ -11,50 +11,50 @@ class EndSection extends StatelessWidget {
         MediaQuery.of(context).orientation == Orientation.landscape;
     return ConstrainedBox(
       constraints: BoxConstraints.expand(height: 500),
-      child: Padding(
-        padding: isLandscape? EdgeInsets.symmetric(horizontal: 100):EdgeInsets.all(0.0),
-        child: FrostedGlassContainer(
-          borderRadius: isLandscape?BorderRadius.circular(20.0):BorderRadius.circular(0.0),
-          child: Padding(
-            padding: isLandscape? EdgeInsets.symmetric(vertical: 50, horizontal: 100):EdgeInsets.symmetric(vertical: 50, horizontal: 25),
+      child: FrostedGlassContainer(
+        borderRadius: isLandscape?BorderRadius.circular(20.0):BorderRadius.circular(0.0),
+        child: Center(
+          child: FractionallySizedBox(
+            heightFactor: 8/10,
+            widthFactor: 9/10,
             child: Flex(
               direction: isLandscape? Axis.horizontal:Axis.vertical,
               crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Expanded(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      AutoSizeText(
-                        'Ready to explore?',
-                        maxLines: 1,
-                        style: TextStyle(fontSize: 70),
-                      ),
-                      SizedBox(height: 10,),
-                      Text('Contact us now. and get a price quote with detailed cost overview for free', style: TextStyle(color: Colors.white54),)
-                    ],
-                  ),
+               children: [
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    AutoSizeText(
+                      'Ready to \nexplore?',
+                      maxLines: 2,
+                      style: TextStyle(fontSize: 70),
+                    ),
+                    SizedBox(height: 10,),
+                    Text(
+                      'Contact us now. and get a price quote \nwith detailed cost overview for free',
+                      style: TextStyle(color: Colors.white54, fontSize: 25),
+                    )
+                  ],
                 ),
-                Flexible(
-                  child: Center(
-                    child: OutlinedButton(
-                      style: OutlinedButton.styleFrom(
-                        backgroundColor: Colors.white,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: new BorderRadius.circular(5.0),
-                        ),
+                Spacer(),
+                Center(
+                  child: OutlinedButton(
+                    style: OutlinedButton.styleFrom(
+                      backgroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: new BorderRadius.circular(5.0),
                       ),
-                      onPressed: ()=> context.router.navigateNamed('contact'),
-                      child: Padding(
-                        padding: const EdgeInsets.all(18.0),
-                        child: Text(
-                          'Book for free',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black,
-                              fontSize: 20),
-                        ),
+                    ),
+                    onPressed: ()=> context.router.navigateNamed('contact'),
+                    child: Padding(
+                      padding: const EdgeInsets.all(18.0),
+                      child: Text(
+                        'Book for free',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                            fontSize: 20),
                       ),
                     ),
                   ),
@@ -62,7 +62,7 @@ class EndSection extends StatelessWidget {
               ],
             ),
                 ),
-              ),
+        ),
             ),
           );
   }
