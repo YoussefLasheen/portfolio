@@ -113,18 +113,14 @@ class ProjectDetailsLoadingShimmerLandscape extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Spacer(flex: 2,),
-                  Flexible(
+                  Expanded(
                     child: Container(
-                      height: 50,
-                      width: 200,
                       color: Colors.white,
                     ),
                   ),
                   SizedBox(height: 10,),
-                  Flexible(
+                  Expanded(
                     child: Container(
-                      height: 50,
-                      width: 200,
                       color: Colors.white,
                     ),
                   ),
