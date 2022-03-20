@@ -19,119 +19,108 @@ class ProjectDetailsScreenTopLandscape extends StatelessWidget {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-    bool isLandscape =
-        MediaQuery.of(context).orientation == Orientation.landscape;
-    return Material(
-      child: Stack(
-        children: [
-          SingleChildScrollView(
-            physics: BouncingScrollPhysics(),
-            child: Column(
-              children: [
-                SizedBox(
-                  width: screenWidth,
-                  height: screenHeight,
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    textDirection:
-                        isInversed ? TextDirection.rtl : TextDirection.ltr,
-                    children: <Widget>[
-                      Expanded(
-                        flex: 2,
-                        child: projectDescription.projectMetadata!.backgroundImageSource == null
-                            ? Placeholder(
-                                color:
-                                    isInversed ? Colors.white : Colors.blueGrey)
-                            : Hero(
-                                tag: projectDescription.projectMetadata!.title! + 'image',
-                                child: Image.network(
-                                  projectDescription.projectMetadata!.backgroundImageSource!,
-                                  fit: BoxFit.fitHeight,
-                                  loadingBuilder: (BuildContext context,
-                                      Widget child,
-                                      ImageChunkEvent? loadingProgress) {
-                                    if (loadingProgress == null) return child;
-                                    return Center(
-                                      child: CircularProgressIndicator(
-                                        value: loadingProgress
-                                                    .expectedTotalBytes !=
-                                                null
-                                            ? loadingProgress
-                                                    .cumulativeBytesLoaded /
-                                                loadingProgress
-                                                    .expectedTotalBytes!
-                                            : null,
-                                      ),
-                                    );
-                                  },
-                                ),
-                              ),
+    return Stack(
+      children: [
+        SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
+          child: Column(
+            children: [
+              SizedBox(
+                width: screenWidth,
+                height: screenHeight,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  textDirection:
+                      isInversed ? TextDirection.rtl : TextDirection.ltr,
+                  children: <Widget>[
+                    Expanded(
+                      flex: 2,
+                      child:Image.network(
+                        projectDescription.projectMetadata!.backgroundImageSource!,
+                        fit: BoxFit.fitHeight,
+                        loadingBuilder: (BuildContext context,
+                            Widget child,
+                            ImageChunkEvent? loadingProgress) {
+                          if (loadingProgress == null) return child;
+                          return Center(
+                            child: CircularProgressIndicator(
+                              value: loadingProgress
+                                          .expectedTotalBytes !=
+                                      null
+                                  ? loadingProgress
+                                          .cumulativeBytesLoaded /
+                                      loadingProgress
+                                          .expectedTotalBytes!
+                                  : null,
+                            ),
+                          );
+                        },
                       ),
-                      Expanded(
-                        flex: 1,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 100),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            //mainAxisAlignment: MainAxisAlignment.center,
-                            mainAxisSize: MainAxisSize.max,
-                            children: <Widget>[
-                              Spacer(flex: 2,),
-                              Expanded(
-                                child: FittedBox(
-                                    child: Text(
-                                  "#" + projectDescription.projectMetadata!.title!,
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: mainColor),
-                                )),
-                              ),
-                              Expanded(
-                                child: FittedBox(
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 100),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          //mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.max,
+                          children: <Widget>[
+                            Spacer(flex: 2,),
+                            Expanded(
+                              child: FittedBox(
                                   child: Text(
-                                    "— " + projectDescription.projectMetadata!.shortDescription!,
-                                  ),
+                                "#" + projectDescription.projectMetadata!.title!,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: mainColor),
+                              )),
+                            ),
+                            Expanded(
+                              child: FittedBox(
+                                child: Text(
+                                  "— " + projectDescription.projectMetadata!.shortDescription!,
                                 ),
                               ),
-                              Wrap(
-                                alignment:WrapAlignment.end,
-                                children: [
-                                  for (var tag in projectDescription.projectMetadata!.tags!)
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Chip(label: Text(tag)),
-                                    )
-                                ],
-                              ),
-                              Spacer(flex: 3,),
-                              AccessOptions(accessOptions: projectDescription.accessOptions,),
-                              Spacer()
-                            ],
-                          ),
+                            ),
+                            Wrap(
+                              alignment:WrapAlignment.end,
+                              children: [
+                                for (var tag in projectDescription.projectMetadata!.tags!)
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Chip(label: Text(tag)),
+                                  )
+                              ],
+                            ),
+                            Spacer(flex: 3,),
+                            AccessOptions(accessOptions: projectDescription.accessOptions,),
+                            Spacer()
+                          ],
                         ),
-                      )
-                    ],
-                  ),
+                      ),
+                    )
+                  ],
                 ),
-                ProjectDetails(
-                  projectDescription: projectDescription,
-                )
-              ],
-            ),
+              ),
+              ProjectDetails(
+                projectDescription: projectDescription,
+              )
+            ],
           ),
-          IconButton(
-            onPressed: () {
-              context.router.navigateNamed('');
-            },
-            color: Colors.white,
-            icon: BlendMask(
-              blendMode: BlendMode.difference,
-              child: Icon(Icons.arrow_back_rounded),
-            ),
-            iconSize: 100,
+        ),
+        IconButton(
+          onPressed: () {
+            context.router.navigateNamed('');
+          },
+          color: Colors.white,
+          icon: BlendMask(
+            blendMode: BlendMode.difference,
+            child: Icon(Icons.arrow_back_rounded),
           ),
-        ],
-      ),
+          iconSize: 100,
+        ),
+      ],
     );
   }
 }
