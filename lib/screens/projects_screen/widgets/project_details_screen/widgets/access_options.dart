@@ -24,7 +24,7 @@ class AccessOptions extends StatelessWidget {
           children: [
             Expanded(
               flex: 4,
-              child: Ink(
+              child: Material(
                 color: Color(0xFF323941),
                 child: InkWell(
                   onTap: () {
@@ -42,7 +42,7 @@ class AccessOptions extends StatelessWidget {
             accessOptions!.length==1?
             Container():
             Expanded(
-              child: Ink(
+              child: Material(
                 color: mainColor,
                 child: PopupMenuButton(
                   child: Icon(Icons.more_vert_rounded),
