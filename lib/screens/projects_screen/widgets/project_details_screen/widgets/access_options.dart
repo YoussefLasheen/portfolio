@@ -24,12 +24,12 @@ class AccessOptions extends StatelessWidget {
           children: [
             Expanded(
               flex: 4,
-              child: InkWell(
-                onTap: () {
-                  _launchURL(accessOptions![0]['url']);
-                },
-                child: Container(
-                  color: Color(0xFF323941),
+              child: Ink(
+                color: Color(0xFF323941),
+                child: InkWell(
+                  onTap: () {
+                    _launchURL(accessOptions!.first['url']);
+                  },
                   child: Center(
                     child: Text(
                       accessOptions![0]['value'],
@@ -42,9 +42,11 @@ class AccessOptions extends StatelessWidget {
             accessOptions!.length==1?
             Container():
             Expanded(
-              child: Container(
+              child: Ink(
                 color: mainColor,
                 child: PopupMenuButton(
+                  child: Icon(Icons.more_vert_rounded),
+                  tooltip: "More Options",
                   offset: isLandscape? Offset(-MediaQuery.of(context).size.width*0.105,screenHeight *0.1):Offset.zero,
                   itemBuilder: (BuildContext context) =>
                       <PopupMenuEntry<AccessOptions>>[
