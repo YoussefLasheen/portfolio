@@ -32,6 +32,8 @@ dependencies:
   carousel_slider: ^4.0.0
   flutter_native_splash: ^2.1.0
   shimmer: ^2.0.0
+  flutter_riverpod: ^1.0.3
+  foil: ^0.9.0+1
 
 dev_dependencies:
   flutter_test:
