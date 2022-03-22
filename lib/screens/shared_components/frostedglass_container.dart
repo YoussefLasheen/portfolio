@@ -41,7 +41,10 @@ class FrostedGlassContainer extends ConsumerWidget {
                 builder: (_, WidgetRef ref, __){
                   final value = ref.watch(hoveringStateProvider);
                   return Foil(
-                    gradient: shimmerGradient,
+                    gradient: mainGradient.copyWith(
+                        colors: mainGradient.colors.reversed.toList(),
+                        begin: Alignment.bottomLeft,
+                        end: Alignment.topRight),
                     unwrappedGradient: mainGradient,
                     useSensor: false,
                     
