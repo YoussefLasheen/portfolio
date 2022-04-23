@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_null_comparison
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -44,21 +46,12 @@ class CTextFormField extends FormField<String> {
     bool enableInteractiveSelection = true,
     InputCounterWidgetBuilder? buildCounter,
   })  : assert(initialValue == null || controller == null),
-        assert(textAlign != null),
-        assert(autofocus != null),
-        assert(readOnly != null),
-        assert(obscureText != null),
-        assert(autocorrect != null),
-        assert(enableSuggestions != null),
-        assert(maxLengthEnforced != null),
-        assert(scrollPadding != null),
-        assert(maxLines == null || maxLines > 0),
+        assert(maxLines > 0),
         assert(minLines == null || minLines > 0),
         assert(
           (maxLines == null) || (minLines == null) || (maxLines >= minLines),
           'minLines can\'t be greater than maxLines',
         ),
-        assert(expands != null),
         assert(
           !expands || (maxLines == null && minLines == null),
           'minLines and maxLines must be null when expands is true.',
@@ -66,7 +59,6 @@ class CTextFormField extends FormField<String> {
         assert(!obscureText || maxLines == 1,
             'Obscured fields cannot be multiline.'),
         assert(maxLength == null || maxLength > 0),
-        assert(enableInteractiveSelection != null),
         super(
           key: key,
           initialValue:
@@ -106,7 +98,6 @@ class CTextFormField extends FormField<String> {
               obscureText: obscureText,
               autocorrect: autocorrect,
               enableSuggestions: enableSuggestions,
-              maxLengthEnforced: maxLengthEnforced,
               maxLines: maxLines,
               minLines: minLines,
               expands: expands,

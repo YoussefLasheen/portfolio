@@ -1,11 +1,10 @@
-import 'package:auto_route/src/router/auto_router_x.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:portfolio/assets/constants.dart';
 import 'package:portfolio/screens/projects_screen/models/project.dart';
 import 'package:portfolio/screens/projects_screen/widgets/project_details_screen/widgets/access_options.dart';
 import 'package:portfolio/screens/projects_screen/widgets/project_details_screen/widgets/project_details.dart';
 import 'package:portfolio/screens/shared_components/blend_mask.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class ProjectDetailsScreenTopLandscape extends StatelessWidget {
   const ProjectDetailsScreenTopLandscape({

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:portfolio/Icons/icons.dart';
 import 'package:portfolio/screens/shared_components/frostedglass_container.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class ContactLinks extends StatelessWidget {
   @override
@@ -94,8 +93,8 @@ class InfoTile extends StatelessWidget {
       title: SelectableText(text!),
       subtitle: Text(subText!),
       onTap: () async {
-        if (await canLaunch(url!)) {
-          await launch(url!);
+        if (await canLaunchUrlString(url!)) {
+          await launchUrlString(url!);
         } else {
           throw 'Could not launch $url';
         }
@@ -114,8 +113,8 @@ class SocialIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () async {
-        if (await canLaunch(url)) {
-          await launch(url);
+        if (await canLaunchUrlString(url)) {
+          await launchUrlString(url);
         } else {
           throw 'Could not launch $url';
         }

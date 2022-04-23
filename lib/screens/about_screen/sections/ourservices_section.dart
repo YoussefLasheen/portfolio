@@ -1,8 +1,7 @@
-import 'package:auto_route/src/router/auto_router_x.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:portfolio/assets/constants.dart';
 import 'package:portfolio/screens/shared_components/frostedglass_container.dart';
 import 'package:rive/rive.dart';
 

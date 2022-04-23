@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/assets/constants.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class AccessOptions extends StatelessWidget {
   final List? accessOptions;
@@ -73,8 +73,8 @@ class AccessOptions extends StatelessWidget {
 }
 
 _launchURL(String url) async {
-  if (await canLaunch(url)) {
-    await launch(url);
+  if (await canLaunchUrlString(url)) {
+    await launchUrlString(url);
   } else {
     throw 'Could not launch $url';
   }

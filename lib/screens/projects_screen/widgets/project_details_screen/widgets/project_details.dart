@@ -1,10 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:portfolio/screens/projects_screen/models/project.dart';
-import 'package:portfolio/services/api.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class ProjectDetails extends StatelessWidget {
   const ProjectDetails({this.projectDescription});
@@ -195,14 +191,6 @@ class ProjectDetails extends StatelessWidget {
               ],
             ),
           );
-  }
-}
-
-_launchURL(String url) async {
-  if (await canLaunch(url)) {
-    await launch(url);
-  } else {
-    throw 'Could not launch $url';
   }
 }
 

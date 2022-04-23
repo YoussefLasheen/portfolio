@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:foil/foil.dart';
 import 'package:portfolio/assets/constants.dart';
-import 'package:shimmer/shimmer.dart';
 
 
 

@@ -63,7 +63,6 @@ class OrderDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    PageController controller = PageController();
     return Hero(
       tag: 'tag',
       child: Center(
