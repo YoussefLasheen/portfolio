@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:portfolio/screens/shared_components/frostedglass_container.dart';
+import 'package:seo_renderer/seo_renderer.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 class ContactLinks extends StatelessWidget {
@@ -51,25 +52,41 @@ class ContactLinks extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  SocialIcon(
-                    icon: FontAwesomeIcons.githubAlt,
-                    url: "https://github.com/YoussefLasheen",
-                    color: Color(0xFF238636),
+                  LinkRenderer(
+                    text: 'github',
+                    href: 'https://github.com/YoussefLasheen',
+                    child: SocialIcon(
+                      icon: FontAwesomeIcons.githubAlt,
+                      url: "https://github.com/YoussefLasheen",
+                      color: Color(0xFF238636),
+                    ),
                   ),
-                  SocialIcon(
-                    icon: FontAwesomeIcons.linkedinIn,
-                    url: "http://linkedin.com/in/yousseflasheen",
-                    color: Color(0xFF0a66c2),
+                  LinkRenderer(
+                    text: 'linkedin',
+                    href: 'http://linkedin.com/in/yousseflasheen',
+                    child: SocialIcon(
+                      icon: FontAwesomeIcons.linkedinIn,
+                      url: "http://linkedin.com/in/yousseflasheen",
+                      color: Color(0xFF0a66c2),
+                    ),
                   ),
-                  SocialIcon(
-                    icon: FontAwesomeIcons.stackOverflow,
-                    url: "https://stackoverflow.com/users/10240634/youssef-lasheen",
-                    color: Color(0xFFef8236),
+                  LinkRenderer(
+                    text: 'stackOverflow',
+                    href: 'https://stackoverflow.com/users/10240634/youssef-lasheen',
+                    child: SocialIcon(
+                      icon: FontAwesomeIcons.stackOverflow,
+                      url: "https://stackoverflow.com/users/10240634/youssef-lasheen",
+                      color: Color(0xFFef8236),
+                    ),
                   ),
-                  SocialIcon(
-                    icon: FontAwesomeIcons.twitter,
-                    url: "https://twitter.com/joelasheen",
-                    color: Color(0xFF1d9bf0),
+                  LinkRenderer(
+                    text: 'twitter',
+                    href: 'https://twitter.com/joelasheen',
+                    child: SocialIcon(
+                      icon: FontAwesomeIcons.twitter,
+                      url: "https://twitter.com/joelasheen",
+                      color: Color(0xFF1d9bf0),
+                    ),
                   ),
                 ],
               ),
@@ -90,8 +107,8 @@ class InfoTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       leading: Icon(icon),
-      title: SelectableText(text!),
-      subtitle: Text(subText!),
+      title: TextRenderer(text: text!,child: SelectableText(text!)),
+      subtitle: TextRenderer(child: Text(subText!)),
       onTap: () async {
         if (await canLaunchUrlString(url!)) {
           await launchUrlString(url!);

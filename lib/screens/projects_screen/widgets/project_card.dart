@@ -5,6 +5,7 @@ import 'package:portfolio/assets/constants.dart';
 import 'package:portfolio/routes/router.gr.dart';
 import 'package:portfolio/screens/about_screen/sections/welcome_section.dart';
 import 'package:portfolio/screens/projects_screen/models/project.dart';
+import 'package:seo_renderer/seo_renderer.dart';
 
 class ProjectCard extends StatelessWidget {
   final ProjectMetadata? projectMetadata;
@@ -71,18 +72,20 @@ class ProjectCard extends StatelessWidget {
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: FittedBox(
-                  child: Text(
-                    "#" + projectMetadata!.title!,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: mainColor,
-                      fontSize: 50,
-                      shadows: [
-                        Shadow(
-                            color: Colors.black.withOpacity(0.3),
-                            offset: Offset(2, 2),
-                            blurRadius: 5)
-                      ],
+                  child: TextRenderer(
+                    child: Text(
+                      "#" + projectMetadata!.title!,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: mainColor,
+                        fontSize: 50,
+                        shadows: [
+                          Shadow(
+                              color: Colors.black.withOpacity(0.3),
+                              offset: Offset(2, 2),
+                              blurRadius: 5)
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -92,9 +95,11 @@ class ProjectCard extends StatelessWidget {
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: FittedBox(
-                  child: Text(
-                    "— " + projectMetadata!.shortDescription!,
-                    style: TextStyle(fontSize: 25),
+                  child: TextRenderer(
+                    child: Text(
+                      "— " + projectMetadata!.shortDescription!,
+                      style: TextStyle(fontSize: 25),
+                    ),
                   ),
                 ),
               ),
@@ -114,13 +119,15 @@ class ProjectCard extends StatelessWidget {
                         Expanded(
                           flex: 8,
                           child: FittedBox(
-                            child: Text(
-                              'VIEW WORK',
-                              maxLines: 1,
-                              textAlign: TextAlign.right,
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 24,
+                            child: TextRenderer(
+                              child: Text(
+                                'VIEW WORK',
+                                maxLines: 1,
+                                textAlign: TextAlign.right,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 24,
+                                ),
                               ),
                             ),
                           ),

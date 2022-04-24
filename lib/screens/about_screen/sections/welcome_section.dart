@@ -3,6 +3,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:portfolio/assets/constants.dart';
 import 'package:portfolio/screens/shared_components/frostedglass_container.dart';
+import 'package:seo_renderer/seo_renderer.dart';
 
 class WelcomeSection extends StatelessWidget {
   @override
@@ -53,12 +54,14 @@ class WelcomeSection extends StatelessWidget {
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 30, vertical: 20),
-                          child: Text(
-                             'CONTACT US',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                                fontSize: 20),
+                          child: TextRenderer(
+                            child: Text(
+                               'CONTACT US',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                  fontSize: 20),
+                            ),
                           ),
                         ),
                         onPressed: ()=> context.router.navigateNamed('contact'),
@@ -77,12 +80,14 @@ class WelcomeSection extends StatelessWidget {
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 30, vertical: 20),
-                          child: Text(
-                            'VIEW WORK',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                                fontSize: 20),
+                          child: TextRenderer(
+                            child: Text(
+                              'VIEW WORK',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                  fontSize: 20),
+                            ),
                           ),
                         ),
                       ),

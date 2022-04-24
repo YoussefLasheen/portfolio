@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:portfolio/screens/about_screen/sections/welcome_section.dart';
 import 'package:portfolio/screens/contact_screen/models/message.dart';
 import 'package:portfolio/screens/contact_screen/widgets/contact_form/input.dart';
+import 'package:seo_renderer/seo_renderer.dart';
 
 class ContactForm extends StatelessWidget {
   static var _formKey = GlobalKey<FormState>();
@@ -89,12 +90,14 @@ class ContactForm extends StatelessWidget {
                       child: Padding(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 10, vertical: 5),
-                          child: Text(
-                            'Send',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                                fontSize: 20),
+                          child: TextRenderer(
+                            child: Text(
+                              'Send',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                  fontSize: 20),
+                            ),
                           ),
                         ),
                     ),
@@ -118,12 +121,14 @@ class ContactForm extends StatelessWidget {
                       child: Padding(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 10, vertical: 5),
-                          child: Text(
-                            'Send',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                                fontSize: 20),
+                          child: TextRenderer(
+                            child: Text(
+                              'Send',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                  fontSize: 20),
+                            ),
                           ),
                         ),
                     ),

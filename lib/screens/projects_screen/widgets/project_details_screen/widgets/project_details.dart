@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:portfolio/screens/projects_screen/models/project.dart';
+import 'package:seo_renderer/seo_renderer.dart';
 
 class ProjectDetails extends StatelessWidget {
   const ProjectDetails({this.projectDescription});
@@ -204,13 +205,15 @@ class InfoSnippet extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          text,
-          style: TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-              fontSize: 20,
-              wordSpacing: 1),
+        TextRenderer(
+          child: Text(
+            text,
+            style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+                wordSpacing: 1),
+          ),
         ),
         SizedBox(
           height: 10,
@@ -223,9 +226,11 @@ class InfoSnippet extends StatelessWidget {
         SizedBox(
           height: 20,
         ),
-        Text(
-          subText!,
-          style: TextStyle(color: Colors.black87, fontSize: 18),
+        TextRenderer(
+          child: Text(
+            subText!,
+            style: TextStyle(color: Colors.black87, fontSize: 18),
+          ),
         )
       ],
     );

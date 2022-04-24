@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/assets/constants.dart';
+import 'package:seo_renderer/seo_renderer.dart';
 
 class BottomSection extends StatelessWidget {
   const BottomSection({
@@ -43,16 +44,18 @@ class BottomSection extends StatelessWidget {
                           Expanded(
                             flex: 2,
                             child: FittedBox(
-                              child: Text("Have an intersting project?"),
+                              child: TextRenderer(child: Text("Have an intersting project?")),
                             ),
                           ),
                           Expanded(
                             child: FittedBox(
-                              child: Text(
-                                "No matter what it is you're after, contact me today to discuss further",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.normal,
-                                    color: Colors.white70),
+                              child: TextRenderer(
+                                child: Text(
+                                  "No matter what it is you're after, contact me today to discuss further",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.normal,
+                                      color: Colors.white70),
+                                ),
                               ),
                             ),
                           ),

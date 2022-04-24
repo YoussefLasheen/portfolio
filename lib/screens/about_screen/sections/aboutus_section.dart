@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:portfolio/assets/constants.dart';
+import 'package:seo_renderer/seo_renderer.dart';
 
 class AboutusSection extends StatelessWidget {
   @override
@@ -33,12 +34,14 @@ class AboutusSection extends StatelessWidget {
                       ),
                     ),
                     Flexible(
-                      child: Text(
-                        'A freelance Flutter developer based in Egypt. I make quality, commented, and reusable code. My services include product analysis through to full product design - from wireframing and prototyping to interface design and Flutter development. ',
-                        style: TextStyle(
-                          color: Colors.white70,
-                          height: 1.5,
-                          wordSpacing: 1.5
+                      child: TextRenderer(
+                        child: Text(
+                          'A freelance Flutter developer based in Egypt. I make quality, commented, and reusable code. My services include product analysis through to full product design - from wireframing and prototyping to interface design and Flutter development. ',
+                          style: TextStyle(
+                            color: Colors.white70,
+                            height: 1.5,
+                            wordSpacing: 1.5
+                          ),
                         ),
                       ),
                     )

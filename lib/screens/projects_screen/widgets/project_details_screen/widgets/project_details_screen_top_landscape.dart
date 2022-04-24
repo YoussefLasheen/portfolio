@@ -5,6 +5,7 @@ import 'package:portfolio/screens/projects_screen/models/project.dart';
 import 'package:portfolio/screens/projects_screen/widgets/project_details_screen/widgets/access_options.dart';
 import 'package:portfolio/screens/projects_screen/widgets/project_details_screen/widgets/project_details.dart';
 import 'package:portfolio/screens/shared_components/blend_mask.dart';
+import 'package:seo_renderer/seo_renderer.dart';
 
 class ProjectDetailsScreenTopLandscape extends StatelessWidget {
   const ProjectDetailsScreenTopLandscape({
@@ -68,17 +69,21 @@ class ProjectDetailsScreenTopLandscape extends StatelessWidget {
                             Spacer(flex: 2,),
                             Expanded(
                               child: FittedBox(
-                                  child: Text(
+                                  child: TextRenderer(
+                                    child: Text(
                                 "#" + projectDescription.projectMetadata!.title!,
                                 style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: mainColor),
-                              )),
+                                      fontWeight: FontWeight.bold,
+                                      color: mainColor),
+                              ),
+                                  )),
                             ),
                             Expanded(
                               child: FittedBox(
-                                child: Text(
-                                  "— " + projectDescription.projectMetadata!.shortDescription!,
+                                child: TextRenderer(
+                                  child: Text(
+                                    "— " + projectDescription.projectMetadata!.shortDescription!,
+                                  ),
                                 ),
                               ),
                             ),

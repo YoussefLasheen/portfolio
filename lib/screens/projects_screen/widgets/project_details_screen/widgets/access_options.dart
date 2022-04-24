@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/assets/constants.dart';
+import 'package:seo_renderer/seo_renderer.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 class AccessOptions extends StatelessWidget {
@@ -31,9 +32,11 @@ class AccessOptions extends StatelessWidget {
                     _launchURL(accessOptions!.first['url']);
                   },
                   child: Center(
-                    child: Text(
-                      accessOptions![0]['value'],
-                      style: TextStyle(color: Colors.white),
+                    child: TextRenderer(
+                      child: Text(
+                        accessOptions![0]['value'],
+                        style: TextStyle(color: Colors.white),
+                      ),
                     ),
                   ),
                 ),

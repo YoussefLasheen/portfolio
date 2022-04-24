@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:portfolio/screens/shared_components/frostedglass_container.dart';
+import 'package:seo_renderer/seo_renderer.dart';
 
 class EndSection extends StatelessWidget {
   @override
@@ -30,9 +31,11 @@ class EndSection extends StatelessWidget {
                       style: TextStyle(fontSize: 70),
                     ),
                     SizedBox(height: 10,),
-                    Text(
-                      'Contact us now. and get a price quote \nwith detailed cost overview for free',
-                      style: TextStyle(color: Colors.white54, fontSize: 25),
+                    TextRenderer(
+                      child: Text(
+                        'Contact us now. and get a price quote \nwith detailed cost overview for free',
+                        style: TextStyle(color: Colors.white54, fontSize: 25),
+                      ),
                     )
                   ],
                 ),
@@ -48,12 +51,14 @@ class EndSection extends StatelessWidget {
                     onPressed: ()=> context.router.navigateNamed('contact'),
                     child: Padding(
                       padding: const EdgeInsets.all(18.0),
-                      child: Text(
-                        'Book for free',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                            fontSize: 20),
+                      child: TextRenderer(
+                        child: Text(
+                          'Book for free',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                              fontSize: 20),
+                        ),
                       ),
                     ),
                   ),

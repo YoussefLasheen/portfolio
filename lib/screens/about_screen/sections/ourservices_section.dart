@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:portfolio/screens/shared_components/frostedglass_container.dart';
 import 'package:rive/rive.dart';
+import 'package:seo_renderer/seo_renderer.dart';
 
 class OurservicesSection extends StatelessWidget {
   @override
@@ -32,10 +33,13 @@ class OurservicesSection extends StatelessWidget {
                     style: TextStyle(fontSize: 50),
                   ),
                   SizedBox(height: 50,),
-                  AutoSizeText(
-                    'We offer highly efficient app development for the web and mobile - or both. We can do maps, eCommerce, Live Streaming, or even just a simple data viewer.',
-                    style: TextStyle(
-                        color: Colors.white70, height: 2, wordSpacing: 1.5,),
+                  TextRenderer(
+                    text: 'We offer highly efficient app development for the web and mobile - or both. We can do maps, eCommerce, Live Streaming, or even just a simple data viewer.',
+                    child: AutoSizeText(
+                      'We offer highly efficient app development for the web and mobile - or both. We can do maps, eCommerce, Live Streaming, or even just a simple data viewer.',
+                      style: TextStyle(
+                          color: Colors.white70, height: 2, wordSpacing: 1.5,),
+                    ),
                   ),
                 ],
               ),
@@ -153,10 +157,12 @@ class _AnimatedTileState extends State<AnimatedTile> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(widget.text),
-              Text(
-                widget.text,
-                style: TextStyle(fontSize: 12, color: Colors.white30),
+              TextRenderer(child: Text(widget.text)),
+              TextRenderer(
+                child: Text(
+                  widget.text,
+                  style: TextStyle(fontSize: 12, color: Colors.white30),
+                ),
               )
             ],
           ),

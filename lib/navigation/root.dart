@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:portfolio/navigation/widgets/sidebar.dart';
 import 'package:portfolio/routes/router.gr.dart';
+import 'package:seo_renderer/seo_renderer.dart';
 
 class Root extends StatelessWidget {
   @override
@@ -9,32 +10,36 @@ class Root extends StatelessWidget {
     WidgetsBinding.instance!.addPostFrameCallback((_) => limitOrientation(context));
     bool isLandscape =
         MediaQuery.of(context).orientation == Orientation.landscape;
-    return AutoTabsRouter(
-      routes: [AboutRouter(), ProjectsRouter(), ContactRouter()],
-      builder: (context, child, animation) {
-        final tabsRouter = AutoTabsRouter.of(context);
-        return Material(
-          color: Colors.grey[900],
-          child: Flex(
-            direction: isLandscape ? Axis.horizontal : Axis.vertical,
-            children: <Widget>[
-              Sidebar(
-                currentIndex: tabsRouter.activeIndex,
-                onTap: (index) {
-                  tabsRouter.setActiveIndex(index);
-                },
-              ),
-              Expanded(
-                child: FadeTransition(
-                  opacity: animation,
-                  // the passed child is techinaclly our animated selected-tab page
-                  child: child,
+    return RobotDetector(
+      debug: true,
+      child: AutoTabsRouter(
+        navigatorObservers: ()=>[seoRouteObserver],
+        routes: [AboutRouter(), ProjectsRouter(), ContactRouter()],
+        builder: (context, child, animation) {
+          final tabsRouter = AutoTabsRouter.of(context);
+          return Material(
+            color: Colors.grey[900],
+            child: Flex(
+              direction: isLandscape ? Axis.horizontal : Axis.vertical,
+              children: <Widget>[
+                Sidebar(
+                  currentIndex: tabsRouter.activeIndex,
+                  onTap: (index) {
+                    tabsRouter.setActiveIndex(index);
+                  },
                 ),
-              )
-            ],
-          ),
-        );
-      },
+                Expanded(
+                  child: FadeTransition(
+                    opacity: animation,
+                    // the passed child is techinaclly our animated selected-tab page
+                    child: child,
+                  ),
+                )
+              ],
+            ),
+          );
+        },
+      ),
     );
   }
 }
