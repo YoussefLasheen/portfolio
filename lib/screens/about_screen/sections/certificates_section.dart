@@ -1,5 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dismissible_page/dismissible_page.dart';
 import 'package:flutter/material.dart';
+import 'package:portfolio/services/api.dart';
 
 class CertificatesSection extends StatelessWidget {
   const CertificatesSection({Key? key}) : super(key: key);
@@ -8,40 +11,62 @@ class CertificatesSection extends StatelessWidget {
   Widget build(BuildContext context) {
     bool isLandscape =
         MediaQuery.of(context).orientation == Orientation.landscape;
-    return SizedBox(
-      height: 250,
-      width: double.infinity,
-      child: CarouselSlider.builder(
-        options: CarouselOptions(
-          enableInfiniteScroll: false,
-          viewportFraction: isLandscape ? 0.3 : 0.7,
-          enlargeCenterPage: true,
-          enlargeStrategy: CenterPageEnlargeStrategy.scale,
-          padEnds: true,
-        ),
-        itemCount: 5,
-        itemBuilder: (BuildContext context, int itemIndex, int pageViewIndex) {
-          return AspectRatio(aspectRatio: 12 / 9, child: CertificateCard());
-        },
-      ),
+    return FutureBuilder<DocumentSnapshot>(
+      future: Api('Data').getDocumentById('certificates data'),
+      builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          return Text("Something went wrong");
+        }
+
+        if (snapshot.hasData && !snapshot.data!.exists) {
+          return Text("Document does not exist");
+        }
+
+        if (snapshot.connectionState == ConnectionState.done) {
+          Map<String, dynamic> data =
+              snapshot.data!.data() as Map<String, dynamic>;
+
+          List<Certificate> myModels = (data['data'] as List)
+              .map((i) => Certificate.fromJson(i))
+              .toList();
+
+          return SizedBox(
+            height: 250,
+            width: double.infinity,
+            child: CarouselSlider.builder(
+              options: CarouselOptions(
+                enableInfiniteScroll: false,
+                viewportFraction: isLandscape ? 0.3 : 0.7,
+                enlargeCenterPage: true,
+                enlargeStrategy: CenterPageEnlargeStrategy.scale,
+                padEnds: true,
+              ),
+              itemCount: myModels.length,
+              itemBuilder:
+                  (BuildContext context, int itemIndex, int pageViewIndex) {
+                return AspectRatio(
+                    aspectRatio: 12 / 9,
+                    child: CertificateCard(
+                      certificate: myModels[itemIndex],
+                    ));
+              },
+            ),
+          );
+        }
+        return Center(child: CircularProgressIndicator());
+      },
     );
   }
 }
 
-class CertificateCard extends StatefulWidget {
-  CertificateCard({Key? key}) : super(key: key);
+class CertificateCard extends StatelessWidget {
+  final Certificate certificate;
 
-  @override
-  State<CertificateCard> createState() => _CertificateCardState();
-}
+  CertificateCard({
+    Key? key,
+    required this.certificate,
+  }) : super(key: key);
 
-class _CertificateCardState extends State<CertificateCard> {
-  Certificate _certificate = Certificate(
-      title: 'AI Programming with Python Nanodegree',
-      shortDescription: 'Udacity',
-      certificationLink: 'https://confirm.udacity.com/DL47ZLN9',
-      imageUrl:
-          'https://firebasestorage.googleapis.com/v0/b/yousseflasheen-portfolio.appspot.com/o/projects_assets%2Fthis_portfolio%2FCertificates%2FMachine%20Learning%20Engineer%20Nanodegree-1.jpg?alt=media&token=0e96db7e-b197-4c49-977c-67aa96265613');
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -49,24 +74,21 @@ class _CertificateCardState extends State<CertificateCard> {
       child: ConstrainedBox(
         constraints: BoxConstraints.tightFor(height: 400),
         child: Hero(
-          tag: 'ddd',
+          tag: certificate.title,
           child: Card(
             clipBehavior: Clip.antiAlias,
             child: InkWell(
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => CertificateDialog(),
-                  ),
-                );
+                context.pushTransparentRoute(CertificateDialog(
+                  certificate: certificate,
+                ));
               },
               child: Stack(
                 children: [
                   SizedBox.expand(
                     child: Container(
                       color: Colors.white,
-                      child: Image.network(_certificate.imageUrl,
+                      child: Image.network(certificate.imageUrl,
                           fit: BoxFit.fitHeight),
                     ),
                   ),
@@ -87,7 +109,7 @@ class _CertificateCardState extends State<CertificateCard> {
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
-                            _certificate.title,
+                            certificate.title,
                             style: TextStyle(
                                 fontSize: 24,
                                 fontWeight: FontWeight.bold,
@@ -108,13 +130,35 @@ class _CertificateCardState extends State<CertificateCard> {
 }
 
 class CertificateDialog extends StatelessWidget {
-  const CertificateDialog({Key? key}) : super(key: key);
+  final Certificate certificate;
+  const CertificateDialog({Key? key, required this.certificate})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Hero(
-      tag: 'tag',
-      child: Center(child: Container()),
+    return Material(
+      color: Colors.transparent,
+      child: Stack(
+        children: [
+          DismissiblePage(
+            direction: DismissiblePageDismissDirection.multi,
+            isFullScreen: false,
+            startingOpacity: 0.5,
+            onDismissed: () {
+              Navigator.of(context).pop();
+            },
+            child: Hero(
+              tag: certificate.title,
+              child: Center(
+                child: Image.network(certificate.imageUrl),
+              ),
+            ),
+          ),
+          IconButton(
+              onPressed: () => Navigator.of(context).pop(),
+              icon: Icon(Icons.close))
+        ],
+      ),
     );
   }
 }
@@ -134,8 +178,8 @@ class Certificate {
   Certificate.fromJson(Map<String, Object?> json)
       : this(
           title: json['title']! as String,
-          shortDescription: json['shortDescription']! as String,
-          imageUrl: json['backgroundImageSource']! as String,
-          certificationLink: json['tags'] as String,
+          shortDescription: json['desc']! as String,
+          imageUrl: json['imageUrl']! as String,
+          certificationLink: json['confUrl'] as String,
         );
 }
