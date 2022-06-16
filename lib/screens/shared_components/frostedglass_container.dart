@@ -2,7 +2,6 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:foil/foil.dart';
 import 'package:portfolio/assets/constants.dart';
 
 
@@ -39,19 +38,9 @@ class FrostedGlassContainer extends ConsumerWidget {
               child: Consumer(
                 builder: (_, WidgetRef ref, __){
                   final value = ref.watch(hoveringStateProvider);
-                  return Foil(
-                    gradient: mainGradient.copyWith(
-                        colors: mainGradient.colors.reversed.toList(),
-                        begin: Alignment.bottomLeft,
-                        end: Alignment.topRight),
-                    unwrappedGradient: mainGradient,
-                    useSensor: false,
-                    
-                    isUnwrapped: value,
-                    child: Container(
+                  return Container(
                     decoration: decoration,
-                ),
-                  );
+                );
                 },
               ),
             ),
