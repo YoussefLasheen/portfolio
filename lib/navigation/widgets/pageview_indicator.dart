@@ -42,6 +42,7 @@ class PageViewIndicator extends StatelessWidget {
 
 Widget circleBar(bool isActive, String content, bool isLandscape, double underLineWidth) {
   return Column(
+    mainAxisAlignment: MainAxisAlignment.center,
     children: <Widget>[
       Text(
         content,

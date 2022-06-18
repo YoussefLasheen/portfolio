@@ -21,7 +21,9 @@ class _SidebarState extends State<Sidebar> {
       quarterTurns: isLandscape ? -1 : 0,
       child: Center(
         child: Padding(
-          padding: const EdgeInsets.only(top: 60, bottom: 45),
+          padding: isLandscape
+              ? EdgeInsets.only(top: 60, bottom: 45)
+              : EdgeInsets.symmetric(vertical: 15, horizontal: 20),
           child: ConstrainedBox(
             constraints: BoxConstraints(maxHeight: 50, maxWidth: 500),
             child: PageViewIndicator(
