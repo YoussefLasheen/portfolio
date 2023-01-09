@@ -26,7 +26,6 @@ dependencies:
   firebase_core: ^2.4.1
   rive: ^0.8.1
   font_awesome_flutter: ^10.1.0
-  mouse_parallax: ^1.1.0
   carousel_slider: ^4.0.0
   shimmer: ^2.0.0
   flutter_riverpod: ^1.0.3

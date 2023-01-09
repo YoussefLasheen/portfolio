@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:mouse_parallax/mouse_parallax.dart';
 import 'package:portfolio/assets/constants.dart';
 import 'package:portfolio/routes/router.gr.dart';
 import 'package:portfolio/screens/about_screen/sections/welcome_section.dart';
@@ -31,20 +30,10 @@ class ProjectCard extends StatelessWidget {
           width: isLandscape ? screenWidth * 0.7 : screenWidth * 0.9,
           child: AspectRatio(
             aspectRatio: 3 / 2,
-            child: ParallaxStack(
-              layers: <Widget>[
-                ParallaxLayer(
-                  xOffset: 10,
-                  yOffset: 5,
-                  xRotation: 0.01,
-                  yRotation: 0.01,
-                  child: _buildBackgroundImage(isLandscape, screenWidth),
-                ),
-                ParallaxLayer(
-                   xOffset: 5,
-                   yOffset: 0,
-                  child: _buildOverlayText(isLandscape, screenWidth, context),
-                )
+            child: Stack(
+              children: <Widget>[
+                _buildBackgroundImage(isLandscape, screenWidth),
+                _buildOverlayText(isLandscape, screenWidth, context)
               ],
             ),
           ),
