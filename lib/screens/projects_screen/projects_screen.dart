@@ -1,7 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:implicitly_animated_reorderable_list/implicitly_animated_reorderable_list.dart';
-import 'package:implicitly_animated_reorderable_list/transitions.dart';
 import 'package:portfolio/assets/constants.dart';
 import 'package:portfolio/screens/projects_screen/models/project.dart';
 import 'package:portfolio/screens/projects_screen/widgets/project_card.dart';
@@ -63,61 +61,50 @@ class AnimatedFilteredList extends StatefulWidget {
 class _AnimatedFilteredListState extends State<AnimatedFilteredList> {
   String? filterTag = "All";
   
-
+  List<ProjectMetadata>? filteredProjects;
   @override
   Widget build(BuildContext context) {
     Parameters queryTag = context.routeData.queryParams;
     if (queryTag.isNotEmpty && widget.allTags!.contains(queryTag.rawMap['tag'])) {
       filterTag = queryTag.rawMap['tag'];
     }
-    List<ProjectMetadata> filteredIndex = [];
 
-    if (filterTag == "All") {
-      filteredIndex
-        ..clear()
-        ..addAll(widget.projectsIndex);
-    } else {
-      for (int i = 0; i < widget.projectsIndex.length; i++) {
-        for (int h = 0; h < widget.projectsIndex[i].tags!.length; h++) {
-          if (filterTag!.contains(widget.projectsIndex[i].tags![h])) {
-            filteredIndex.add(widget.projectsIndex[i]);
-            setState(() {});
-            break;
-          }
-        }
-      }
-    }
+    filteredProjects = widget.projectsIndex.where((element) {
+      if (filterTag == "All") return true;
+      return element.tags!.contains(filterTag);
+    }).toList();
 
-    return ListView(
-      physics: BouncingScrollPhysics(),
-      children: [
-        TopSection(),
-        ChoiceTags(
-          allTags: widget.allTags,
-          filterTag: filterTag,
-          onSelected: (tag) {
-            setState(() {
-              filterTag = tag;
-            });
-          },
-        ),
-        ImplicitlyAnimatedList<ProjectMetadata>(
-          shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
-          items: filteredIndex,
-          areItemsTheSame: (a, b) => a.id == b.id,
-          itemBuilder: (context, animation, filteredProjectMetadata, index) {
-            // check for out of bounds index because of a bug in the ImplicitlyAnimatedList widget
-            if (index >= filteredIndex.length) return Container();
-            return SizeFadeTransition(
-              sizeFraction: 0.7,
-              curve: Curves.easeInOut,
-              animation: animation,
-              child: ProjectCard(projectMetadata: filteredProjectMetadata, isInversed: index.isEven, id: filteredProjectMetadata.id,),
-            );
-          },
-        ),
-      ],
+    return ListView.builder(
+      shrinkWrap: true,
+      itemCount: filteredProjects!.length,
+      itemBuilder: (context, index) {
+        ProjectMetadata _project = filteredProjects![index];
+        if (index != 0)
+         return ProjectCard(
+            projectMetadata: _project,
+            isInversed: index.isEven,
+            id: _project.id,
+          );
+        return Column(
+          children: [
+            TopSection(),
+            ChoiceTags(
+              allTags: widget.allTags,
+              filterTag: filterTag,
+              onSelected: (tag) {
+                setState(() {
+                  filterTag = tag;
+                });
+              },
+            ),
+            ProjectCard(
+              projectMetadata: _project,
+              isInversed: index.isEven,
+              id: _project.id,
+            ),
+          ],
+        );
+      },
     );
   }
 }

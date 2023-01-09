@@ -23,8 +23,6 @@ dependencies:
   auto_size_text: ^3.0.0
   url_launcher: ^6.0.17
   auto_route: ^3.2.0
-
-  implicitly_animated_reorderable_list: ^0.4.2
   firebase_core: ^2.4.1
   rive: ^0.8.1
   font_awesome_flutter: ^10.1.0
