@@ -29,10 +29,11 @@ class ProjectsScreen extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.done) {
           Map<String, dynamic> data =
               snapshot.data!.data() as Map<String, dynamic>;
-          
-          List<ProjectMetadata> myModels = (data['projectsIndex'] as List).map((i) =>
-              ProjectMetadata.fromJson(i)).toList();
-           
+
+          List<ProjectMetadata> myModels = (data['projectsIndex'] as List)
+              .map((i) => ProjectMetadata.fromJson(i))
+              .toList();
+
           return AnimatedFilteredList(
             projectsIndex: myModels,
             allTags: data['allTags'],
@@ -45,7 +46,7 @@ class ProjectsScreen extends StatelessWidget {
 }
 
 class AnimatedFilteredList extends StatefulWidget {
-  final List? allTags;  
+  final List? allTags;
   const AnimatedFilteredList({
     Key? key,
     required this.projectsIndex,
@@ -60,12 +61,13 @@ class AnimatedFilteredList extends StatefulWidget {
 
 class _AnimatedFilteredListState extends State<AnimatedFilteredList> {
   String? filterTag = "All";
-  
+  ViewOption viewOption = ViewOption.list;
   List<ProjectMetadata>? filteredProjects;
   @override
   Widget build(BuildContext context) {
     Parameters queryTag = context.routeData.queryParams;
-    if (queryTag.isNotEmpty && widget.allTags!.contains(queryTag.rawMap['tag'])) {
+    if (queryTag.isNotEmpty &&
+        widget.allTags!.contains(queryTag.rawMap['tag'])) {
       filterTag = queryTag.rawMap['tag'];
     }
 
@@ -74,20 +76,15 @@ class _AnimatedFilteredListState extends State<AnimatedFilteredList> {
       return element.tags!.contains(filterTag);
     }).toList();
 
-    return ListView.builder(
-      shrinkWrap: true,
-      itemCount: filteredProjects!.length,
-      itemBuilder: (context, index) {
-        ProjectMetadata _project = filteredProjects![index];
-        if (index != 0)
-         return ProjectCard(
-            projectMetadata: _project,
-            isInversed: index.isEven,
-            id: _project.id,
-          );
-        return Column(
+    bool isVertical =
+        MediaQuery.of(context).orientation == Orientation.portrait;
+    if (isVertical) viewOption = ViewOption.list;
+    return ListView(
+      physics: const BouncingScrollPhysics(),
+      children: [
+        TopSection(),
+        Row(
           children: [
-            TopSection(),
             ChoiceTags(
               allTags: widget.allTags,
               filterTag: filterTag,
@@ -97,14 +94,69 @@ class _AnimatedFilteredListState extends State<AnimatedFilteredList> {
                 });
               },
             ),
-            ProjectCard(
-              projectMetadata: _project,
-              isInversed: index.isEven,
-              id: _project.id,
-            ),
+            Spacer(),
+            if (!isVertical)
+              Padding(
+                padding: const EdgeInsets.only(right: 30.0),
+                child: ToggleButtons(
+                  borderRadius: const BorderRadius.all(Radius.circular(8)),
+                  selectedColor: Colors.white,
+                  fillColor: mainColor,
+                  isSelected: [
+                    viewOption == ViewOption.list,
+                    viewOption == ViewOption.grid
+                  ],
+                  onPressed: (int index) {
+                    if (index == 0) {
+                      setState(() {
+                        viewOption = ViewOption.list;
+                      });
+                    } else {
+                      setState(() {
+                        viewOption = ViewOption.grid;
+                      });
+                    }
+                  },
+                  children: const <Widget>[
+                    Icon(Icons.list_alt_outlined),
+                    Icon(Icons.grid_view_rounded),
+                  ],
+                ),
+              ),
           ],
-        );
-      },
+        ),
+        if (viewOption == ViewOption.list)
+          ListView.builder(
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: filteredProjects!.length,
+            itemBuilder: (context, index) {
+              ProjectMetadata _project = filteredProjects![index];
+              return ProjectCard(
+                projectMetadata: _project,
+                isInversed: index.isEven,
+                id: _project.id,
+              );
+            },
+          ),
+        if (viewOption == ViewOption.grid)
+          GridView.builder(
+            shrinkWrap: true,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              childAspectRatio: 1.5,
+            ),
+            itemCount: filteredProjects!.length,
+            itemBuilder: (context, index) {
+              ProjectMetadata _project = filteredProjects![index];
+              return ProjectCard(
+                projectMetadata: _project,
+                isInversed: true,
+                id: _project.id,
+              );
+            },
+          )
+      ],
     );
   }
 }
@@ -156,3 +208,5 @@ class ChoiceTags extends StatelessWidget {
     );
   }
 }
+
+enum ViewOption { list, grid }
