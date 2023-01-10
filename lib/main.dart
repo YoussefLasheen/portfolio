@@ -20,9 +20,7 @@ Future<void> main() async {
 }
 
 class MyApp extends StatelessWidget {
-  final _router = GoRouter(
-    initialLocation: '/about',
-    routes: [
+  final _router = GoRouter(initialLocation: '/about', routes: [
     ShellRoute(
       builder: (BuildContext context, GoRouterState state, Widget child) {
         return Root(child: child);
@@ -30,19 +28,46 @@ class MyApp extends StatelessWidget {
       routes: [
         GoRoute(
           path: '/about',
-          builder: (context, state) => AboutScreen(),
+          pageBuilder: (
+            context,
+            state,
+          ) {
+            return CustomTransitionPage(
+              key: state.pageKey,
+              child: AboutScreen(),
+              transitionDuration: Duration.zero,
+              transitionsBuilder: (_, __, ___, child) => child,
+            );
+          },
         ),
         GoRoute(
           path: '/projects',
-          builder: (context, state) =>
-              ProjectsScreen(queryTag: state.queryParams['filter']),
+          pageBuilder: (
+            context,
+            state,
+          ) {
+            return CustomTransitionPage(
+              key: state.pageKey,
+              child: ProjectsScreen(queryTag: state.queryParams['filter']),
+              transitionDuration: Duration.zero,
+              transitionsBuilder: (_, __, ___, child) => child,
+            );
+          },
           routes: [
             GoRoute(
               path: ':id',
-              builder: (context, state) {
-                return ProjectDetailsScreen(
-                  id: state.params['id'],
-                  project: state.extra as Project,
+              pageBuilder: (
+                context,
+                state,
+              ) {
+                return CustomTransitionPage(
+                  key: state.pageKey,
+                  child: ProjectDetailsScreen(
+                    id: state.params['id'],
+                    project: state.extra as Project,
+                  ),
+                  transitionDuration: Duration.zero,
+                  transitionsBuilder: (_, __, ___, child) => child,
                 );
               },
             ),
@@ -50,7 +75,17 @@ class MyApp extends StatelessWidget {
         ),
         GoRoute(
           path: '/contact',
-          builder: (context, state) => ContactScreen(),
+          pageBuilder: (
+            context,
+            state,
+          ) {
+            return CustomTransitionPage(
+              key: state.pageKey,
+              child: ContactScreen(),
+              transitionDuration: Duration.zero,
+              transitionsBuilder: (_, __, ___, child) => child,
+            );
+          },
         ),
       ],
     )
