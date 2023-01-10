@@ -65,13 +65,17 @@ class _AnimatedFilteredListState extends State<AnimatedFilteredList> {
   String? filterTag = "All";
   ViewOption viewOption = ViewOption.list;
   List<Project>? filteredProjects;
+
   @override
-  Widget build(BuildContext context) {
+  void initState() {
     if (widget.queryTag.isNotEmpty &&
         widget.allTags!.contains(widget.queryTag)) {
       filterTag = widget.queryTag;
     }
-
+    super.initState();
+  }
+  @override
+  Widget build(BuildContext context) {
     filteredProjects = widget.projectsIndex.where((element) {
       if (filterTag == "All") return true;
       return element.tags!.contains(filterTag);

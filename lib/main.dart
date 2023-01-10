@@ -48,7 +48,7 @@ class MyApp extends StatelessWidget {
           ) {
             return CustomTransitionPage(
               key: state.pageKey,
-              child: ProjectsScreen(queryTag: state.queryParams['filter']),
+              child: ProjectsScreen(queryTag: state.queryParams['tag']),
               transitionDuration: Duration.zero,
               transitionsBuilder: (_, __, ___, child) => child,
             );

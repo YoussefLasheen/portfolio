@@ -64,19 +64,19 @@ class OurservicesCard extends StatelessWidget {
               AnimatedTile(
                   'Mobile Development',
                   '4 projects',
-                  () => context.go('projects?tag=Mobile'),
+                  () => context.go('/projects?tag=Mobile'),
                   'assets/animations/mobile-development.riv'),
               _buildSeparator(),
               AnimatedTile(
                   'Web Development',
                   '4 projects',
-                  () => context.go('projects?tag=Web'),
+                  () => context.go('/projects?tag=Web'),
                   'assets/animations/web-development.riv'),
               _buildSeparator(),
               AnimatedTile(
                   'UI/UX Design',
                   '4 projects',
-                  () => context.go('/projects'),
+                  () => context.go('/projects?tag=UI/UX'),
                   'assets/animations/ui-design.riv'),
             ],
           ),
