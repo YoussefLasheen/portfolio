@@ -55,8 +55,7 @@ class ProjectDetails extends StatelessWidget {
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: AutoSizeText(
-                                      projectDescription!
-                                          .infoSnippet!['longDescription'],
+                                      projectDescription!.longDescription!,
                                       textAlign: TextAlign.justify,
                                       style: TextStyle(
                                           color: Colors.black54, fontSize: 40,),
@@ -85,15 +84,13 @@ class ProjectDetails extends StatelessWidget {
                                           child: FittedBox(
                                               child: InfoSnippet(
                                                   'ROLE',
-                                                  projectDescription!
-                                                      .infoSnippet!['role']))),
+                                                  projectDescription!.role))),
                                       Spacer(),
                                       Flexible(
                                           child: FittedBox(
                                               child: InfoSnippet(
                                                   'DATE',
-                                                  projectDescription!
-                                                      .infoSnippet!['date']))),
+                                                  projectDescription!.date))),
                                     ],
                                   ),
                                 ),
@@ -105,15 +102,13 @@ class ProjectDetails extends StatelessWidget {
                                           child: FittedBox(
                                               child: InfoSnippet(
                                                   'CREDITS',
-                                                  projectDescription!.infoSnippet![
-                                                      'credits']))),
+                                                  projectDescription!.credits))),
                                       Spacer(),
                                       Flexible(
                                           child: FittedBox(
                                               child: InfoSnippet(
                                                   'CLIENT',
-                                                  projectDescription!
-                                                      .infoSnippet!['client']))),
+                                                  projectDescription!.client))),
                                     ],
                                   ),
                                 )
@@ -137,14 +132,12 @@ class ProjectDetails extends StatelessWidget {
                                         Flexible(
                                             child: InfoSnippet(
                                                 'ROLE',
-                                                projectDescription!
-                                                    .infoSnippet!['role'])),
+                                                projectDescription!.role)),
                                         Spacer(),
                                         Flexible(
                                             child: InfoSnippet(
                                                 'DATE',
-                                                projectDescription!
-                                                    .infoSnippet!['date'])),
+                                                projectDescription!.date)),
                                       ],
                                     ),
                                   ),
@@ -156,14 +149,12 @@ class ProjectDetails extends StatelessWidget {
                                         Flexible(
                                             child: InfoSnippet(
                                                 'CREDITS',
-                                                projectDescription!.infoSnippet![
-                                                    'credits'])),
+                                                projectDescription!.credits)),
                                         Spacer(),
                                         Flexible(
                                             child: InfoSnippet(
                                                 'CLIENT',
-                                                projectDescription!.infoSnippet![
-                                                    'client'])),
+                                                projectDescription!.client)),
                                       ],
                                     ),
                                   )
