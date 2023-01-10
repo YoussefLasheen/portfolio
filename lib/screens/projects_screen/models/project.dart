@@ -16,7 +16,7 @@ class Project {
   final String? backgroundImageSource;
   final List? tags;
   final Map? infoSnippet;
-  final List? accessOptions;
+  final Map? accessOptions;
   final int? order;
 
   Project.fromJson(Map<String, Object?> json)
@@ -27,7 +27,7 @@ class Project {
           backgroundImageSource: json['backgroundImageSource']! as String,
           tags: json['tags']! as List,
           infoSnippet: json['info']! as Map,
-          accessOptions: json['access']! as List,
+          accessOptions: json['access']! as Map,
           order: json['order']! as int,
         );
 }

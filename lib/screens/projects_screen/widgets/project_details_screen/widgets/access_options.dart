@@ -3,7 +3,7 @@ import 'package:portfolio/assets/constants.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 class AccessOptions extends StatelessWidget {
-  final List? accessOptions;
+  final Map? accessOptions;
 
   const AccessOptions({Key? key, this.accessOptions});
   @override
@@ -28,11 +28,11 @@ class AccessOptions extends StatelessWidget {
                       color: Color(0xFF323941),
                       child: InkWell(
                         onTap: () {
-                          _launchURL(accessOptions!.first['url']);
+                          _launchURL(accessOptions!.entries.elementAt(0).value);
                         },
                         child: Center(
                           child: Text(
-                            accessOptions![0]['value'],
+                            accessOptions!.entries.elementAt(0).key,
                             style: TextStyle(color: Colors.white),
                           ),
                         ),
@@ -55,17 +55,13 @@ class AccessOptions extends StatelessWidget {
                                   : Offset.zero,
                               itemBuilder: (BuildContext context) =>
                                   <PopupMenuEntry<AccessOptions>>[
-                                for (var option in accessOptions!.sublist(1))
+                                for (var i = 1; i < accessOptions!.length; i++)
                                   PopupMenuItem(
                                     child: ListTile(
-                                      title: Text(option['value']),
-                                      leading: Icon(
-                                        IconData(option['icon'],
-                                            fontFamily: 'CustomIcons'),
-                                      ),
+                                      title: Text(accessOptions!.entries.elementAt(i).key),
                                     ),
                                     onTap: () {
-                                      _launchURL(option['url']);
+                                      _launchURL(accessOptions!.entries.elementAt(i).value);
                                     },
                                   )
                               ],
