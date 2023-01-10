@@ -29,8 +29,8 @@ class ProjectsScreen extends StatelessWidget {
           Map<String, dynamic> data =
               snapshot.data!.data() as Map<String, dynamic>;
 
-          List<Project> myModels = (data['projectsIndex'] as List)
-              .map((i) => Project.fromJson(i))
+          List<Project> myModels = (data['projects'] as Map).entries
+              .map((i) => Project.fromJson(i.value, i.key))
               .toList();
           myModels.sort ((a, b) => b.order!.compareTo(a.order!));
           return AnimatedFilteredList(

@@ -19,9 +19,9 @@ class Project {
   final Map? accessOptions;
   final int? order;
 
-  Project.fromJson(Map<String, Object?> json)
+  Project.fromJson(Map<String, Object?> json, String id)
       : this(
-          id: json['id']! as String,
+          id: id,
           title: json['title']! as String,
           shortDescription: json['shortDescription']! as String,
           backgroundImageSource: json['backgroundImageSource']! as String,

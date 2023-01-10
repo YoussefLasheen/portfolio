@@ -44,8 +44,8 @@ class ProjectDetailsScreen extends StatelessWidget {
           } else {
             Map<String, dynamic> data = (snapshot.data as DocumentSnapshot)
                 .data() as Map<String, dynamic>;
-            _project = Project.fromJson(data['projectsIndex']
-                .firstWhere((element) => element['id'] == id));
+            _project = Project.fromJson((data['projects'] as Map).entries
+                .firstWhere((element) => element.key == id).value,id!);
           }
 
           if (isLandscape) {
