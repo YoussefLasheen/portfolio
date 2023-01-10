@@ -32,7 +32,7 @@ class ProjectsScreen extends StatelessWidget {
           List<Project> myModels = (data['projectsIndex'] as List)
               .map((i) => Project.fromJson(i))
               .toList();
-
+          myModels.sort ((a, b) => b.order!.compareTo(a.order!));
           return AnimatedFilteredList(
             projectsIndex: myModels,
             allTags: data['allTags'],

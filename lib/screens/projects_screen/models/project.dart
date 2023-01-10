@@ -7,6 +7,8 @@ class Project {
     this.tags,
     this.accessOptions,
     this.infoSnippet,
+    this.order,
+
   });
   final String? id;
   final String? title;
@@ -15,6 +17,7 @@ class Project {
   final List? tags;
   final Map? infoSnippet;
   final List? accessOptions;
+  final int? order;
 
   Project.fromJson(Map<String, Object?> json)
       : this(
@@ -25,5 +28,6 @@ class Project {
           tags: json['tags']! as List,
           infoSnippet: json['info']! as Map,
           accessOptions: json['access']! as List,
+          order: json['order']! as int,
         );
 }
