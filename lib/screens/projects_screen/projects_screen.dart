@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:portfolio/assets/constants.dart';
 import 'package:portfolio/screens/projects_screen/models/project.dart';
@@ -12,7 +11,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class ProjectsScreen extends StatelessWidget {
   final String? queryTag;
 
-  const ProjectsScreen({Key? key, @queryParam this.queryTag}) : super(key: key);
+  const ProjectsScreen({Key? key, this.queryTag}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<DocumentSnapshot>(
@@ -30,13 +29,14 @@ class ProjectsScreen extends StatelessWidget {
           Map<String, dynamic> data =
               snapshot.data!.data() as Map<String, dynamic>;
 
-          List<ProjectMetadata> myModels = (data['projectsIndex'] as List)
-              .map((i) => ProjectMetadata.fromJson(i))
+          List<Project> myModels = (data['projectsIndex'] as List)
+              .map((i) => Project.fromJson(i))
               .toList();
 
           return AnimatedFilteredList(
             projectsIndex: myModels,
             allTags: data['allTags'],
+            queryTag: queryTag ?? "",
           );
         }
         return Center(child: CircularProgressIndicator());
@@ -47,13 +47,15 @@ class ProjectsScreen extends StatelessWidget {
 
 class AnimatedFilteredList extends StatefulWidget {
   final List? allTags;
+  final String queryTag;
   const AnimatedFilteredList({
     Key? key,
     required this.projectsIndex,
     this.allTags,
+    this.queryTag = "",
   }) : super(key: key);
 
-  final List<ProjectMetadata> projectsIndex;
+  final List<Project> projectsIndex;
 
   @override
   State<AnimatedFilteredList> createState() => _AnimatedFilteredListState();
@@ -62,13 +64,12 @@ class AnimatedFilteredList extends StatefulWidget {
 class _AnimatedFilteredListState extends State<AnimatedFilteredList> {
   String? filterTag = "All";
   ViewOption viewOption = ViewOption.list;
-  List<ProjectMetadata>? filteredProjects;
+  List<Project>? filteredProjects;
   @override
   Widget build(BuildContext context) {
-    Parameters queryTag = context.routeData.queryParams;
-    if (queryTag.isNotEmpty &&
-        widget.allTags!.contains(queryTag.rawMap['tag'])) {
-      filterTag = queryTag.rawMap['tag'];
+    if (widget.queryTag.isNotEmpty &&
+        widget.allTags!.contains(widget.queryTag)) {
+      filterTag = widget.queryTag;
     }
 
     filteredProjects = widget.projectsIndex.where((element) {
@@ -131,9 +132,9 @@ class _AnimatedFilteredListState extends State<AnimatedFilteredList> {
             shrinkWrap: true,
             itemCount: filteredProjects!.length,
             itemBuilder: (context, index) {
-              ProjectMetadata _project = filteredProjects![index];
+              Project _project = filteredProjects![index];
               return ProjectCard(
-                projectMetadata: _project,
+                project: _project,
                 isInversed: index.isEven,
                 id: _project.id,
               );
@@ -148,9 +149,9 @@ class _AnimatedFilteredListState extends State<AnimatedFilteredList> {
             ),
             itemCount: filteredProjects!.length,
             itemBuilder: (context, index) {
-              ProjectMetadata _project = filteredProjects![index];
+              Project _project = filteredProjects![index];
               return ProjectCard(
-                projectMetadata: _project,
+                project: _project,
                 isInversed: true,
                 id: _project.id,
               );

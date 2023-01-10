@@ -1,16 +1,15 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:portfolio/assets/constants.dart';
-import 'package:portfolio/routes/router.gr.dart';
 import 'package:portfolio/screens/about_screen/sections/welcome_section.dart';
 import 'package:portfolio/screens/projects_screen/models/project.dart';
 
 class ProjectCard extends StatelessWidget {
-  final ProjectMetadata? projectMetadata;
+  final Project? project;
   final String? id;
   final bool? isInversed;
 
-  const ProjectCard({this.projectMetadata, this.isInversed, this.id});
+  const ProjectCard({this.project, this.isInversed, this.id});
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -61,7 +60,7 @@ class ProjectCard extends StatelessWidget {
                 alignment: Alignment.centerLeft,
                 child: FittedBox(
                   child: Text(
-                    "#" + projectMetadata!.title!,
+                    "#" + project!.title!,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: mainColor,
@@ -82,7 +81,7 @@ class ProjectCard extends StatelessWidget {
                 alignment: Alignment.centerLeft,
                 child: FittedBox(
                   child: Text(
-                    "— " + projectMetadata!.shortDescription!,
+                    "— " + project!.shortDescription!,
                     style: TextStyle(fontSize: 25),
                   ),
                 ),
@@ -122,10 +121,7 @@ class ProjectCard extends StatelessWidget {
                             child: ColoredButton(
                               decoration: BoxDecoration(color: Colors.grey.withOpacity(0.1)),
                               onPressed: () {
-                                context.router.push(ProjectsDetailsRouter(
-                                  id: id!,
-                                  isInversed: isInversed!,
-                                ));
+                                context.go('/projects/${id}', extra: project);
                               },
                               child: Center(
                                 child: FittedBox(
@@ -171,7 +167,7 @@ class ProjectCard extends StatelessWidget {
                 : 0
             : 0,
       ),
-      child: projectMetadata!.backgroundImageSource == null
+      child: project!.backgroundImageSource == null
           ? Placeholder(color: isInversed! ? Colors.white : Colors.blueGrey)
           : Container(
               decoration: BoxDecoration(boxShadow: [
@@ -181,9 +177,9 @@ class ProjectCard extends StatelessWidget {
                     blurRadius: 15)
               ]),
               child: Hero(
-                tag: projectMetadata!.title! + 'image',
+                tag: project!.title! + 'image',
                 child: Image.network(
-                  projectMetadata!.backgroundImageSource!,
+                  project!.backgroundImageSource!,
                   fit: BoxFit.fill,
                   loadingBuilder: (BuildContext context, Widget child,
                       ImageChunkEvent? loadingProgress) {

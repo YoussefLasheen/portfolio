@@ -1,11 +1,11 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:portfolio/screens/projects_screen/models/project.dart';
 import 'package:portfolio/screens/projects_screen/widgets/project_details_screen/widgets/project_details.dart';
 
 class  ProjectDetailsScreenTopPotrait extends StatelessWidget {
   const ProjectDetailsScreenTopPotrait({required this.projectDescription});
-  final ProjectDescription projectDescription;
+  final Project projectDescription;
 
   @override
   Widget build(BuildContext context) {
@@ -16,13 +16,13 @@ class  ProjectDetailsScreenTopPotrait extends StatelessWidget {
         physics: BouncingScrollPhysics(),
         slivers: <Widget>[
           SliverAppBar(
-            leading: IconButton(onPressed: (){context.router.navigateNamed('');}, icon: Icon(Icons.arrow_back_rounded)),
+            leading: IconButton(onPressed: (){context.go('/projects');}, icon: Icon(Icons.arrow_back_rounded)),
             expandedHeight: screenHeight * 0.25,
             bottom: PreferredSize(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    for (var tag in projectDescription.projectMetadata!.tags!)
+                    for (var tag in projectDescription.tags!)
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Chip(label: Text(tag)),
@@ -32,13 +32,13 @@ class  ProjectDetailsScreenTopPotrait extends StatelessWidget {
                 preferredSize: Size.fromHeight(50)),
             actions: [],
             flexibleSpace: FlexibleSpaceBar(
-              title: Text(projectDescription.projectMetadata!.title!),
+              title: Text(projectDescription.title!),
               background: Hero(
-                tag: projectDescription.projectMetadata!.title! + 'image',
-                child: projectDescription.projectMetadata!.backgroundImageSource == null
+                tag: projectDescription.title! + 'image',
+                child: projectDescription.backgroundImageSource == null
                     ? Placeholder()
                     : Image.network(
-                        projectDescription.projectMetadata!.backgroundImageSource!,
+                        projectDescription.backgroundImageSource!,
                         fit: BoxFit.cover,
                       ),
               ),

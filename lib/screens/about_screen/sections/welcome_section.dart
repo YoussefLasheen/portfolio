@@ -1,6 +1,6 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:portfolio/assets/constants.dart';
 import 'package:portfolio/screens/shared_components/frostedglass_container.dart';
 
@@ -61,13 +61,13 @@ class WelcomeSection extends StatelessWidget {
                                 fontSize: 20),
                           ),
                         ),
-                        onPressed: ()=> context.router.navigateNamed('contact'),
+                        onPressed: ()=> context.go('/contact'),
                       ),
                       SizedBox(
                         width: 10,
                       ),
                       TextButton(
-                        onPressed: ()=> context.router.navigateNamed('projects'),
+                        onPressed: ()=> context.go('/projects'),
                         style: TextButton.styleFrom(
                           backgroundColor: Colors.grey[700],
                           shape: RoundedRectangleBorder(

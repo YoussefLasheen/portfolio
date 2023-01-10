@@ -4,7 +4,7 @@ import 'package:portfolio/screens/projects_screen/models/project.dart';
 
 class ProjectDetails extends StatelessWidget {
   const ProjectDetails({this.projectDescription});
-  final ProjectDescription? projectDescription;
+  final Project? projectDescription;
   @override
   Widget build(BuildContext context) {
     bool isLandscape =
@@ -175,7 +175,7 @@ class ProjectDetails extends StatelessWidget {
                     ),
                   ),
                 ),
-                if (projectDescription!.projectMetadata!.backgroundImageSource == null) 
+                if (projectDescription!.backgroundImageSource == null) 
                 Center(child: CircularProgressIndicator(),) 
                 else Container(
                   width: MediaQuery.of(context).size.width,
@@ -184,7 +184,7 @@ class ProjectDetails extends StatelessWidget {
                     image: DecorationImage(
                       fit: BoxFit.cover,
                       image:
-                          NetworkImage(projectDescription!.projectMetadata!.backgroundImageSource!),
+                          NetworkImage(projectDescription!.backgroundImageSource!),
                     ),
                   ),
                 ),

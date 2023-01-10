@@ -1,7 +1,7 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
 import 'package:portfolio/screens/shared_components/frostedglass_container.dart';
 import 'package:rive/rive.dart';
 
@@ -64,19 +64,19 @@ class OurservicesCard extends StatelessWidget {
               AnimatedTile(
                   'Mobile Development',
                   '4 projects',
-                  () => context.router.navigateNamed('projects?tag=Mobile'),
+                  () => context.go('projects?tag=Mobile'),
                   'assets/animations/mobile-development.riv'),
               _buildSeparator(),
               AnimatedTile(
                   'Web Development',
                   '4 projects',
-                  () => context.router.navigateNamed('projects?tag=Web'),
+                  () => context.go('projects?tag=Web'),
                   'assets/animations/web-development.riv'),
               _buildSeparator(),
               AnimatedTile(
                   'UI/UX Design',
                   '4 projects',
-                  () => context.router.navigateNamed('projects'),
+                  () => context.go('/projects'),
                   'assets/animations/ui-design.riv'),
             ],
           ),

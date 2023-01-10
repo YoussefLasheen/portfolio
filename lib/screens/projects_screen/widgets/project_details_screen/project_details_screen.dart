@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:portfolio/assets/constants.dart';
@@ -13,8 +12,9 @@ import 'package:portfolio/services/api.dart';
 import 'package:shimmer/shimmer.dart';
 
 class ProjectDetailsScreen extends StatelessWidget {
-  const ProjectDetailsScreen({this.isInversed, @PathParam() this.id});
+  const ProjectDetailsScreen({this.isInversed, this.id, this.project});
 
+  final Project? project;
   final bool? isInversed;
   final String? id;
 
@@ -22,75 +22,24 @@ class ProjectDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     bool isLandscape =
         MediaQuery.of(context).orientation == Orientation.landscape;
-
-    return FutureBuilder<DocumentSnapshot>(
-      future: Future.delayed(
-        const Duration(
-          milliseconds: 350,
-        ),
-        () {
-          return Api('Data/projects_screen/projects').getDocumentById(id);
-        },
-      ),
-      builder: (context, snapshot) {
-        if (snapshot.hasError) {
-          return Center(
-            child: Text(
-              "Something went wrong",
-              style: Theme.of(context).textTheme.headline2,
-            ),
-          );
-        }
-
-        if (snapshot.hasData && !snapshot.data!.exists) {
-          return Center(
-            child: Text(
-              "404\nProject not found",
-              style: Theme.of(context).textTheme.headline2,
-            ),
-          );
-        }
-
-        if (snapshot.connectionState == ConnectionState.done) {
-          Map<String, dynamic> data =
-              snapshot.data!.data() as Map<String, dynamic>;
-
-          ProjectDescription projectDescription = ProjectDescription(
-            infoSnippet: data['infoSnippet'],
-            projectMetadata: ProjectMetadata(
-              title: data['metadata']['title'],
-              id: data['metadata']['id'],
-              shortDescription: data['metadata']['shortDescription'],
-              tags: data['metadata']['tags'],
-              backgroundImageSource: data['metadata']['backgroundImageSource'],
-            ),
-            accessOptions: data['accessOptions'],
-          );
+        
           if (isLandscape) {
             return ProjectDetailsScreenTopLandscape(
               isInversed: isInversed ?? true,
-              projectDescription: projectDescription,
+              projectDescription: project!,
             );
           } else {
             return Stack(
               children: [
                 ProjectDetailsScreenTopPotrait(
-                  projectDescription: projectDescription,
+                  projectDescription: project!,
                 ),
                 AccessOptions(
-                  accessOptions: projectDescription.accessOptions,
+                  accessOptions: project!.accessOptions,
                 ),
               ],
             );
           }
-        }
-        return isLandscape
-            ? ProjectDetailsLoadingShimmerLandscape()
-            : Center(
-                child: CircularProgressIndicator(),
-              );
-      },
-    );
   }
 }
 

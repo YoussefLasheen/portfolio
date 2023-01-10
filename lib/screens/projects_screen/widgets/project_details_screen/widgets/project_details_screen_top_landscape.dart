@@ -1,5 +1,5 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:portfolio/assets/constants.dart';
 import 'package:portfolio/screens/projects_screen/models/project.dart';
 import 'package:portfolio/screens/projects_screen/widgets/project_details_screen/widgets/access_options.dart';
@@ -11,7 +11,7 @@ class ProjectDetailsScreenTopLandscape extends StatelessWidget {
     required this.projectDescription,
     this.isInversed = true,
   });
-  final ProjectDescription projectDescription;
+  final Project projectDescription;
   final bool isInversed;
 
   @override
@@ -35,7 +35,7 @@ class ProjectDetailsScreenTopLandscape extends StatelessWidget {
                     Expanded(
                       flex: 2,
                       child:Image.network(
-                        projectDescription.projectMetadata!.backgroundImageSource!,
+                        projectDescription.backgroundImageSource!,
                         fit: BoxFit.fitHeight,
                         loadingBuilder: (BuildContext context,
                             Widget child,
@@ -69,7 +69,7 @@ class ProjectDetailsScreenTopLandscape extends StatelessWidget {
                             Expanded(
                               child: FittedBox(
                                   child: Text(
-                                "#" + projectDescription.projectMetadata!.title!,
+                                "#" + projectDescription.title!,
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     color: mainColor),
@@ -78,14 +78,14 @@ class ProjectDetailsScreenTopLandscape extends StatelessWidget {
                             Expanded(
                               child: FittedBox(
                                 child: Text(
-                                  "— " + projectDescription.projectMetadata!.shortDescription!,
+                                  "— " + projectDescription.shortDescription!,
                                 ),
                               ),
                             ),
                             Wrap(
                               alignment:WrapAlignment.end,
                               children: [
-                                for (var tag in projectDescription.projectMetadata!.tags!)
+                                for (var tag in projectDescription.tags!)
                                   Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Chip(label: Text(tag)),
@@ -110,7 +110,7 @@ class ProjectDetailsScreenTopLandscape extends StatelessWidget {
         ),
         IconButton(
           onPressed: () {
-            context.router.navigateNamed('');
+            context.go('/projects');
           },
           color: Colors.white,
           icon: BlendMask(

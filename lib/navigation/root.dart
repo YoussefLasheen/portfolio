@@ -1,41 +1,58 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:portfolio/navigation/widgets/sidebar.dart';
-import 'package:portfolio/routes/router.gr.dart';
 
 class Root extends StatelessWidget {
+  final Widget child;
+
+  const Root({Key? key, required this.child}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     WidgetsBinding.instance!.addPostFrameCallback((_) => limitOrientation(context));
     bool isLandscape =
         MediaQuery.of(context).orientation == Orientation.landscape;
-    return AutoTabsRouter(
-      routes: [AboutRouter(), ProjectsRouter(), ContactRouter()],
-      builder: (context, child, animation) {
-        final tabsRouter = AutoTabsRouter.of(context);
-        return Material(
+    return Material(
           color: Colors.grey[900],
           child: Flex(
             direction: isLandscape ? Axis.horizontal : Axis.vertical,
             children: <Widget>[
               Sidebar(
-                currentIndex: tabsRouter.activeIndex,
-                onTap: (index) {
-                  tabsRouter.setActiveIndex(index);
-                },
+                currentIndex: _calculateSelectedIndex(context),
+                onTap: (index) => _onItemTapped(index, context)
               ),
               Expanded(
-                child: FadeTransition(
-                  opacity: animation,
-                  // the passed child is techinaclly our animated selected-tab page
-                  child: child,
-                ),
+                child: child,
               )
             ],
           ),
         );
-      },
-    );
+  }
+  static int _calculateSelectedIndex(BuildContext context) {
+    final String location = GoRouterState.of(context).location;
+    if (location.startsWith('/about')) {
+      return 0;
+    }
+    if (location.startsWith('/projects')) {
+      return 1;
+    }
+    if (location.startsWith('/contact')) {
+      return 2;
+    }
+    return 0;
+  }
+
+  void _onItemTapped(int index, BuildContext context) {
+    switch (index) {
+      case 0:
+        GoRouter.of(context).go('/about');
+        break;
+      case 1:
+        GoRouter.of(context).go('/projects');
+        break;
+      case 2:
+        GoRouter.of(context).go('/contact');
+        break;
+    }
   }
 }
 

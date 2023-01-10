@@ -1,6 +1,6 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:portfolio/screens/shared_components/frostedglass_container.dart';
 
 class EndSection extends StatelessWidget {
@@ -45,7 +45,7 @@ class EndSection extends StatelessWidget {
                         borderRadius: new BorderRadius.circular(5.0),
                       ),
                     ),
-                    onPressed: ()=> context.router.navigateNamed('contact'),
+                    onPressed: ()=> context.go('/contact'),
                     child: Padding(
                       padding: const EdgeInsets.all(18.0),
                       child: Text(
