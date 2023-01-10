@@ -22,24 +22,57 @@ class ProjectDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     bool isLandscape =
         MediaQuery.of(context).orientation == Orientation.landscape;
-        
+
+    return FutureBuilder(
+      future: project != null
+          ? Future.delayed(
+              const Duration(
+                milliseconds: 350,
+              ),
+              () => Future.value(project),
+            )
+          : Api('Data').getDocumentById('projects_screen'),
+      builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          return Text("Something went wrong");
+        }
+
+        if (snapshot.hasData) {
+          Project? _project;
+          if (project != null) {
+            _project = project;
+          } else {
+            Map<String, dynamic> data = (snapshot.data as DocumentSnapshot)
+                .data() as Map<String, dynamic>;
+            _project = Project.fromJson(data['projectsIndex']
+                .firstWhere((element) => element['id'] == id));
+          }
+
           if (isLandscape) {
             return ProjectDetailsScreenTopLandscape(
               isInversed: isInversed ?? true,
-              projectDescription: project!,
+              projectDescription: _project!,
             );
           } else {
             return Stack(
               children: [
                 ProjectDetailsScreenTopPotrait(
-                  projectDescription: project!,
+                  projectDescription: _project!,
                 ),
                 AccessOptions(
-                  accessOptions: project!.accessOptions,
+                  accessOptions: _project.accessOptions,
                 ),
               ],
             );
           }
+        }
+        return isLandscape
+            ? ProjectDetailsLoadingShimmerLandscape()
+            : Center(
+                child: CircularProgressIndicator(),
+              );
+      },
+    );
   }
 }
 
@@ -61,19 +94,25 @@ class ProjectDetailsLoadingShimmerLandscape extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Spacer(flex: 2,),
+                  Spacer(
+                    flex: 2,
+                  ),
                   Expanded(
                     child: Container(
                       color: Colors.white,
                     ),
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(
+                    height: 10,
+                  ),
                   Expanded(
                     child: Container(
                       color: Colors.white,
                     ),
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(
+                    height: 10,
+                  ),
                   Wrap(
                     alignment: WrapAlignment.end,
                     children: [

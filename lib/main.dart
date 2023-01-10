@@ -64,7 +64,7 @@ class MyApp extends StatelessWidget {
                   key: state.pageKey,
                   child: ProjectDetailsScreen(
                     id: state.params['id'],
-                    project: state.extra as Project,
+                    project: state.extra as Project?,
                   ),
                   transitionDuration: Duration.zero,
                   transitionsBuilder: (_, __, ___, child) => child,
