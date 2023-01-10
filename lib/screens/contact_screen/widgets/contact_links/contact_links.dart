@@ -90,7 +90,7 @@ class InfoTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       leading: Icon(icon),
-      title: SelectableText(text!),
+      title: Text(text!),
       subtitle: Text(subText!),
       onTap: () async {
         if (await canLaunchUrlString(url!)) {
