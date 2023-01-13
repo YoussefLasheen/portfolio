@@ -19,30 +19,33 @@ class AboutusSection extends StatelessWidget {
                 AutoSizeText(
                   'About Us',
                   maxLines: 1,
-                  style: TextStyle(fontSize: 70),
+                  style: Theme.of(context).textTheme.headline2,
                 ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8),
-                      child: Container(
-                        width: 30,
-                        height: 10,
-                        color: mainColor,
-                      ),
-                    ),
-                    Flexible(
-                      child: Text(
-                        'A freelance Flutter developer based in Egypt. I make quality, commented, and reusable code. My services include product analysis through to full product design - from wireframing and prototyping to interface design and Flutter development. ',
-                        style: TextStyle(
-                          color: Colors.white70,
-                          height: 1.5,
-                          wordSpacing: 1.5
+                SizedBox(height: 25,),
+                Expanded(
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+                        child: Container(
+                          width: 30,
+                          height: 10,
+                          color: mainColor,
                         ),
                       ),
-                    )
-                  ],
+                      Expanded(
+                        child: AutoSizeText(
+                          'We are a B2B software development company based in Cairo, Egypt. We specialize in creating custom software solutions for businesses of all sizes. Our team of experienced developers have years of experience in developing software solutions that are tailored to meet the specific needs of our clients. ',
+                          style: TextStyle(
+                            color: Colors.white60,
+                            height: 1.5,
+                            fontSize: 24,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
                 )
               ],
             ),

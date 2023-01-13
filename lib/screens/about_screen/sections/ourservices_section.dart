@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
+import 'package:portfolio/assets/constants.dart';
 import 'package:portfolio/screens/shared_components/frostedglass_container.dart';
 import 'package:rive/rive.dart';
 
@@ -11,36 +12,55 @@ class OurservicesSection extends StatelessWidget {
     bool isLandscape =
         MediaQuery.of(context).orientation == Orientation.landscape;
     return ConstrainedBox(
-      constraints: isLandscape? BoxConstraints.expand(height: 500): BoxConstraints.expand(height: 700),
+      constraints: isLandscape? BoxConstraints.expand(height: 500): BoxConstraints.expand(height: 900),
       child: Flex(
         direction: isLandscape ? Axis.horizontal : Axis.vertical,
         verticalDirection:
             isLandscape ? VerticalDirection.down : VerticalDirection.up,
         children: [
-          Expanded(child: OurservicesCard()),
-          SizedBox(width: 50, height: 50,),
+          Expanded(flex: isLandscape? 4: 6,child: OurservicesCard()),
+          Spacer(),
           Expanded(
-            child: Padding(
-              padding: isLandscape? EdgeInsets.only(right: 150, ): EdgeInsets.zero,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  AutoSizeText(
-                    'Our Services',
-                    maxLines: 1,
-                    style: TextStyle(fontSize: 50),
+            flex: 4,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                AutoSizeText(
+                  'Our Services',
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context).textTheme.headline2,
+                ),
+                SizedBox(height: 25,),
+                Expanded(
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+                        child: Container(
+                          width: 30,
+                          height: 10,
+                          color: mainColor,
+                        ),
+                      ),
+                      Expanded(
+                        child: AutoSizeText(
+                          'We use cutting-edge technologies and the latest development tools to ensure that our solutions are reliable, secure, and scalable. Our goal is to provide our clients with high-quality, cost-effective software solutions that help them achieve their business objectives. Whether you need a custom web application or a mobile app, we have the expertise and resources to deliver the perfect solution for your business. ',
+                          style: TextStyle(
+                            color: Colors.white60,
+                            height: 1.5,
+                            fontSize: 24,
+                          ),
+                        ),
+                      )
+                    ],
                   ),
-                  SizedBox(height: 50,),
-                  AutoSizeText(
-                    'We offer highly efficient app development for the web and mobile - or both. We can do maps, eCommerce, Live Streaming, or even just a simple data viewer.',
-                    style: TextStyle(
-                        color: Colors.white70, height: 2, wordSpacing: 1.5,),
-                  ),
-                ],
-              ),
+                )
+              ],
             ),
-          )
+          ),
+          isLandscape?Spacer():SizedBox.shrink(),
         ],
       ),
     );
@@ -61,23 +81,29 @@ class OurservicesCard extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              AnimatedTile(
-                  'Mobile Development',
-                  '4 projects',
-                  () => context.go('/projects?tag=Mobile'),
-                  'assets/animations/mobile-development.riv'),
+              Expanded(
+                child: AnimatedTile(
+                    'Mobile Development',
+                    'This includes both native applications, and web-based applications, which are accessed through a browser. ',
+                    () => context.go('/projects?tag=Mobile'),
+                    'assets/animations/mobile-development.riv'),
+              ),
               _buildSeparator(),
-              AnimatedTile(
-                  'Web Development',
-                  '4 projects',
-                  () => context.go('/projects?tag=Web'),
-                  'assets/animations/web-development.riv'),
+              Expanded(
+                child: AnimatedTile(
+                    'Web Development',
+                    'Building, and maintaining websites.',
+                    () => context.go('/projects?tag=Web'),
+                    'assets/animations/web-development.riv'),
+              ),
               _buildSeparator(),
-              AnimatedTile(
-                  'UI/UX Design',
-                  '4 projects',
-                  () => context.go('/projects?tag=UI/UX'),
-                  'assets/animations/ui-design.riv'),
+              Expanded(
+                child: AnimatedTile(
+                    'UI/UX Design',
+                    'Designing user interfaces for software applications. We focus on creating an intuitive, user-friendly experience. ',
+                    () => context.go('/projects?tag=UI/UX'),
+                    'assets/animations/ui-design.riv'),
+              ),
             ],
           ),
         ),
@@ -150,17 +176,19 @@ class _AnimatedTileState extends State<AnimatedTile> {
           SizedBox(
             width: 15,
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(widget.text),
-              Text(
-                widget.text,
-                style: TextStyle(fontSize: 12, color: Colors.white30),
-              )
-            ],
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(widget.text),
+                Text(
+                  widget.subText,
+                  style: TextStyle(fontSize: 12, color: Colors.white30),
+                )
+              ],
+            ),
           ),
-          Spacer(),
         IconButton(onPressed: widget.link as void Function()?, icon: Icon(Icons.navigate_next_rounded))
         ],
       ),
