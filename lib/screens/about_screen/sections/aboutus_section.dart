@@ -55,7 +55,7 @@ class AboutusSection extends StatelessWidget {
               ? Expanded(
                 flex:2 ,
                 child: Image.asset(
-                  'assets/images/LLLogoClipArtOulined.png',
+                  'assets/images/LLLogoClipArtOulined.webp',
                   fit: BoxFit.contain,
                 ),
               )

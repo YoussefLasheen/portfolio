@@ -79,7 +79,7 @@ limitOrientation(BuildContext context) {
                           Expanded(
                               flex: 6,
                               child: Image.asset(
-                                  'assets/images/rotate-to-portrait-icon.png')),
+                                  'assets/images/rotate-to-portrait-icon.webp')),
                           Spacer(),
                           Expanded(
                             child: FittedBox(
