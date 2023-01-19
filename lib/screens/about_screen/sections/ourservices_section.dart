@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:portfolio/assets/constants.dart';
 import 'package:portfolio/screens/shared_components/frostedglass_container.dart';
 import 'package:rive/rive.dart';
+import 'package:flutter/foundation.dart';
 
 class OurservicesSection extends StatelessWidget {
   @override
@@ -22,42 +23,45 @@ class OurservicesSection extends StatelessWidget {
           Spacer(),
           Expanded(
             flex: 4,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                AutoSizeText(
-                  'Our Services',
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: Theme.of(context).textTheme.headline2,
-                ),
-                SizedBox(height: 25,),
-                Expanded(
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
-                        child: Container(
-                          width: 30,
-                          height: 10,
-                          color: mainColor,
-                        ),
-                      ),
-                      Expanded(
-                        child: AutoSizeText(
-                          'We use cutting-edge technologies and the latest development tools to ensure that our solutions are reliable, secure, and scalable. Our goal is to provide our clients with high-quality, cost-effective software solutions that help them achieve their business objectives. Whether you need a custom web application or a mobile app, we have the expertise and resources to deliver the perfect solution for your business. ',
-                          style: TextStyle(
-                            color: Colors.white60,
-                            height: 1.5,
-                            fontSize: 24,
+            child: Padding(
+              padding: isLandscape? EdgeInsets.only(right: 100, left: 50): EdgeInsets.all(20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  AutoSizeText(
+                    'Our Services',
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: Theme.of(context).textTheme.headline2,
+                  ),
+                  SizedBox(height: 25,),
+                  Expanded(
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+                          child: Container(
+                            width: 30,
+                            height: 10,
+                            color: mainColor,
                           ),
                         ),
-                      )
-                    ],
-                  ),
-                )
-              ],
+                        Expanded(
+                          child: AutoSizeText(
+                            'We use cutting-edge technologies and the latest development tools to ensure that our solutions are reliable, secure, and scalable. Our goal is to provide our clients with high-quality, cost-effective software solutions that help them achieve their business objectives. Whether you need a custom web application or a mobile app, we have the expertise and resources to deliver the perfect solution for your business. ',
+                            style: TextStyle(
+                              color: Colors.white60,
+                              height: 1.5,
+                              fontSize: 24,
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
           isLandscape?Spacer():SizedBox.shrink(),
@@ -72,37 +76,44 @@ class OurservicesCard extends StatelessWidget {
   Widget build(BuildContext context) {
     bool isLandscape =
         MediaQuery.of(context).orientation == Orientation.landscape;
+    final isMobile = defaultTargetPlatform == TargetPlatform.iOS ||
+        defaultTargetPlatform == TargetPlatform.android;
     return FrostedGlassContainer(
       borderRadius: isLandscape?BorderRadius.circular(20.0):BorderRadius.circular(0.0),
       child: Center(
         child: FractionallySizedBox(
-          heightFactor: 7/10,
-          widthFactor: isLandscape?7/10:8/10,
+          heightFactor: 7 / 10,
+          widthFactor: isLandscape ? 7 / 10 : 8 / 10,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Expanded(
                 child: AnimatedTile(
-                    'Mobile Development',
-                    'This includes both native applications, and web-based applications, which are accessed through a browser. ',
-                    () => context.go('/projects?tag=Mobile'),
-                    'assets/animations/mobile-development.riv'),
+                    text: 'Mobile Development',
+                    subText:
+                        'This includes both native applications, and web-based applications, which are accessed through a browser. ',
+                    link: '/projects?tag=Mobile',
+                    path: 'mobile-development',
+                    enableAnimation: !isMobile),
               ),
               _buildSeparator(),
               Expanded(
                 child: AnimatedTile(
-                    'Web Development',
-                    'Building, and maintaining websites.',
-                    () => context.go('/projects?tag=Web'),
-                    'assets/animations/web-development.riv'),
+                    text: 'Web Development',
+                    subText: 'Building, and maintaining websites.',
+                    link: '/projects?tag=Web',
+                    path: 'web-development',
+                    enableAnimation: !isMobile),
               ),
               _buildSeparator(),
               Expanded(
                 child: AnimatedTile(
-                    'UI/UX Design',
-                    'Designing user interfaces for software applications. We focus on creating an intuitive, user-friendly experience. ',
-                    () => context.go('/projects?tag=UI/UX'),
-                    'assets/animations/ui-design.riv'),
+                    text: 'UI/UX Design',
+                    subText:
+                        'Designing user interfaces for software applications. We focus on creating an intuitive, user-friendly experience. ',
+                    link: '/projects?tag=UI/UX',
+                    path: 'ui-design',
+                    enableAnimation: !isMobile),
               ),
             ],
           ),
@@ -110,7 +121,6 @@ class OurservicesCard extends StatelessWidget {
       ),
     );
   }
-
 
   Widget _buildSeparator() {
     return Divider(
@@ -121,18 +131,26 @@ class OurservicesCard extends StatelessWidget {
     );
   }
 }
+
 class AnimatedTile extends StatefulWidget {
   final String text;
   final String subText;
-  final Function link;
-  final String animationPath;
+  final String link;
+  final String path;
+  final bool enableAnimation;
 
-    AnimatedTile( this.text, this.subText, this.link, this.animationPath,);
-  
-    @override
-    State<AnimatedTile> createState() => _AnimatedTileState();
-  }
-  
+  AnimatedTile({
+    required this.text,
+    required this.subText,
+    required this.link,
+    required this.path,
+    required this.enableAnimation,
+  });
+
+  @override
+  State<AnimatedTile> createState() => _AnimatedTileState();
+}
+
 class _AnimatedTileState extends State<AnimatedTile> {
   SMIInput<bool>? _hoveringInput;
   Artboard? _artboard;
@@ -140,34 +158,39 @@ class _AnimatedTileState extends State<AnimatedTile> {
   @override
   void initState() {
     super.initState();
-    rootBundle.load(widget.animationPath).then(
-      (data) {
-        final file = RiveFile.import(data);
-        final artboard = file.mainArtboard;
-        var controller = StateMachineController.fromArtboard(
-          artboard,
-          'State Machine 1',
-        );
-        if (controller != null) {
-          artboard.addController(controller);
-          _hoveringInput = controller.findInput('hovering');
-        }
-        setState(() => _artboard = artboard);
-      },
-    );
+    if (widget.enableAnimation) {
+      rootBundle.load('assets/animations/${widget.path}.riv').then(
+        (data) {
+          final file = RiveFile.import(data);
+          final artboard = file.mainArtboard;
+          var controller = StateMachineController.fromArtboard(
+            artboard,
+            'State Machine 1',
+          );
+          if (controller != null) {
+            artboard.addController(controller);
+            _hoveringInput = controller.findInput('hovering');
+          }
+          setState(() => _artboard = artboard);
+        },
+      );
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: widget.link as void Function()?,
-      onHover: (val)=>_hoveringInput?.value = val,
+      onTap: () => context.go(widget.link),
+      onHover: (val) => _hoveringInput?.value = val,
       child: Row(
         children: [
           SizedBox.square(
             dimension: 60,
-            child: _artboard == null
-                ? SizedBox()
+            child: !widget.enableAnimation
+                ? Image.asset(
+                    'assets/icons/${widget.path}.webp',
+                    fit: BoxFit.fitHeight,
+                  )
                 : Rive(
                     artboard: _artboard!,
                     fit: BoxFit.fitHeight,
@@ -189,7 +212,7 @@ class _AnimatedTileState extends State<AnimatedTile> {
               ],
             ),
           ),
-        IconButton(onPressed: widget.link as void Function()?, icon: Icon(Icons.navigate_next_rounded))
+          Icon(Icons.navigate_next_rounded)
         ],
       ),
     );
