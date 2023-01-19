@@ -33,15 +33,12 @@ class  ProjectDetailsScreenTopPotrait extends StatelessWidget {
             actions: [],
             flexibleSpace: FlexibleSpaceBar(
               title: Text(projectDescription.title!),
-              background: Hero(
-                tag: projectDescription.title! + 'image',
-                child: projectDescription.backgroundImageSource == null
-                    ? Placeholder()
-                    : Image.network(
-                        projectDescription.backgroundImageSource!,
-                        fit: BoxFit.cover,
-                      ),
-              ),
+              background: projectDescription.backgroundImageSource == null
+                  ? Placeholder()
+                  : Image.network(
+                      projectDescription.backgroundImageSource!,
+                      fit: BoxFit.cover,
+                    ),
             ),
           ),
           SliverFillRemaining(

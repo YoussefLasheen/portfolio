@@ -73,54 +73,51 @@ class CertificateCard extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: ConstrainedBox(
         constraints: BoxConstraints.tightFor(height: 400),
-        child: Hero(
-          tag: certificate.title,
-          child: Card(
-            clipBehavior: Clip.antiAlias,
-            child: InkWell(
-              onTap: () {
-                context.pushTransparentRoute(CertificateDialog(
-                  certificate: certificate,
-                ));
-              },
-              child: Stack(
-                children: [
-                  SizedBox.expand(
-                    child: Container(
-                      color: Colors.white,
-                      child: Image.network(certificate.imageUrl,
-                          fit: BoxFit.fitHeight),
+        child: Card(
+          clipBehavior: Clip.antiAlias,
+          child: InkWell(
+            onTap: () {
+              context.pushTransparentRoute(CertificateDialog(
+                certificate: certificate,
+              ));
+            },
+            child: Stack(
+              children: [
+                SizedBox.expand(
+                  child: Container(
+                    color: Colors.white,
+                    child: Image.network(certificate.imageUrl,
+                        fit: BoxFit.fitHeight),
+                  ),
+                ),
+                Positioned.fill(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.bottomCenter,
+                        end: Alignment.topCenter,
+                        colors: [
+                          Colors.black.withOpacity(0.5),
+                          Colors.transparent,
+                        ],
+                      ),
+                    ),
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          certificate.title,
+                          style: TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black),
+                        ),
+                      ),
                     ),
                   ),
-                  Positioned.fill(
-                    child: Container(
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          begin: Alignment.bottomCenter,
-                          end: Alignment.topCenter,
-                          colors: [
-                            Colors.black.withOpacity(0.5),
-                            Colors.transparent,
-                          ],
-                        ),
-                      ),
-                      child: Align(
-                        alignment: Alignment.bottomCenter,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            certificate.title,
-                            style: TextStyle(
-                                fontSize: 24,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black),
-                          ),
-                        ),
-                      ),
-                    ),
-                  )
-                ],
-              ),
+                )
+              ],
             ),
           ),
         ),
@@ -147,11 +144,8 @@ class CertificateDialog extends StatelessWidget {
             onDismissed: () {
               Navigator.of(context).pop();
             },
-            child: Hero(
-              tag: certificate.title,
-              child: Center(
-                child: Image.network(certificate.imageUrl),
-              ),
+            child: Center(
+              child: Image.network(certificate.imageUrl),
             ),
           ),
           IconButton(
