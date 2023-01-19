@@ -40,16 +40,19 @@ class TopSection extends StatelessWidget {
                             Expanded(
                               flex: 3,
                                 child: AutoSizeText(
-                                  'Some of my projects. From complete projects with showcases to Flutter packages',
-                                  style: TextStyle(color: Colors.white70, fontSize: 60),
+                                  'Here are a few of my projects, ranging from fully developed projects with demonstrations to Flutter packages.',
+                                  textAlign: TextAlign.justify,
+                                  style: TextStyle(color: Colors.white70, fontSize: 60,),
                                 ),
                             ),
                           ],
                         ),
                       ),
+                      if(isLandscape)
                       Spacer(
                         flex: 1,
                       ),
+                      if(isLandscape)
                       Expanded(
                           flex: isLandscape?4:2,
                           child: Image.asset('assets/images/LLLogoClipArtOulined.webp',fit: BoxFit.contain,)),
@@ -57,7 +60,7 @@ class TopSection extends StatelessWidget {
                     ],
                   ),
                 ),
-                Spacer(flex: 2,)
+                isLandscape? Spacer(flex: 2,): SizedBox.shrink(),
               ],
             ),
           ),
