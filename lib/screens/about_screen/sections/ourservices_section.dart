@@ -191,10 +191,12 @@ class _AnimatedTileState extends State<AnimatedTile> {
                     'assets/icons/${widget.path}.webp',
                     fit: BoxFit.fitHeight,
                   )
-                : Rive(
-                    artboard: _artboard!,
-                    fit: BoxFit.fitHeight,
-                  ),
+                : _artboard == null
+                    ? SizedBox.shrink()
+                    : Rive(
+                        artboard: _artboard!,
+                        fit: BoxFit.fitHeight,
+                      ),
           ),
           SizedBox(
             width: 15,
