@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:portfolio/navigation/root.dart';
 import 'package:portfolio/screens/about_screen/about_screen.dart';
-import 'package:portfolio/screens/contact_screen/contact_screen.dart' deferred as contact_screen;
-import 'package:portfolio/screens/projects_screen/projects_screen.dart' deferred as projects_screen;
-import 'package:portfolio/screens/projects_screen/widgets/project_details_screen/project_details_screen.dart' deferred as project_details;
+import 'package:portfolio/screens/contact_screen/contact_screen.dart';
+import 'package:portfolio/screens/projects_screen/projects_screen.dart';
+import 'package:portfolio/screens/projects_screen/widgets/project_details_screen/project_details_screen.dart';
 
 import 'firebase_options.dart';
 import 'screens/projects_screen/models/project.dart';
@@ -48,16 +48,7 @@ class MyApp extends StatelessWidget {
           ) {
             return CustomTransitionPage(
               key: state.pageKey,
-              child: FutureBuilder(
-                future: projects_screen.loadLibrary(),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.done) {
-                    return projects_screen.ProjectsScreen(queryTag: state.queryParams['tag']);
-                  } else {
-                    return SizedBox.shrink();
-                  }
-                },
-              ),
+              child: ProjectsScreen(queryTag: state.queryParams['tag']),
               transitionDuration: Duration.zero,
               transitionsBuilder: (_, __, ___, child) => child,
             );
@@ -71,18 +62,9 @@ class MyApp extends StatelessWidget {
               ) {
                 return CustomTransitionPage(
                   key: state.pageKey,
-                  child: FutureBuilder(
-                    future: project_details.loadLibrary(),
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.done) {
-                        return project_details.ProjectDetailsScreen(
-                          id: state.params['id'],
-                          project: state.extra as Project?,
-                        );
-                      } else {
-                        return SizedBox.shrink();
-                      }
-                    },
+                  child: ProjectDetailsScreen(
+                    id: state.params['id'],
+                    project: state.extra as Project?,
                   ),
                   transitionDuration: Duration.zero,
                   transitionsBuilder: (_, __, ___, child) => child,
@@ -99,16 +81,7 @@ class MyApp extends StatelessWidget {
           ) {
             return CustomTransitionPage(
               key: state.pageKey,
-              child: FutureBuilder(
-                future: contact_screen.loadLibrary(),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.done) {
-                    return contact_screen.ContactScreen();
-                  } else {
-                    return SizedBox.shrink();
-                  }
-                },
-              ),
+              child: ContactScreen(),
               transitionDuration: Duration.zero,
               transitionsBuilder: (_, __, ___, child) => child,
             );
