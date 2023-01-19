@@ -90,16 +90,17 @@ class _AnimatedFilteredListState extends State<AnimatedFilteredList> {
         TopSection(),
         Row(
           children: [
-            ChoiceTags(
-              allTags: widget.allTags,
-              filterTag: filterTag,
-              onSelected: (tag) {
-                setState(() {
-                  filterTag = tag;
-                });
-              },
+            Flexible(
+              child: ChoiceTags(
+                allTags: widget.allTags,
+                filterTag: filterTag,
+                onSelected: (tag) {
+                  setState(() {
+                    filterTag = tag;
+                  });
+                },
+              ),
             ),
-            Spacer(),
             if (!isVertical)
               Padding(
                 padding: const EdgeInsets.only(right: 30.0),
@@ -180,6 +181,7 @@ class ChoiceTags extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(15.0),
         child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
           scrollDirection: Axis.horizontal,
           child: Row(
             children: [
