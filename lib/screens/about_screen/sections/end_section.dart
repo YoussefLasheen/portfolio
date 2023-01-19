@@ -11,7 +11,7 @@ class EndSection extends StatelessWidget {
     return Padding(
       padding: isLandscape? EdgeInsets.only(right: 100, left: 50, bottom: 100): EdgeInsets.zero,
       child: ConstrainedBox(
-        constraints: BoxConstraints.expand(height: 500),
+        constraints: BoxConstraints.expand(height: isLandscape? 500: 800),
         child: FrostedGlassContainer(
           borderRadius: isLandscape?BorderRadius.circular(20.0):BorderRadius.circular(0.0),
           child: Center(
@@ -22,21 +22,27 @@ class EndSection extends StatelessWidget {
                 direction: isLandscape? Axis.horizontal:Axis.vertical,
                 crossAxisAlignment: CrossAxisAlignment.center,
                  children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      AutoSizeText(
-                        'Ready to \nexplore?',
-                        maxLines: 2,
-                        style: TextStyle(fontSize: 70),
-                      ),
-                      SizedBox(height: 10,),
-                      Text(
-                        'Contact us now. and get a price quote \nwith detailed cost overview for free',
-                        style: TextStyle(color: Colors.white54, fontSize: 25),
-                      )
-                    ],
+                  Expanded(
+                    flex: 3,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        AutoSizeText(
+                          'Ready to explore?',
+                          maxLines: 2,
+                          style: TextStyle(fontSize: 70),
+                        ),
+                        SizedBox(height: 10,),
+                        Flexible(
+                          child: AutoSizeText(
+                            'If you would like to discuss your project with us and receive a free consultation, please contact us via our website or call us at +201012845227. \nWe look forward to hearing from you!',
+                            textAlign: TextAlign.justify,
+                            style: TextStyle(color: Colors.white54, fontSize: 25, height: 1.5),
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                   Spacer(),
                   Center(
