@@ -170,6 +170,17 @@ class ProjectCard extends StatelessWidget {
       child: project!.backgroundImageSource == null
           ? Placeholder(color: isInversed! ? Colors.white : Colors.blueGrey)
           : Container(
+              foregroundDecoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    Colors.black54,
+                    Colors.transparent,
+                  ],
+                  begin: isInversed!? Alignment.topRight :Alignment.topLeft,
+                  end: isInversed!?  Alignment.bottomLeft:Alignment.bottomRight,
+                  stops: [0, 0.5],
+                ),
+              ),
               decoration: BoxDecoration(boxShadow: [
                 BoxShadow(
                     color: Colors.black.withOpacity(0.3),
