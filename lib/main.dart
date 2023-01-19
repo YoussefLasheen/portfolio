@@ -10,9 +10,12 @@ import 'package:portfolio/screens/projects_screen/widgets/project_details_screen
 import 'firebase_options.dart';
 import 'screens/projects_screen/models/project.dart';
 
+import 'package:flutter_web_plugins/url_strategy.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  usePathUrlStrategy();
   runApp(MyApp());
 }
 
