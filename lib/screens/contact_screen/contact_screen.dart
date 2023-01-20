@@ -18,7 +18,7 @@ class ContactScreen extends StatelessWidget {
           ? NeverScrollableScrollPhysics()
           : BouncingScrollPhysics(),
       child: SizedBox(
-        height: isLandscape ? screenHeight : screenHeight * 1.25,
+        height: isLandscape ? screenHeight : screenHeight * 2,
         child: Flex(
           direction: isLandscape ? Axis.horizontal : Axis.vertical,
           children: <Widget>[
@@ -31,6 +31,7 @@ class ContactScreen extends StatelessWidget {
               ),
             ),
             Expanded(
+              flex: isLandscape?1: 2,
               child: Container(
                 decoration: BoxDecoration(
                   gradient: mainGradient
@@ -38,14 +39,11 @@ class ContactScreen extends StatelessWidget {
                 constraints: BoxConstraints.expand(),
                 child: Align(
                   alignment: Alignment.center,
-                  child: SizedBox(
-                    height: screenHeight * 0.5,
-                    child: Padding(
-                      padding: isLandscape
-                          ? EdgeInsets.symmetric(horizontal: 100.0)
-                          : EdgeInsets.symmetric(horizontal: 20),
-                      child: ContactLinks(),
-                    ),
+                  child: Padding(
+                    padding: isLandscape
+                        ? EdgeInsets.symmetric(horizontal: 100.0)
+                        : EdgeInsets.zero,
+                    child: ContactLinks(),
                   ),
                 ),
               ),

@@ -1,46 +1,53 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:portfolio/assets/custom_icons.dart';
 import 'package:portfolio/screens/shared_components/frostedglass_container.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 class ContactLinks extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    bool isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
     return Column(
       children: [
+        if (isLandscape)
+        Spacer(),
         Expanded(
-          flex: 3,
-          child: FrostedGlassContainer(
-            borderRadius: BorderRadius.circular(20.0),
-            decoration: BoxDecoration(color: Colors.black26,),
-            child: Center(
-              child: FractionallySizedBox(
-                widthFactor: 8/10,
-                heightFactor: 7/10,
-                child: Column(
-                  children: [
-                    Expanded(
-                        child: InfoTile(
-                      icon: Icons.email,
-                      text: "youssef@lasheen.dev",
-                      subText: "Email",
-                      url: "mailto:youssef@lasheen.dev",
-                    )),
-                    Expanded(
-                        child: InfoTile(
-                      icon: Icons.phone,
-                      text: "+201012845227",
-                      subText: "Phone",
-                      url: "url://+201012845227",
-                    )),
-                    Expanded(
-                        child: InfoTile(
-                      icon: Icons.location_on,
-                      text: "Cairo, Egypt",
-                      subText: "Location",
-                      url: "https://www.google.com/maps/place/Cairo+Governorate",
-                    )),
-                  ],
+          flex: 1,
+          child: Padding(
+            padding: isLandscape? EdgeInsets.all(30.0): EdgeInsets.zero,
+            child: FrostedGlassContainer(
+              borderRadius: isLandscape? BorderRadius.circular(20.0): BorderRadius.zero,
+              decoration: BoxDecoration(color: Colors.black26,),
+              child: Center(
+                child: FractionallySizedBox(
+                  widthFactor: 8/10,
+                  heightFactor: 7/10,
+                  child: Column(
+                    children: [
+                      Expanded(
+                          child: InfoTile(
+                        icon: Icons.email,
+                        text: "youssef@lasheen.dev",
+                        subText: "Email",
+                        url: "mailto:youssef@lasheen.dev",
+                      )),
+                      Expanded(
+                          child: InfoTile(
+                        icon: Icons.phone,
+                        text: "+201012845227",
+                        subText: "Phone",
+                        url: "url://+201012845227",
+                      )),
+                      Expanded(
+                          child: InfoTile(
+                        icon: Icons.location_on,
+                        text: "Cairo, Egypt",
+                        subText: "Location",
+                        url: "https://www.google.com/maps/place/Cairo+Governorate",
+                      )),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -48,28 +55,39 @@ class ContactLinks extends StatelessWidget {
         ),
         SizedBox(height: 50,),
         Expanded(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+              child: Wrap(
+                spacing: 100,
+                runSpacing: 50,
                 children: [
                   SocialIcon(
-                    icon: FontAwesomeIcons.githubAlt,
-                    url: "https://github.com/YoussefLasheen",
+                    icon: CustomIcons.github_circled,
+                    url: "https://github.com/lasheendev",
                     color: Color(0xFF238636),
                   ),
                   SocialIcon(
-                    icon: FontAwesomeIcons.linkedinIn,
-                    url: "http://linkedin.com/in/yousseflasheen",
+                    icon: CustomIcons.youtube,
+                    url: "https://www.youtube.com/@lasheendev",
+                    color: Color(0xFFe20202),
+                  ),
+                  SocialIcon(
+                    icon: CustomIcons.facebook,
+                    url: "https://web.facebook.com/lasheendev",
+                    color: Color(0xFF0d8bf0),
+                  ),
+                  SocialIcon(
+                    icon: CustomIcons.instagram,
+                    url: "https://www.instagram.com/lasheen.dev",
+                    color: Colors.orange,
+                  ),
+                  SocialIcon(
+                    icon: CustomIcons.twitter,
+                    url: "https://twitter.com/lasheendev",
+                    color: Color(0xFF1da1fa),
+                  ),
+                  SocialIcon(
+                    icon: CustomIcons.linkedin,
+                    url: "https://www.linkedin.com/company/lasheendev",
                     color: Color(0xFF0a66c2),
-                  ),
-                  SocialIcon(
-                    icon: FontAwesomeIcons.stackOverflow,
-                    url: "https://stackoverflow.com/users/10240634/youssef-lasheen",
-                    color: Color(0xFFef8236),
-                  ),
-                  SocialIcon(
-                    icon: FontAwesomeIcons.twitter,
-                    url: "https://twitter.com/joelasheen",
-                    color: Color(0xFF1d9bf0),
                   ),
                 ],
               ),
