@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
   final _router = GoRouter(initialLocation: '/about', routes: [
     ShellRoute(
       builder: (BuildContext context, GoRouterState state, Widget child) {
-        return Root(child: SelectionArea(child: child));
+        return Root(child: child);
       },
       routes: [
         GoRoute(
