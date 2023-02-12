@@ -55,7 +55,7 @@ class TopSection extends StatelessWidget {
                       if(isLandscape)
                       Expanded(
                           flex: isLandscape?4:2,
-                          child: Image.asset('assets/images/LLLogoClipArtOulined.webp',fit: BoxFit.contain,)),
+                          child: Image.asset('assets/images/LLLogo.webp',fit: BoxFit.contain,)),
                       //Spacer()
                     ],
                   ),
