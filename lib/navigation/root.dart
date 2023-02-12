@@ -8,28 +8,29 @@ class Root extends StatelessWidget {
   const Root({Key? key, required this.child}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance!.addPostFrameCallback((_) => limitOrientation(context));
+    WidgetsBinding.instance!
+        .addPostFrameCallback((_) => limitOrientation(context));
     bool isLandscape =
         MediaQuery.of(context).orientation == Orientation.landscape;
     return Material(
-          color: Colors.grey[900],
-          child: Flex(
-            direction: isLandscape ? Axis.horizontal : Axis.vertical,
-            children: <Widget>[
-              Sidebar(
-                currentIndex: _calculateSelectedIndex(context),
-                onTap: (index) => _onItemTapped(index, context)
-              ),
-              Expanded(
-                child: child,
-              )
-            ],
-          ),
-        );
+      color: Colors.grey[900],
+      child: Flex(
+        direction: isLandscape ? Axis.horizontal : Axis.vertical,
+        children: <Widget>[
+          Sidebar(
+              currentIndex: _calculateSelectedIndex(context),
+              onTap: (index) => _onItemTapped(index, context)),
+          Expanded(
+            child: child,
+          )
+        ],
+      ),
+    );
   }
+
   static int _calculateSelectedIndex(BuildContext context) {
     final String location = GoRouterState.of(context).location;
-    if (location.startsWith('/about')) {
+    if (location == '/') {
       return 0;
     }
     if (location.startsWith('/projects')) {
@@ -44,7 +45,7 @@ class Root extends StatelessWidget {
   void _onItemTapped(int index, BuildContext context) {
     switch (index) {
       case 0:
-        GoRouter.of(context).go('/about');
+        GoRouter.of(context).go('/');
         break;
       case 1:
         GoRouter.of(context).go('/projects');

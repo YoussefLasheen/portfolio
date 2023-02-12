@@ -20,14 +20,14 @@ Future<void> main() async {
 }
 
 class MyApp extends StatelessWidget {
-  final _router = GoRouter(initialLocation: '/about', routes: [
+  final _router = GoRouter(initialLocation: '/', routes: [
     ShellRoute(
       builder: (BuildContext context, GoRouterState state, Widget child) {
         return Root(child: child);
       },
       routes: [
         GoRoute(
-          path: '/about',
+          path: '/',
           pageBuilder: (
             context,
             state,
