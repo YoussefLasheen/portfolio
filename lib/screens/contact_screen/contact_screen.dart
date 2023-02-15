@@ -31,11 +31,9 @@ class ContactScreen extends StatelessWidget {
               ),
             ),
             Expanded(
-              flex: isLandscape?1: 2,
+              flex: 1,
               child: Container(
-                decoration: BoxDecoration(
-                  gradient: mainGradient
-                ),
+                decoration: BoxDecoration(gradient: mainGradient),
                 constraints: BoxConstraints.expand(),
                 child: Align(
                   alignment: Alignment.center,
@@ -43,7 +41,10 @@ class ContactScreen extends StatelessWidget {
                     padding: isLandscape
                         ? EdgeInsets.symmetric(horizontal: 100.0)
                         : EdgeInsets.zero,
-                    child: ContactLinks(),
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: ContactLinks(),
+                    ),
                   ),
                 ),
               ),
